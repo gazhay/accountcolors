@@ -1,4 +1,4 @@
-# accountcolors
+# Account Colors
 Fork of the Account Colors add-on for Thunderbird
 
 
