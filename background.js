@@ -24,18 +24,18 @@
 //overlay chrome://messenger/content/messengercompose/messengercompose.xul chrome://accountcolors/content/accountcolors-composewindow-overlay.xul
 
 	messenger.WindowListener.registerWindow(
-		"chrome://messenger/content/messenger.xul",
+		"chrome://messenger/content/messenger.xhtml",
 		"chrome://accountcolors/content/accountcolors-3panewindow-injector.js");
 
 	messenger.WindowListener.registerWindow(
-		"chrome://messenger/content/messageWindow.xul",
+		"chrome://messenger/content/messageWindow.xhtml",
 		"chrome://accountcolors/content/accountcolors-messagewindow-injector.js");
 
 	messenger.WindowListener.registerWindow(
-		"chrome://messenger/content/messengercompose/messengercompose.xul",
+		"chrome://messenger/content/messengercompose/messengercompose.xhtml",
 		"chrome://accountcolors/content/accountcolors-composewindow-injector.js");
 
-	messenger.WindowListener.registerOptionsPage("chrome://accountcolors/content/accountcolors-options.xul")
+	messenger.WindowListener.registerOptionsPage("chrome://accountcolors/content/accountcolors-options.xhtml")
 
 	messenger.WindowListener.startListening();
 })()

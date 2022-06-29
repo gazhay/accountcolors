@@ -160,7 +160,8 @@ var accountColorsUtilities =
     getAccount: function(accounts,index)
     {
         /* Thunderbird 20.0 - nsISupportsArray deprecated - queryElementAt() replaced QueryElementAt()  */
-        
+
+        if (Array.isArray(accounts)) return accounts[index];
         if (typeof accounts.length != "undefined") return accounts.queryElementAt(index,Components.interfaces.nsIMsgAccount);
         else return accounts.QueryElementAt(index,Components.interfaces.nsIMsgAccount);
     },
@@ -171,6 +172,7 @@ var accountColorsUtilities =
     {
         /* Thunderbird 20.0 - nsISupportsArray deprecated - queryElementAt() replaced QueryElementAt()  */
         
+        if (Array.isArray(identities)) return identities[index];
         if (typeof identities.length != "undefined") return identities.queryElementAt(index,Components.interfaces.nsIMsgIdentity);
         else return identities.QueryElementAt(index,Components.interfaces.nsIMsgIdentity);
     },
