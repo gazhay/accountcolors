@@ -8,7 +8,8 @@ Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolor
 function onLoad(activatedWhileWindowOpen) {
   WL.injectCSS("chrome://accountcolors-skin/content/accountcolors-messagewindow.css");
 
-  WL.injectElements(`
+  WL.injectElements(
+    `
     <toolbar id="mail-toolbar-menubar2">
         <toolbaritem id="menubar-items">
             <menubar id="mail-menubar">
@@ -21,9 +22,11 @@ function onLoad(activatedWhileWindowOpen) {
             </menubar>
         </toolbaritem>
     </toolbar>
-`, ["chrome://accountcolors/locale/accountcolors.dtd"]);
+`,
+    ["chrome://accountcolors/locale/accountcolors.dtd"]
+  );
 
-    window.accountColorsMessage.onLoad();
+  window.accountColorsMessage.onLoad();
 }
 
 function onUnload(deactivatedWhileWindowOpen) {
@@ -31,8 +34,8 @@ function onUnload(deactivatedWhileWindowOpen) {
   // add-on is being deactivated/removed while the window
   // is still open. It can be skipped otherwise.
   if (!deactivatedWhileWindowOpen) {
-    return
+    return;
   }
-  
+
   window.accountColorsMessage.onUnload();
 }
