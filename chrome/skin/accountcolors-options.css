@@ -5,8 +5,9 @@
 /*      CSS for Options dialog                                          */
 /*                                                                      */
 /*      Copyright (C) 2014-2019  by  DW-dev                             */
+/*      Copyright (C) 2022-2022  by  MrMelon54                          */
 /*                                                                      */
-/*      Last Edit  -  04 Dec 2019                                       */
+/*      Last Edit  -  15 Jul 2022                                       */
 /*                                                                      */
 /************************************************************************/
 
@@ -89,7 +90,7 @@
   padding: 2px;
 }
 
-.accountcolors-picker > hbox {
+.accountcolors-picker > vbox > hbox {
   border: 1px solid black;
 }
 
@@ -144,7 +145,6 @@ separator.section {
 }
 
 #accountcolors-picker-header {
-  background: -moz-linear-gradient(left, #bfcddb, #d6e3f1);
   margin: 3px;
 }
 
@@ -153,7 +153,8 @@ separator.section {
   height: 14px;
   margin: 4px 6px;
   background-image: url(chrome://accountcolors-skin/content/accountcolors-close.png);
-  background-repeat: center no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #accountcolors-picker-close:hover {
