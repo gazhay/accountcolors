@@ -166,10 +166,14 @@ var accountColors3Pane = {
   onLoad: function () {
     /* Wait for Thunderbird to finish parsing CSS style sheets and initializing folder tree */
 
-    window.setTimeout(checkReady, 10);
+    window.setTimeout(checkReady, 10, 0);
 
-    function checkReady() {
+    function checkReady(retry) {
       var i, ready, sheet, count, row;
+
+      if (retry > 5) {
+        return;
+      }
 
       ready = false;
 
@@ -186,7 +190,8 @@ var accountColors3Pane = {
 
         ready = true;
       } catch (e) {
-        window.setTimeout(checkReady, 20);
+        console.log(e)
+        window.setTimeout(checkReady, 20, retry + 1);
       }
 
       if (ready)
