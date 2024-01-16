@@ -14,9 +14,6 @@
 "use strict";
 
 var accountColorsOptions = {
-  appInfo: Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo),
-  versionComparator: Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator),
-  tbVersion: "",
 
   runtime: Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime),
 
@@ -36,13 +33,6 @@ var accountColorsOptions = {
     var checkbox, checkstate;
     var accounts = new Array();
     var identities = new Array();
-
-    /* Determine Thunderbird version and set attribute */
-
-    if (accountColorsOptions.versionComparator.compare(accountColorsOptions.appInfo.version, "68.0a1") >= 0) accountColorsOptions.tbVersion = "68.0";
-    else accountColorsOptions.tbVersion = "68.0";
-
-    document.getElementById("accountcolors-options").setAttribute("accountcolors-tbversion", accountColorsOptions.tbVersion);
 
     /* Add listener for dialog accept button (OK) */
 

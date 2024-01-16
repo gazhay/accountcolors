@@ -14,10 +14,6 @@
 "use strict";
 
 var accountColorsCompose = {
-  appInfo: Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo),
-  versionComparator: Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator),
-  tbVersion: "",
-
   prefs: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.accountcolors."),
 
   accountManager: Components.classes["@mozilla.org/messenger/account-manager;1"].getService(Components.interfaces.nsIMsgAccountManager),
@@ -64,13 +60,6 @@ var accountColorsCompose = {
     var element, style, fontcolor;
 
     window.removeEventListener("load", accountColorsCompose.onLoad, false);
-
-    /* Determine Thunderbird version and set attribute */
-
-    if (accountColorsCompose.versionComparator.compare(accountColorsCompose.appInfo.version, "68.0a1") >= 0) accountColorsCompose.tbVersion = "68.0";
-    else accountColorsCompose.tbVersion = "68.0";
-
-    document.getElementById("msgcomposeWindow").setAttribute("accountcolors-tbversion", accountColorsCompose.tbVersion);
 
     /* Register preferences observer */
 

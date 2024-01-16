@@ -13,7 +13,19 @@
 
 "use strict";
 
+/* Get thunderbird version object */
+
+function getThunderbirdVersion() {
+  let parts = Services.appinfo.version.split(".");
+  return {
+    major: parseInt(parts[0]),
+    minor: parseInt(parts[1]),
+  }
+}
+
 var accountColorsUtilities = {
+  thunderbirdVersion: getThunderbirdVersion(),
+
   prefs: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.accountcolors."),
 
   accountManager: Components.classes["@mozilla.org/messenger/account-manager;1"].getService(Components.interfaces.nsIMsgAccountManager),
