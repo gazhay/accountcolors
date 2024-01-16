@@ -21,15 +21,59 @@ var accountColorsOptions = {
 
   accountManager: Components.classes["@mozilla.org/messenger/account-manager;1"].getService(Components.interfaces.nsIMsgAccountManager),
 
+  theme: null,
+
   pickerButton: null,
 
   /********************************************************************/
+
+  /* Init accountColorsOptions */
+
+  onLoad() {
+    // Resolve thunderbird current theme before initPrefs
+    return new Promise(function (resolve, reject) {
+      var theme = null;
+      var timeoutId = setTimeout(reject, 10000, "timeout waiting for theme");
+      var enumerator = Services.ww.getWindowEnumerator();
+      while (enumerator.hasMoreElements()) {
+        enumerator.getNext().document.querySelectorAll("browser").forEach(function (browser) {
+          if (!theme && browser.messageManager != null) {
+            var script = "data:text/plain," + encodeURIComponent(`
+              if (content.wrappedJSObject.browser != null) {
+                content.wrappedJSObject.browser.theme.getCurrent().then(theme => {
+                  sendAsyncMessage("accountcolors-thunderbird-theme-${browser.browserId}", theme)
+                });
+              } else {
+                sendAsyncMessage("accountcolors-thunderbird-theme-${browser.browserId}", null)
+              }
+            `);
+            browser.messageManager.addMessageListener(`accountcolors-thunderbird-theme-${browser.browserId}`, function removeMe(message) {
+              browser.messageManager.removeMessageListener(`accountcolors-thunderbird-theme-${browser.browserId}`, removeMe);
+              if (message.data != null && theme == null) {
+                theme = message.data;
+                theme.properties = theme.properties || { color_scheme: "light" };
+                theme.colors = theme.colors || { frame_text: null, frame: null };
+                theme.colors.frame_text = theme.colors.frame_text || (theme.properties.color_scheme == "dark" ? "#FFFFFF" : "#000000"); // Font color
+                theme.colors.frame = theme.colors.frame || (theme.properties.color_scheme == "dark" ? "#000000" : "#FFFFFF"); // Background color
+                clearTimeout(timeoutId);
+                resolve(theme);
+              }
+            });
+            browser.messageManager.loadFrameScript(script, false);
+          }
+        });
+      }
+    }).then(theme => {
+      accountColorsOptions.theme = theme;
+      accountColorsOptions.initPrefs();
+    });
+  },
 
   /* Initialise preferences */
 
   initPrefs: function () {
     var container, template, accountidbox, account, identity, index, acc, id;
-    var background, menulist, fontstyle, fontsize;
+    var background, menulist, color, fontstyle, fontsize;
     var checkbox, checkstate;
     var accounts = new Array();
     var identities = new Array();
@@ -87,40 +131,40 @@ var accountColorsOptions = {
         document.getElementById("accountcolors-accountname" + index).value = account.incomingServer.prettyName;
 
         try {
-          document.getElementById("accountcolors-accountname" + index).style.color = accountColorsOptions.prefs.getCharPref(account.key + "-fontcolor");
-          accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, accountColorsOptions.prefs.getCharPref(account.key + "-fontcolor"));
+          color = accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, accountColorsOptions.prefs.getCharPref(account.key + "-fontcolor"));
+          document.getElementById("accountcolors-accountname" + index).style.color = color;
         } catch (e) {
           if (account.incomingServer == accountColorsOptions.accountManager.localFoldersServer) {
             try {
               /* compatibility with Version 3.0 */
-              document.getElementById("accountcolors-accountname" + index).style.color = accountColorsOptions.prefs.getCharPref("idLF" + "-fontcolor");
-              accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, accountColorsOptions.prefs.getCharPref("idLF" + "-fontcolor"));
+              color = accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, accountColorsOptions.prefs.getCharPref("idLF" + "-fontcolor"));
+              document.getElementById("accountcolors-accountname" + index).style.color = color;
             } catch (e) {
-              document.getElementById("accountcolors-accountname" + index).style.color = "#000000";
-              accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, "#000000");
+              color = accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, "");
+              document.getElementById("accountcolors-accountname" + index).style.color = color;
             }
           } else {
-            document.getElementById("accountcolors-accountname" + index).style.color = "#000000";
-            accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, "#000000");
+            color = accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, "");
+            document.getElementById("accountcolors-accountname" + index).style.color = "";
           }
         }
 
         try {
-          document.getElementById("accountcolors-accountname" + index).style.backgroundColor = accountColorsOptions.prefs.getCharPref(account.key + "-bkgdcolor");
-          accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, accountColorsOptions.prefs.getCharPref(account.key + "-bkgdcolor"));
+          color = accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, accountColorsOptions.prefs.getCharPref(account.key + "-bkgdcolor"));
+          document.getElementById("accountcolors-accountname" + index).style.backgroundColor = color;
         } catch (e) {
           if (account.incomingServer == accountColorsOptions.accountManager.localFoldersServer) {
             try {
               /* compatibility with Version 3.0 */
-              document.getElementById("accountcolors-accountname" + index).style.backgroundColor = accountColorsOptions.prefs.getCharPref("idLF" + "-bkgdcolor");
-              accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, accountColorsOptions.prefs.getCharPref("idLF" + "-bkgdcolor"));
+              color = accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, accountColorsOptions.prefs.getCharPref("idLF" + "-bkgdcolor"));
+              document.getElementById("accountcolors-accountname" + index).style.backgroundColor = color;
             } catch (e) {
-              document.getElementById("accountcolors-accountname" + index).style.backgroundColor = "#FFFFFF";
-              accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, "#FFFFFF");
+              color = accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, "");
+              document.getElementById("accountcolors-accountname" + index).style.backgroundColor = color;
             }
           } else {
-            document.getElementById("accountcolors-accountname" + index).style.backgroundColor = "#FFFFFF";
-            accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, "#FFFFFF");
+            color = accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, "");
+            document.getElementById("accountcolors-accountname" + index).style.backgroundColor = color;
           }
         }
 
@@ -154,36 +198,37 @@ var accountColorsOptions = {
           document.getElementById("accountcolors-identityname" + index).value = identity.identityName;
 
           try {
-            document.getElementById("accountcolors-accountname" + index).style.color = accountColorsOptions.prefs.getCharPref(identity.key + "-fontcolor");
-            document.getElementById("accountcolors-identityname" + index).style.color = accountColorsOptions.prefs.getCharPref(identity.key + "-fontcolor");
-            accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, accountColorsOptions.prefs.getCharPref(identity.key + "-fontcolor"));
+            color = accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, accountColorsOptions.prefs.getCharPref(identity.key + "-fontcolor"));
+            document.getElementById("accountcolors-accountname" + index).style.color = color;
+            document.getElementById("accountcolors-identityname" + index).style.color = color;
           } catch (e) {
             try {
               /* compatibility with Version 2.0 */
-              document.getElementById("accountcolors-accountname" + index).style.color = accountColorsOptions.prefs.getCharPref(account.key + "-fontcolor");
-              document.getElementById("accountcolors-identityname" + index).style.color = accountColorsOptions.prefs.getCharPref(account.key + "-fontcolor");
-              accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, accountColorsOptions.prefs.getCharPref(account.key + "-fontcolor"));
+              color = accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, accountColorsOptions.prefs.getCharPref(account.key + "-fontcolor"));
+              document.getElementById("accountcolors-accountname" + index).style.color = color;
+              document.getElementById("accountcolors-identityname" + index).style.color = color;
             } catch (e) {
-              document.getElementById("accountcolors-accountname" + index).style.color = "#000000";
-              document.getElementById("accountcolors-identityname" + index).style.color = "#000000";
-              accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, "#000000");
+              color = accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + index, "");
+              document.getElementById("accountcolors-accountname" + index).style.color = color;
+              document.getElementById("accountcolors-identityname" + index).style.color = color;
+              ;
             }
           }
 
           try {
-            document.getElementById("accountcolors-accountname" + index).style.backgroundColor = accountColorsOptions.prefs.getCharPref(identity.key + "-bkgdcolor");
-            document.getElementById("accountcolors-identityname" + index).style.backgroundColor = accountColorsOptions.prefs.getCharPref(identity.key + "-bkgdcolor");
-            accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, accountColorsOptions.prefs.getCharPref(identity.key + "-bkgdcolor"));
+            color = accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, accountColorsOptions.prefs.getCharPref(identity.key + "-bkgdcolor"));
+            document.getElementById("accountcolors-accountname" + index).style.backgroundColor = color;
+            document.getElementById("accountcolors-identityname" + index).style.backgroundColor = color;
           } catch (e) {
             try {
               /* compatibility with Version 2.0 */
-              document.getElementById("accountcolors-accountname" + index).style.backgroundColor = accountColorsOptions.prefs.getCharPref(account.key + "-bkgdcolor");
-              document.getElementById("accountcolors-identityname" + index).style.backgroundColor = accountColorsOptions.prefs.getCharPref(account.key + "-bkgdcolor");
-              accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, accountColorsOptions.prefs.getCharPref(account.key + "-bkgdcolor"));
+              color = accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, accountColorsOptions.prefs.getCharPref(account.key + "-bkgdcolor"));
+              document.getElementById("accountcolors-accountname" + index).style.backgroundColor = color;
+              document.getElementById("accountcolors-identityname" + index).style.backgroundColor = color;
             } catch (e) {
-              document.getElementById("accountcolors-accountname" + index).style.backgroundColor = "#FFFFFF";
-              document.getElementById("accountcolors-identityname" + index).style.backgroundColor = "#FFFFFF";
-              accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, "#FFFFFF");
+              color = accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + index, "");;
+              document.getElementById("accountcolors-accountname" + index).style.backgroundColor = color;
+              document.getElementById("accountcolors-identityname" + index).style.backgroundColor = color;
             }
           }
 
@@ -1084,14 +1129,13 @@ var accountColorsOptions = {
         length = document.getElementById("accountcolors-accountidbox-container").children.length;
 
         for (i = index + 1; i < length && document.getElementById("accountcolors-accountidbox" + i).getAttribute("ac-accountidtype") == "id"; i++) {
-          accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + i, accountColorsOptions.pickerGetColor("accountcolors-fontpicker" + index));
-          accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + i, accountColorsOptions.pickerGetColor("accountcolors-bkgdpicker" + index));
+          color = accountColorsOptions.pickerSetColor("accountcolors-fontpicker" + i, accountColorsOptions.pickerGetColor("accountcolors-fontpicker" + index));
+          document.getElementById("accountcolors-accountname" + i).style.color = color;
+          document.getElementById("accountcolors-identityname" + i).style.color = color;
 
-          document.getElementById("accountcolors-accountname" + i).style.color = accountColorsOptions.pickerGetColor("accountcolors-fontpicker" + index);
-          document.getElementById("accountcolors-accountname" + i).style.backgroundColor = accountColorsOptions.pickerGetColor("accountcolors-bkgdpicker" + index);
-
-          document.getElementById("accountcolors-identityname" + i).style.color = accountColorsOptions.pickerGetColor("accountcolors-fontpicker" + index);
-          document.getElementById("accountcolors-identityname" + i).style.backgroundColor = accountColorsOptions.pickerGetColor("accountcolors-bkgdpicker" + index);
+          color = accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + i, accountColorsOptions.pickerGetColor("accountcolors-bkgdpicker" + index));
+          document.getElementById("accountcolors-accountname" + i).style.backgroundColor = color;
+          document.getElementById("accountcolors-identityname" + i).style.backgroundColor = color;
         }
       }
     }
@@ -1111,11 +1155,9 @@ var accountColorsOptions = {
         length = document.getElementById("accountcolors-accountidbox-container").children.length;
 
         for (i = index + 1; i < length && document.getElementById("accountcolors-accountidbox" + i).getAttribute("ac-accountidtype") == "id"; i++) {
-          accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + i, accountColorsOptions.pickerGetColor("accountcolors-bkgdpicker" + index));
-
-          document.getElementById("accountcolors-accountname" + i).style.backgroundColor = accountColorsOptions.pickerGetColor("accountcolors-bkgdpicker" + index);
-
-          document.getElementById("accountcolors-identityname" + i).style.backgroundColor = accountColorsOptions.pickerGetColor("accountcolors-bkgdpicker" + index);
+          color = accountColorsOptions.pickerSetColor("accountcolors-bkgdpicker" + i, accountColorsOptions.pickerGetColor("accountcolors-bkgdpicker" + index));
+          document.getElementById("accountcolors-accountname" + i).style.backgroundColor = color;
+          document.getElementById("accountcolors-identityname" + i).style.backgroundColor = color;
         }
       }
     }
@@ -1499,7 +1541,7 @@ var accountColorsOptions = {
 
     hexstr = document.getElementById("accountcolors-picker-hexstr").value;
 
-    pickerbutton.children[0].style.setProperty("background-color", "#" + hexstr, "");
+    accountColorsOptions.pickerSetColor(pickerbutton.id, "#" + hexstr);
 
     if (pickerbutton.id.indexOf("font") >= 0) accountColorsOptions.updateFontColor(Number(pickerbutton.id.substr(24)));
     else accountColorsOptions.updateBkgdColor(Number(pickerbutton.id.substr(24)));
@@ -1524,6 +1566,10 @@ var accountColorsOptions = {
 
     pickerbutton = document.getElementById(pickerId);
 
+    if (pickerbutton.children[0].style.getPropertyPriority("background-color") != "important") {
+      return "" // If not user-defined color, return empty string to use system default color prevent storing it to prefs
+    }
+
     rgbColors = pickerbutton.children[0].style.getPropertyValue("background-color").match(/rgb\((\d+),\s(\d+),\s(\d+)\)/);
 
     r = Number(rgbColors[1]).toString(16).toUpperCase();
@@ -1537,13 +1583,23 @@ var accountColorsOptions = {
 
     return "#" + hexstr;
   },
-
   pickerSetColor: function (pickerId, color) {
     var pickerbutton;
 
     pickerbutton = document.getElementById(pickerId);
 
-    pickerbutton.children[0].style.setProperty("background-color", color, "");
+    if (!!color) {
+      pickerbutton.children[0].style.setProperty("background-color", color, "important"); // Use a special priority flag to indicate it's user-defined color (instead of default)
+    } else {
+      if (pickerId.indexOf("font") >= 0) {
+        color = accountColorsOptions.theme.colors.frame_text;
+      } else if (pickerId.indexOf("bkgd") >= 0) {
+        color = accountColorsOptions.theme.colors.frame;
+      }
+      pickerbutton.children[0].style.setProperty("background-color", color, ""); // Use a default light scheme before resolving theme from promise
+    }
+
+    return color;
   },
 
   autoBkgdColor: function (fontcolor) {

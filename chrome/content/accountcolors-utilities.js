@@ -117,7 +117,7 @@ var accountColorsUtilities = {
     try {
       fontcolor = accountColorsUtilities.prefs.getCharPref(accountidkey + "-fontcolor");
     } catch (e) {
-      fontcolor = "#000000";
+      fontcolor = "";
     }
 
     return fontcolor;
@@ -131,7 +131,7 @@ var accountColorsUtilities = {
     try {
       bkgdcolor = accountColorsUtilities.prefs.getCharPref(accountidkey + "-bkgdcolor");
     } catch (e) {
-      bkgdcolor = "#FFFFFF";
+      bkgdcolor = "";
     }
 
     return bkgdcolor;
