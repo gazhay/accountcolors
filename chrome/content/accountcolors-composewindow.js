@@ -290,12 +290,16 @@ var accountColorsCompose = {
     if (accountColorsCompose.prefs.getBoolPref("compose-colorhdrbkgd")) {
       bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
 
-      element = document.getElementById("msgheaderstoolbar-box");
-      if (defaultbkgd) element.style.backgroundColor = "";
-      else element.style.backgroundColor = bkgdcolor;
+      element = document.getElementById("msgheaderstoolbar-box"); // msgheaderstoolbar-box does not exist since TB 102.
+      if (element != null) {
+        if (defaultbkgd) element.style.backgroundColor = "";
+        else element.style.backgroundColor = bkgdcolor;
+      }
     } else {
       element = document.getElementById("msgheaderstoolbar-box");
-      element.style.backgroundColor = "";
+      if (element != null) {
+        element.style.backgroundColor = "";
+      }
     }
 
     /* Black/White field fonts */
