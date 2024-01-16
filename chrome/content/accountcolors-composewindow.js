@@ -118,9 +118,13 @@ var accountColorsCompose = {
 
     if (accountColorsCompose.prefs.getBoolPref("compose-colorfromfont")) {
       menulist = document.getElementById("msgIdentity");
-      menulist.children[1].children[1].style.color = accountColorsUtilities.fontColorPref(accountidkey);
-      menulist.children[1].children[2].style.color = accountColorsUtilities.fontColorPref(accountidkey);
-      menulist.children[2].children[0].style.color = accountColorsUtilities.fontColorPref(accountidkey);
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        menulist.style.color = accountColorsUtilities.fontColorPref(accountidkey); // At least after TB 102 (in fact, the same holds for 91,78...), menulist.children[1] does not exist.
+      } else {
+        menulist.children[1].children[1].style.color = accountColorsUtilities.fontColorPref(accountidkey);
+        menulist.children[1].children[2].style.color = accountColorsUtilities.fontColorPref(accountidkey);
+        menulist.children[2].children[0].style.color = accountColorsUtilities.fontColorPref(accountidkey);
+      }
 
       menupopup = document.getElementById("msgIdentityPopup");
 
@@ -131,15 +135,19 @@ var accountColorsCompose = {
           /* not menu separator */
           idkey = menuitem.getAttribute("identitykey");
 
-          menuitem.children[1].style.color = accountColorsUtilities.fontColorPref(idkey);
-          menuitem.children[3].style.color = accountColorsUtilities.fontColorPref(idkey);
+          menuitem.children[1].style.color = accountColorsUtilities.fontColorPref(idkey); // menu-iconic-text
+          menuitem.children[3].style.color = accountColorsUtilities.fontColorPref(idkey); // menu-description
         }
       }
     } else {
       menulist = document.getElementById("msgIdentity");
-      menulist.children[1].children[1].style.color = "";
-      menulist.children[1].children[2].style.color = "";
-      menulist.children[2].children[0].style.color = "";
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        menulist.style.color = "";
+      } else {
+        menulist.children[1].children[1].style.color = "";
+        menulist.children[1].children[2].style.color = "";
+        menulist.children[2].children[0].style.color = "";
+      }
 
       menupopup = document.getElementById("msgIdentityPopup");
 
@@ -374,7 +382,11 @@ var accountColorsCompose = {
 
       menulist = document.getElementById("msgIdentity");
 
-      element = menulist.children[1].children[1];
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        element = menulist;
+      } else {
+        element = menulist.children[1].children[1];
+      }
 
       switch (fontstyle) {
         case 0 /* Normal */:
@@ -395,7 +407,11 @@ var accountColorsCompose = {
           break;
       }
 
-      element = menulist.children[1].children[3];
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        element = menulist;
+      } else {
+        element = menulist.children[1].children[3];
+      }
 
       switch (fontstyle) {
         case 0 /* Normal */:
@@ -418,13 +434,19 @@ var accountColorsCompose = {
     } else {
       menulist = document.getElementById("msgIdentity");
 
-      element = menulist.children[1].children[1];
-      element.style.fontStyle = "";
-      element.style.fontWeight = "";
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        element = menulist;
+        element.style.fontStyle = "";
+        element.style.fontWeight = "";
+      } else {
+        element = menulist.children[1].children[1];
+        element.style.fontStyle = "";
+        element.style.fontWeight = "";
 
-      element = menulist.children[1].children[3];
-      element.style.fontStyle = "";
-      element.style.fontWeight = "";
+        element = menulist.children[1].children[3];
+        element.style.fontStyle = "";
+        element.style.fontWeight = "";
+      }
     }
 
     /* From font size */
