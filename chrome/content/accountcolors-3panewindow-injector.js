@@ -9,23 +9,60 @@ function onLoad(activatedWhileWindowOpen) {
   WL.injectCSS("chrome://accountcolors-skin/content/accountcolors-3panewindow-generated.css");
   WL.injectCSS("chrome://accountcolors-skin/content/accountcolors-3panewindow.css");
 
-  WL.injectElements(
-    `
-    <toolbar id="mail-toolbar-menubar2">
-        <toolbaritem id="menubar-items">
+  if (window.accountColorsUtilities.thunderbirdVersion.major >= 115) { // toolbaritem element removed since TB 115
+    WL.injectElements(
+      `
+      <toolbar id="toolbar-menubar">
             <menubar id="mail-menubar">
                 <menu id="tasksMenu">
                     <menupopup id="taskPopup">
                         <menuitem id="accountcolors-toolsmenu-options" label="&accountcolors.options;" accesskey="&accountcolors.options.ak;"
-                                  oncommand="accountColors3Pane.cmdOptions();" insertbefore="menu_preferences"/>
+                                  oncommand="accountColors3Pane.cmdOptions();" insertafter="menu_accountmgr"/>
                     </menupopup>
                 </menu>
             </menubar>
-        </toolbaritem>
-    </toolbar>
+      </toolbar>
 `,
-    ["chrome://accountcolors/locale/accountcolors.dtd"]
-  );
+      ["chrome://accountcolors/locale/accountcolors.dtd"]
+    );
+  } if (window.accountColorsUtilities.thunderbirdVersion.major >= 102) { // toolbar id changed to `toolbar-menubar` since TB 102
+    WL.injectElements(
+      `
+      <toolbar id="toolbar-menubar">
+          <toolbaritem id="menubar-items">
+              <menubar id="mail-menubar">
+                  <menu id="tasksMenu">
+                      <menupopup id="taskPopup">
+                          <menuitem id="accountcolors-toolsmenu-options" label="&accountcolors.options;" accesskey="&accountcolors.options.ak;"
+                                    oncommand="accountColors3Pane.cmdOptions();" insertafter="menu_accountmgr"/>
+                      </menupopup>
+                  </menu>
+              </menubar>
+          </toolbaritem>
+      </toolbar>
+`,
+      ["chrome://accountcolors/locale/accountcolors.dtd"]
+    );
+  } else {
+    WL.injectElements(
+      `
+      <toolbar id="mail-toolbar-menubar2">
+          <toolbaritem id="menubar-items">
+              <menubar id="mail-menubar">
+                  <menu id="tasksMenu">
+                      <menupopup id="taskPopup">
+                          <menuitem id="accountcolors-toolsmenu-options" label="&accountcolors.options;" accesskey="&accountcolors.options.ak;"
+                                    oncommand="accountColors3Pane.cmdOptions();" insertbefore="menu_preferences"/>
+                      </menupopup>
+                  </menu>
+              </menubar>
+          </toolbaritem>
+      </toolbar>
+`,
+      ["chrome://accountcolors/locale/accountcolors.dtd"]
+    );
+  }
+
 
   window.accountColors3Pane.onLoad();
 }

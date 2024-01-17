@@ -8,23 +8,44 @@ Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolor
 function onLoad(activatedWhileWindowOpen) {
   WL.injectCSS("chrome://accountcolors-skin/content/accountcolors-messagewindow.css");
 
-  WL.injectElements(
-    `
-    <toolbar id="mail-toolbar-menubar2">
-        <toolbaritem id="menubar-items">
-            <menubar id="mail-menubar">
-                <menu id="tasksMenu">
-                    <menupopup id="taskPopup">
-                        <menuitem id="accountcolors-toolsmenu-options" label="&accountcolors.options;" accesskey="&accountcolors.options.ak;"
-                                  oncommand="accountColorsMessage.cmdOptions();" insertbefore="menu_preferences"/>
-                    </menupopup>
-                </menu>
-            </menubar>
-        </toolbaritem>
-    </toolbar>
+  if (window.accountColorsUtilities.thunderbirdVersion.major >= 102) { // toolbar id changed to `toolbar-menubar` since TB 102
+    WL.injectElements(
+      `
+      <toolbar id="toolbar-menubar">
+          <toolbaritem id="menubar-items">
+              <menubar id="mail-menubar">
+                  <menu id="tasksMenu">
+                      <menupopup id="taskPopup">
+                          <menuitem id="accountcolors-toolsmenu-options" label="&accountcolors.options;" accesskey="&accountcolors.options.ak;"
+                                    oncommand="accountColorsMessage.cmdOptions();" insertafter="menu_accountmgr"/>
+                      </menupopup>
+                  </menu>
+              </menubar>
+          </toolbaritem>
+      </toolbar>
 `,
-    ["chrome://accountcolors/locale/accountcolors.dtd"]
-  );
+      ["chrome://accountcolors/locale/accountcolors.dtd"]
+    );
+  } else {
+    WL.injectElements(
+      `
+      <toolbar id="mail-toolbar-menubar2">
+          <toolbaritem id="menubar-items">
+              <menubar id="mail-menubar">
+                  <menu id="tasksMenu">
+                      <menupopup id="taskPopup">
+                          <menuitem id="accountcolors-toolsmenu-options" label="&accountcolors.options;" accesskey="&accountcolors.options.ak;"
+                                    oncommand="accountColorsMessage.cmdOptions();" insertbefore="menu_preferences"/>
+                      </menupopup>
+                  </menu>
+              </menubar>
+          </toolbaritem>
+      </toolbar>
+`,
+      ["chrome://accountcolors/locale/accountcolors.dtd"]
+    );
+  }
+
 
   window.accountColorsMessage.onLoad();
 }

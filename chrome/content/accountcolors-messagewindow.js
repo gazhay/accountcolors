@@ -385,6 +385,6 @@ var accountColorsMessage = {
     optionsWindow = accountColorsMessage.winmed.getMostRecentWindow("accountcolors-options");
 
     if (optionsWindow) optionsWindow.focus();
-    else window.openDialog("chrome://accountcolors/content/accountcolors-options.xul", "", "chrome,dialog,titlebar,centerscreen", null);
+    else window.openDialog("chrome://accountcolors/content/accountcolors-options.xhtml", "", "chrome,dialog,titlebar,centerscreen", null);
   },
 };
