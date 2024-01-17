@@ -28,10 +28,36 @@
 #accountcolors-tabbox {
   flex: auto;
   height: 377px;
+  background-color: inherit;
+}
+
+#accountcolors-tabs {
+  color-scheme: inherit;
+}
+
+#accountcolors-tabs > tab {
+  padding: 0;
+  color-scheme: inherit;
+}
+
+#accountcolors-tabs > tab > hbox {
+  height: 100%;
+  margin-top: 0px;
+  padding: 3px 4px 2px;
+  background-color: var(--unselected-tab-color);
+}
+
+#accountcolors-tabs > tab > hbox[selected="true"] {
+  margin-top: 0px;
+  padding: 1px 6px 4px;
+  background-color: var(--selected-tab-color);
 }
 
 #accountcolors-panels {
   flex: auto;
+  appearance: dialog;
+  color-scheme: inherit;
+
 }
 
 #accountcolors-account-panel,
