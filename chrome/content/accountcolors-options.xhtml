@@ -27,7 +27,7 @@
   <script type="application/x-javascript" src="chrome://accountcolors/content/accountcolors-options.js" />
   <script type="application/x-javascript" src="chrome://accountcolors/content/accountcolors-utilities.js" />
 
-  <tabbox>
+  <tabbox id="accountcolors-tabbox">
     <tabs>
       <tab label="&accountcolors.accountcolors;" />
       <tab label="&accountcolors.folderpane;" />
@@ -36,7 +36,7 @@
       <tab label="&accountcolors.composewindow;" />
     </tabs>
 
-    <tabpanels flex="0">
+    <tabpanels id="accountcolors-panels">
       <tabpanel id="accountcolors-account-panel" orient="vertical">
         <vbox id="accountcolors-accountidbox-header">
           <hbox>

@@ -20,6 +20,28 @@
   --v-scale-image: -moz-linear-gradient(left, #f0f0f0, #f0f0f0);
 }
 
+#accountcolors-options {
+  min-width: 672px;
+  min-height: 417px;
+}
+
+#accountcolors-tabbox {
+  flex: auto;
+  height: 377px;
+}
+
+#accountcolors-panels {
+  flex: auto;
+}
+
+#accountcolors-account-panel,
+#accountcolors-folder-panel,
+#accountcolors-thread-panel,
+#accountcolors-message-panel,
+#accountcolors-compose-panel {
+  min-width: 0px;
+}
+
 #accountcolors-accountidbox-header {
   height: 20px;
   padding-top: 2px;
@@ -57,10 +79,22 @@
   opacity: 0;
 }
 
+#accountcolors-accountidbox-header {
+  flex: 0 1 auto;
+}
+
 #accountcolors-accountidbox-container {
+  flex: 1 1 auto;
   height: 278px;
   padding: 3px 0px;
   border: 1px solid #c0c0c0;
+  overflow-y: auto;
+}
+
+#accountcolors-folder-panel,
+#accountcolors-thread-panel,
+#accountcolors-message-panel,
+#accountcolors-compose-panel {
   overflow-y: auto;
 }
 
