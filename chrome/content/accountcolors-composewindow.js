@@ -104,7 +104,7 @@ var accountColorsCompose = {
     /* Color subject background */
 
     if (accountColorsCompose.prefs.getBoolPref("compose-colorbkgd")) {
-      bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
+      bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey) || "var(--toolbar-bgcolor)";
 
       element = document.getElementById("msgSubject");
       if (defaultbkgd) element.style.backgroundColor = "";
@@ -290,15 +290,27 @@ var accountColorsCompose = {
     if (accountColorsCompose.prefs.getBoolPref("compose-colorhdrbkgd")) {
       bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
 
-      element = document.getElementById("msgheaderstoolbar-box"); // msgheaderstoolbar-box does not exist since TB 102.
+      // msgheaderstoolbar-box replaced by MsgHeadersToolbar since TB 102.
+      element = document.getElementById("MsgHeadersToolbar") || document.getElementById("msgheaderstoolbar-box");
       if (element != null) {
         if (defaultbkgd) element.style.backgroundColor = "";
-        else element.style.backgroundColor = bkgdcolor;
+        else element.style.setProperty("background-color", bkgdcolor, "important");
+      }
+      element = document.getElementById("attachmentArea");
+      element = element && element.querySelector("html summary");
+      if (element != null) {
+        if (defaultbkgd) element.style.backgroundColor = "";
+        else element.style.setProperty("background-color", bkgdcolor, "important");
       }
     } else {
-      element = document.getElementById("msgheaderstoolbar-box");
+      element = document.getElementById("MsgHeadersToolbar") || document.getElementById("msgheaderstoolbar-box");
       if (element != null) {
-        element.style.backgroundColor = "";
+        element.style.setProperty("background-color", "", "");
+      }
+      element = document.getElementById("attachmentArea");
+      element = element && element.querySelector("html summary");
+      if (element != null) {
+        element.style.setProperty("background-color", "", "");
       }
     }
 
