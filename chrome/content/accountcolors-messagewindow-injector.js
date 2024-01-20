@@ -3,10 +3,13 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
 // Load an additional JavaScript file.
 Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-messagewindow.js", window, "UTF-8");
+Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-aboutmessage.js", window, "UTF-8");
 Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-utilities.js", window, "UTF-8");
 
 function onLoad(activatedWhileWindowOpen) {
-  WL.injectCSS("chrome://accountcolors-skin/content/accountcolors-messagewindow.css");
+  if (window.accountColorsUtilities.thunderbirdVersion.major <= 102) {
+    WL.injectCSS("chrome://accountcolors-skin/content/accountcolors-messagewindow.css");
+  }
 
   if (window.accountColorsUtilities.thunderbirdVersion.major >= 102) { // toolbar id changed to `toolbar-menubar` since TB 102
     WL.injectElements(

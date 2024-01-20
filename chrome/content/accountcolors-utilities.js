@@ -16,7 +16,7 @@
 /* Get thunderbird version object */
 
 function getThunderbirdVersion() {
-  let parts = Services.appinfo.version.split(".");
+  const parts = Services.appinfo.version.split(".");
   return {
     major: parseInt(parts[0]),
     minor: parseInt(parts[1]),
