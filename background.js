@@ -31,7 +31,7 @@ async function getThunderbirdVersion() {
   //overlay chrome://messenger/content/messageWindow.xul chrome://accountcolors/content/accountcolors-messagewindow-overlay.xul
   //overlay chrome://messenger/content/messengercompose/messengercompose.xul chrome://accountcolors/content/accountcolors-composewindow-overlay.xul
 
-  messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xhtml", "chrome://accountcolors/content/accountcolors-3panewindow-injector.js");
+  messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xhtml", "chrome://accountcolors/content/accountcolors-messengerwindow-injector.js");
 
   messenger.WindowListener.registerWindow("chrome://messenger/content/messageWindow.xhtml", "chrome://accountcolors/content/accountcolors-messagewindow-injector.js");
 
