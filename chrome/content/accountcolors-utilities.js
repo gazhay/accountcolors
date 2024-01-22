@@ -13,6 +13,9 @@
 
 "use strict";
 
+var Services = globalThis.Services ||
+  ChromeUtils.import("resource://gre/modules/Services.jsm").Services;
+
 /* Get thunderbird version object */
 
 function getThunderbirdVersion() {

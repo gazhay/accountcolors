@@ -401,16 +401,24 @@ var accountColorsOptions = {
 
     checkbox = document.getElementById("accountcolors-folder-showlines");
     try {
-      checkstate = accountColorsOptions.prefs.getBoolPref("folder-showlines");
-      checkbox.checked = checkstate;
+      if (accountColorsUtilities.thunderbirdVersion.major <= 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("folder-showlines");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 103+, as tree-line is no longer native in folder tree view
+      }
     } catch (e) {
       checkbox.checked = false;
     }
 
     checkbox = document.getElementById("accountcolors-folder-darkerbar");
     try {
-      checkstate = accountColorsOptions.prefs.getBoolPref("folder-darkerbar");
-      checkbox.checked = checkstate;
+      if (accountColorsUtilities.thunderbirdVersion.major <= 68) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("folder-darkerbar");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 103+ with new mail frontend
+      }
     } catch (e) {
       checkbox.checked = false;
     }
@@ -605,16 +613,24 @@ var accountColorsOptions = {
 
     checkbox = document.getElementById("accountcolors-thread-showstripes");
     try {
-      checkstate = accountColorsOptions.prefs.getBoolPref("thread-showstripes");
-      checkbox.checked = checkstate;
+      if (accountColorsUtilities.thunderbirdVersion.major <= 68) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("thread-showstripes");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for newer thunderbird, as it is not working (and not having figured out why)
+      }
     } catch (e) {
       checkbox.checked = false;
     }
 
     checkbox = document.getElementById("accountcolors-thread-darkerbar");
     try {
-      checkstate = accountColorsOptions.prefs.getBoolPref("thread-darkerbar");
-      checkbox.checked = checkstate;
+      if (accountColorsUtilities.thunderbirdVersion.major <= 68) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("thread-darkerbar");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 103+ with new mail frontend
+      }
     } catch (e) {
       checkbox.checked = false;
     }

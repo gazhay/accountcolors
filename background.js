@@ -40,6 +40,8 @@ async function getThunderbirdVersion() {
   // New Mail frontend: see https://developer.thunderbird.net/thunderbird-development/codebase-overview/mail-front-end
   // and https://developer.thunderbird.net/add-ons/updating/tb115/adapt-to-changes-in-thunderbird-103-115
   if ((await getThunderbirdVersion()).major > 102) {
+    messenger.WindowListener.registerWindow("about:3pane", "chrome://accountcolors/content/accountcolors-about3pane-injector.js");
+
     messenger.WindowListener.registerWindow("about:message", "chrome://accountcolors/content/accountcolors-aboutmessage-injector.js");
   }
 
