@@ -1677,7 +1677,7 @@ var WindowListener_115 = class extends ExtensionCommon.ExtensionAPI {
 
   async _loadIntoWindow(window, isAddonActivation) {
     const fullyLoaded = async window => {
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 100; i++) {
         await this.sleep(50);
         if (
           window &&
