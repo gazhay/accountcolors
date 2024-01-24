@@ -207,11 +207,14 @@
 #threadPane[ac-whiterowfont] > #threadTree th[is="tree-view-table-header-cell"] img { color: inherit !important }
 #threadPane[ac-blackrowfont] > #threadTree th[is="tree-view-table-header-cell"] img { color: inherit !important }
 
-#threadPane[ac-whiterowfont] > #threadTree tr[is="thread-row"] > td { color: inherit !important }
-#threadPane[ac-blackrowfont] > #threadTree tr[is="thread-row"] > td { color: inherit !important }
+#threadPane[ac-whiterowfont] > #threadTree tr[is="thread-row"] > td { color: inherit }
+#threadPane[ac-blackrowfont] > #threadTree tr[is="thread-row"] > td { color: inherit }
 
 #threadPane[ac-whiterowfont] > #threadTree tr[is="thread-row"] > td button, #threadPane[ac-whiterowfont] > #threadTree tr[is="thread-row"] > td img { color: inherit !important }
 #threadPane[ac-blackrowfont] > #threadTree tr[is="thread-row"] > td button, #threadPane[ac-blackrowfont] > #threadTree tr[is="thread-row"] > td img { color: inherit !important }
+
+#threadPane[ac-whiterowfont] > #threadTree tr[is="thread-card"] > td button, #threadPane[ac-whiterowfont] > #threadTree tr[is="thread-card"] > td img { color: inherit !important }
+#threadPane[ac-blackrowfont] > #threadTree tr[is="thread-card"] > td button, #threadPane[ac-blackrowfont] > #threadTree tr[is="thread-card"] > td img { color: inherit !important }
 
 /**********************************************************************************************************************/
 

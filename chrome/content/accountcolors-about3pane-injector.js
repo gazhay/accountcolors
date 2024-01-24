@@ -2,8 +2,8 @@
 var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
 // Load an additional JavaScript file.
-Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-about3pane.js", window, "UTF-8");
 Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-utilities.js", window, "UTF-8");
+Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-about3pane.js", window, "UTF-8");
 
 function onLoad(activatedWhileWindowOpen) {
   WL.injectCSS("chrome://accountcolors-skin/content/accountcolors-about3pane.css");

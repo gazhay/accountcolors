@@ -2,9 +2,12 @@
 var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
 // Load an additional JavaScript file.
-Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-messengerwindow.js", window, "UTF-8");
-Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-aboutmessage.js", window, "UTF-8");
 Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-utilities.js", window, "UTF-8");
+Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-messengerwindow.js", window, "UTF-8");
+if (window.accountColorsUtilities.thunderbirdVersion.major <= 102) {
+  Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-aboutmessage.js", window, "UTF-8");
+  Services.scriptloader.loadSubScript("chrome://accountcolors/content/accountcolors-about3pane.js", window, "UTF-8");
+}
 
 function onLoad(activatedWhileWindowOpen) {
   if (window.accountColorsUtilities.thunderbirdVersion.major <= 102) {
