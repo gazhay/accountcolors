@@ -433,8 +433,12 @@ var accountColorsOptions = {
 
     checkbox = document.getElementById("accountcolors-folder-hoverselect");
     try {
-      checkstate = accountColorsOptions.prefs.getBoolPref("folder-hoverselect");
-      checkbox.checked = checkstate;
+      if (accountColorsUtilities.thunderbirdVersion.major <= 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("folder-hoverselect");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 103+, as it is always enabled and strictly stick to system default
+      }
     } catch (e) {
       checkbox.checked = false;
     }
@@ -645,8 +649,12 @@ var accountColorsOptions = {
 
     checkbox = document.getElementById("accountcolors-thread-hoverselect");
     try {
-      checkstate = accountColorsOptions.prefs.getBoolPref("thread-hoverselect");
-      checkbox.checked = checkstate;
+      if (accountColorsUtilities.thunderbirdVersion.major <= 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("thread-hoverselect");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 103+, as it is always enabled and strictly stick to system default
+      }
     } catch (e) {
       checkbox.checked = false;
     }
@@ -1005,8 +1013,12 @@ var accountColorsOptions = {
 
     checkbox = document.getElementById("accountcolors-compose-hoverfrom");
     try {
-      checkstate = accountColorsOptions.prefs.getBoolPref("compose-hoverfrom");
-      checkbox.checked = checkstate;
+      if (accountColorsUtilities.thunderbirdVersion.major <= 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("compose-hoverfrom");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 103+, as it is always enabled and strictly stick to system default
+      }
     } catch (e) {
       checkbox.checked = false;
     }

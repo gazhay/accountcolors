@@ -418,3 +418,9 @@
     background-color: #0078D9 !important;
     color: white !important;
 }
+
+:root:not([ac-hoverfrom]) #msgIdentity menuitem[_moz-menuactive]
+{
+    background-color: var(--arrowpanel-dimmed) !important;
+    color: inherit !important;
+}
