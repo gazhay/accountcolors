@@ -28,7 +28,7 @@ pref("extensions.accountcolors.folder-fontsize", 12);
 pref("extensions.accountcolors.folder-colorfont", true);
 pref("extensions.accountcolors.folder-colorbkgd", true);
 pref("extensions.accountcolors.folder-colorfldfont", true);
-pref("extensions.accountcolors.folder-colorfldbkgd", true);
+pref("extensions.accountcolors.folder-colorfldbkgd", false);
 pref("extensions.accountcolors.folder-colorother", false);
 pref("extensions.accountcolors.folder-colorotherbkgd", false);
 pref("extensions.accountcolors.folder-blackrowfont", false);
@@ -43,7 +43,7 @@ pref("extensions.accountcolors.folder-showlines", false);
 pref("extensions.accountcolors.folder-darkerbar", false);
 pref("extensions.accountcolors.folder-incspacing", false);
 pref("extensions.accountcolors.folder-hoverselect", true);
-pref("extensions.accountcolors.folder-colorbkgd-account-icon", false);
+pref("extensions.accountcolors.folder-colorbkgd-account-icon", true);
 pref("extensions.accountcolors.folder-colorbkgd-folder-icon", false);
 
 /* Thread Pane */
