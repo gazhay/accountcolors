@@ -1126,6 +1126,35 @@ var accountColorsOptions = {
     } catch (e) {
       checkbox.checked = false;
     }
+
+    checkbox = document.getElementById("accountcolors-compose-colorbkgd-idmenu-label");
+    try {
+      checkstate = accountColorsOptions.prefs.getBoolPref("compose-colorbkgd-idmenu-label");
+      checkbox.checked = checkstate;
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
+    menulist = document.getElementById("accountcolors-compose-idmenu-label-width");
+    menulist.disabled = !checkbox.checked;
+    menulist.appendItem("Width: 1", 1);
+    menulist.appendItem("Width: 2", 2);
+    menulist.appendItem("Width: 3", 3);
+    menulist.appendItem("Width: 4", 4);
+    menulist.appendItem("Width: 5", 5);
+    menulist.appendItem("Width: 6", 6);
+    menulist.appendItem("Width: 7", 7);
+    menulist.appendItem("Width: 8", 8);
+    menulist.appendItem("Width: 9", 9);
+    menulist.appendItem("Width: 10", 10);
+    menulist.appendItem("Width: 11", 11);
+    menulist.appendItem("Width: 12", 12);
+    try {
+      value = accountColorsOptions.prefs.getIntPref("compose-idmenu-label-width");
+      menulist.selectedIndex = value - 1;
+    } catch (e) {
+      menulist.selectedIndex = 1;
+    }
   },
 
   /********************************************************************/
@@ -1251,6 +1280,7 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("compose-darkfieldbkgd", document.getElementById("accountcolors-compose-darkfieldbkgd").checked);
     // accountColorsOptions.prefs.setBoolPref("compose-defaultbkgd", document.getElementById("accountcolors-compose-defaultbkgd").checked);
     accountColorsOptions.prefs.setBoolPref("compose-hoverfrom", document.getElementById("accountcolors-compose-hoverfrom").checked);
+    accountColorsOptions.prefs.setBoolPref("compose-colorbkgd-idmenu-label", document.getElementById("accountcolors-compose-colorbkgd-idmenu-label").checked);
   },
 
   /********************************************************************/

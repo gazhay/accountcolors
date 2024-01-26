@@ -97,6 +97,7 @@
 <!ENTITY accountcolors.compose.darkfieldbkgd    "Dark Field Backgrounds (on hover or focus)">
 <!ENTITY accountcolors.compose.defaultbkgd "Retain default light/dark background if White selected">
 <!ENTITY accountcolors.compose.hoverfrom        "Reinstate default hover style (on From menu)">
+<!ENTITY accountcolors.thread.colorbkgd.idmenu.label "Color Identity Background in From Menu as Label">
 
 <!ENTITY accountcolors.picker.fonttitle         "Font Color Picker">
 <!ENTITY accountcolors.picker.bkgdtitle         "Background Color Picker">

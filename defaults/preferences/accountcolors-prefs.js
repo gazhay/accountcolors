@@ -123,3 +123,5 @@ pref("extensions.accountcolors.compose-whitefieldfont", false);
 pref("extensions.accountcolors.compose-darkfieldbkgd", false);
 pref("extensions.accountcolors.compose-defaultbkgd", false);
 pref("extensions.accountcolors.compose-hoverfrom", true);
+pref("extensions.accountcolors.compose-colorbkgd-idmenu-label", false);
+pref("extensions.accountcolors.compose-idmenu-label-width", 4);
