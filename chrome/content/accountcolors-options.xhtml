@@ -22,13 +22,13 @@
 
 <!DOCTYPE dialog SYSTEM "chrome://accountcolors/locale/accountcolors.dtd">
 
-<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml" id="accountcolors-options" title="&accountcolors.optionstitle;" buttons="accept,cancel,extra1" persist="screenX screenY" onload="accountColorsOptions.initPrefs();" buttonlabelextra1="&accountcolors.applyprefs;" windowtype="accountcolors-options">
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml" id="accountcolors-options" title="&accountcolors.optionstitle;" buttons="accept,cancel,extra1" persist="screenX screenY" onload="accountColorsOptions.onLoad();" buttonlabelextra1="&accountcolors.applyprefs;" windowtype="accountcolors-options">
   <script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js" />
   <script type="application/x-javascript" src="chrome://accountcolors/content/accountcolors-options.js" />
   <script type="application/x-javascript" src="chrome://accountcolors/content/accountcolors-utilities.js" />
 
-  <tabbox>
-    <tabs>
+  <tabbox id="accountcolors-tabbox">
+    <tabs id="accountcolors-tabs">
       <tab label="&accountcolors.accountcolors;" />
       <tab label="&accountcolors.folderpane;" />
       <tab label="&accountcolors.threadpane;" />
@@ -36,7 +36,7 @@
       <tab label="&accountcolors.composewindow;" />
     </tabs>
 
-    <tabpanels flex="0">
+    <tabpanels id="accountcolors-panels">
       <tabpanel id="accountcolors-account-panel" orient="vertical">
         <vbox id="accountcolors-accountidbox-header">
           <hbox>
@@ -93,9 +93,11 @@
           <checkbox id="accountcolors-folder-darkpanebkgd" label="&accountcolors.folder.darkpanebkgd;" />
         </hbox>
 
+        <!--
         <hbox>
           <checkbox id="accountcolors-folder-defaultbkgd" label="&accountcolors.folder.defaultbkgd;" />
         </hbox>
+        -->
 
         <separator class="groove section" />
 
@@ -221,9 +223,11 @@
           <checkbox id="accountcolors-message-whitehdrlabels" label="&accountcolors.message.whitehdrlabels;" />
         </hbox>
 
+        <!--
         <hbox>
           <checkbox id="accountcolors-message-defaultbkgd" label="&accountcolors.message.defaultbkgd;" />
         </hbox>
+        -->
 
         <hbox>
           <checkbox id="accountcolors-message-hdraccount" label="&accountcolors.message.hdraccount;" />
@@ -288,9 +292,11 @@
           <checkbox id="accountcolors-compose-darkfieldbkgd" label="&accountcolors.compose.darkfieldbkgd;" />
         </hbox>
 
+        <!--
         <hbox>
           <checkbox id="accountcolors-compose-defaultbkgd" label="&accountcolors.compose.defaultbkgd;" />
         </hbox>
+        -->
 
         <separator class="groove section" />
 

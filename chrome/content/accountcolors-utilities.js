@@ -13,7 +13,22 @@
 
 "use strict";
 
+var Services = globalThis.Services ||
+  ChromeUtils.import("resource://gre/modules/Services.jsm").Services;
+
+/* Get thunderbird version object */
+
+function getThunderbirdVersion() {
+  const parts = Services.appinfo.version.split(".");
+  return {
+    major: parseInt(parts[0]),
+    minor: parseInt(parts[1]),
+  }
+}
+
 var accountColorsUtilities = {
+  thunderbirdVersion: getThunderbirdVersion(),
+
   prefs: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.accountcolors."),
 
   accountManager: Components.classes["@mozilla.org/messenger/account-manager;1"].getService(Components.interfaces.nsIMsgAccountManager),
@@ -105,7 +120,7 @@ var accountColorsUtilities = {
     try {
       fontcolor = accountColorsUtilities.prefs.getCharPref(accountidkey + "-fontcolor");
     } catch (e) {
-      fontcolor = "#000000";
+      fontcolor = "";
     }
 
     return fontcolor;
@@ -119,7 +134,7 @@ var accountColorsUtilities = {
     try {
       bkgdcolor = accountColorsUtilities.prefs.getCharPref(accountidkey + "-bkgdcolor");
     } catch (e) {
-      bkgdcolor = "#FFFFFF";
+      bkgdcolor = "";
     }
 
     return bkgdcolor;

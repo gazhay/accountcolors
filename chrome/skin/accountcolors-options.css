@@ -20,6 +20,54 @@
   --v-scale-image: -moz-linear-gradient(left, #f0f0f0, #f0f0f0);
 }
 
+#accountcolors-options {
+  min-width: 672px;
+  min-height: 417px;
+}
+
+#accountcolors-tabbox {
+  flex: auto;
+  height: 377px;
+  background-color: inherit;
+}
+
+#accountcolors-tabs {
+  color-scheme: inherit;
+}
+
+#accountcolors-tabs > tab {
+  padding: 0;
+  color-scheme: inherit;
+}
+
+#accountcolors-tabs > tab > hbox {
+  height: 100%;
+  margin-top: 0px;
+  padding: 3px 4px 2px;
+  background-color: var(--unselected-tab-color);
+}
+
+#accountcolors-tabs > tab > hbox[selected="true"] {
+  margin-top: 0px;
+  padding: 1px 6px 4px;
+  background-color: var(--selected-tab-color);
+}
+
+#accountcolors-panels {
+  flex: auto;
+  appearance: dialog;
+  color-scheme: inherit;
+
+}
+
+#accountcolors-account-panel,
+#accountcolors-folder-panel,
+#accountcolors-thread-panel,
+#accountcolors-message-panel,
+#accountcolors-compose-panel {
+  min-width: 0px;
+}
+
 #accountcolors-accountidbox-header {
   height: 20px;
   padding-top: 2px;
@@ -57,10 +105,22 @@
   opacity: 0;
 }
 
+#accountcolors-accountidbox-header {
+  flex: 0 1 auto;
+}
+
 #accountcolors-accountidbox-container {
+  flex: 1 1 auto;
   height: 278px;
   padding: 3px 0px;
   border: 1px solid #c0c0c0;
+  overflow-y: auto;
+}
+
+#accountcolors-folder-panel,
+#accountcolors-thread-panel,
+#accountcolors-message-panel,
+#accountcolors-compose-panel {
   overflow-y: auto;
 }
 

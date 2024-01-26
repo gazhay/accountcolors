@@ -14,13 +14,7 @@
 "use strict";
 
 var accountColorsCompose = {
-  appInfo: Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo),
-  versionComparator: Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator),
-  tbVersion: "",
-
   prefs: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.accountcolors."),
-
-  promptService: Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService),
 
   accountManager: Components.classes["@mozilla.org/messenger/account-manager;1"].getService(Components.interfaces.nsIMsgAccountManager),
 
@@ -67,13 +61,6 @@ var accountColorsCompose = {
 
     window.removeEventListener("load", accountColorsCompose.onLoad, false);
 
-    /* Determine Thunderbird version and set attribute */
-
-    if (accountColorsCompose.versionComparator.compare(accountColorsCompose.appInfo.version, "68.0a1") >= 0) accountColorsCompose.tbVersion = "68.0";
-    else accountColorsCompose.tbVersion = "68.0";
-
-    document.getElementById("msgcomposeWindow").setAttribute("accountcolors-tbversion", accountColorsCompose.tbVersion);
-
     /* Register preferences observer */
 
     accountColorsCompose.prefsObserver.register();
@@ -117,7 +104,7 @@ var accountColorsCompose = {
     /* Color subject background */
 
     if (accountColorsCompose.prefs.getBoolPref("compose-colorbkgd")) {
-      bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
+      bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey) || "var(--toolbar-bgcolor)";
 
       element = document.getElementById("msgSubject");
       if (defaultbkgd) element.style.backgroundColor = "";
@@ -131,9 +118,13 @@ var accountColorsCompose = {
 
     if (accountColorsCompose.prefs.getBoolPref("compose-colorfromfont")) {
       menulist = document.getElementById("msgIdentity");
-      menulist.children[1].children[1].style.color = accountColorsUtilities.fontColorPref(accountidkey);
-      menulist.children[1].children[2].style.color = accountColorsUtilities.fontColorPref(accountidkey);
-      menulist.children[2].children[0].style.color = accountColorsUtilities.fontColorPref(accountidkey);
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        menulist.style.color = accountColorsUtilities.fontColorPref(accountidkey); // At least after TB 102 (in fact, the same holds for 91,78...), menulist.children[1] does not exist.
+      } else {
+        menulist.children[1].children[1].style.color = accountColorsUtilities.fontColorPref(accountidkey);
+        menulist.children[1].children[2].style.color = accountColorsUtilities.fontColorPref(accountidkey);
+        menulist.children[2].children[0].style.color = accountColorsUtilities.fontColorPref(accountidkey);
+      }
 
       menupopup = document.getElementById("msgIdentityPopup");
 
@@ -144,15 +135,19 @@ var accountColorsCompose = {
           /* not menu separator */
           idkey = menuitem.getAttribute("identitykey");
 
-          menuitem.children[1].style.color = accountColorsUtilities.fontColorPref(idkey);
-          menuitem.children[3].style.color = accountColorsUtilities.fontColorPref(idkey);
+          menuitem.children[1].style.color = accountColorsUtilities.fontColorPref(idkey); // menu-iconic-text
+          menuitem.children[3].style.color = accountColorsUtilities.fontColorPref(idkey); // menu-description
         }
       }
     } else {
       menulist = document.getElementById("msgIdentity");
-      menulist.children[1].children[1].style.color = "";
-      menulist.children[1].children[2].style.color = "";
-      menulist.children[2].children[0].style.color = "";
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        menulist.style.color = "";
+      } else {
+        menulist.children[1].children[1].style.color = "";
+        menulist.children[1].children[2].style.color = "";
+        menulist.children[2].children[0].style.color = "";
+      }
 
       menupopup = document.getElementById("msgIdentityPopup");
 
@@ -295,12 +290,28 @@ var accountColorsCompose = {
     if (accountColorsCompose.prefs.getBoolPref("compose-colorhdrbkgd")) {
       bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
 
-      element = document.getElementById("msgheaderstoolbar-box");
-      if (defaultbkgd) element.style.backgroundColor = "";
-      else element.style.backgroundColor = bkgdcolor;
+      // msgheaderstoolbar-box replaced by MsgHeadersToolbar since TB 102.
+      element = document.getElementById("MsgHeadersToolbar") || document.getElementById("msgheaderstoolbar-box");
+      if (element != null) {
+        if (defaultbkgd) element.style.backgroundColor = "";
+        else element.style.setProperty("background-color", bkgdcolor, "important");
+      }
+      element = document.getElementById("attachmentArea");
+      element = element && element.querySelector("html summary");
+      if (element != null) {
+        if (defaultbkgd) element.style.backgroundColor = "";
+        else element.style.setProperty("background-color", bkgdcolor, "important");
+      }
     } else {
-      element = document.getElementById("msgheaderstoolbar-box");
-      element.style.backgroundColor = "";
+      element = document.getElementById("MsgHeadersToolbar") || document.getElementById("msgheaderstoolbar-box");
+      if (element != null) {
+        element.style.setProperty("background-color", "", "");
+      }
+      element = document.getElementById("attachmentArea");
+      element = element && element.querySelector("html summary");
+      if (element != null) {
+        element.style.setProperty("background-color", "", "");
+      }
     }
 
     /* Black/White field fonts */
@@ -387,7 +398,11 @@ var accountColorsCompose = {
 
       menulist = document.getElementById("msgIdentity");
 
-      element = menulist.children[1].children[1];
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        element = menulist;
+      } else {
+        element = menulist.children[1].children[1];
+      }
 
       switch (fontstyle) {
         case 0 /* Normal */:
@@ -408,7 +423,11 @@ var accountColorsCompose = {
           break;
       }
 
-      element = menulist.children[1].children[3];
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        element = menulist;
+      } else {
+        element = menulist.children[1].children[3];
+      }
 
       switch (fontstyle) {
         case 0 /* Normal */:
@@ -431,13 +450,19 @@ var accountColorsCompose = {
     } else {
       menulist = document.getElementById("msgIdentity");
 
-      element = menulist.children[1].children[1];
-      element.style.fontStyle = "";
-      element.style.fontWeight = "";
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102 || menulist.children[1] == null) {
+        element = menulist;
+        element.style.fontStyle = "";
+        element.style.fontWeight = "";
+      } else {
+        element = menulist.children[1].children[1];
+        element.style.fontStyle = "";
+        element.style.fontWeight = "";
 
-      element = menulist.children[1].children[3];
-      element.style.fontStyle = "";
-      element.style.fontWeight = "";
+        element = menulist.children[1].children[3];
+        element.style.fontStyle = "";
+        element.style.fontWeight = "";
+      }
     }
 
     /* From font size */
@@ -459,6 +484,6 @@ var accountColorsCompose = {
     optionsWindow = accountColorsCompose.winmed.getMostRecentWindow("accountcolors-options");
 
     if (optionsWindow) optionsWindow.focus();
-    else window.openDialog("chrome://accountcolors/content/accountcolors-options.xul", "", "chrome,dialog,titlebar,centerscreen", null);
+    else window.openDialog("chrome://accountcolors/content/accountcolors-options.xhtml", "", "chrome,dialog,titlebar,centerscreen", null);
   },
 };
