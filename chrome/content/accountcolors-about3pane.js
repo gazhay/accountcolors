@@ -1010,8 +1010,8 @@ var accountColorsAbout3Pane_115 = {
 
       /* Regard account folders in Unified Folders (Inbox/Drafts/etc.) as accounts */
 
-      var parentElement = this.parentNode.closest('li[is="folder-tree-row"]');
-      var inUnifiedFolder = parentElement && parentElement.uri.startsWith("mailbox://nobody@smart%20mailboxes");
+      var parentElement = this.parentNode && this.parentNode.closest('li[is="folder-tree-row"]');
+      var inUnifiedFolder = !!parentElement && parentElement.uri.startsWith("mailbox://nobody@smart%20mailboxes");
 
       /* Color account/folders font */
 
