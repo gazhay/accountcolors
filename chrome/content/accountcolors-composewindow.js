@@ -212,6 +212,7 @@ var accountColorsCompose = {
         if (menuitem.localName == "menuitem") {
           /* not menu separator */
           menuitem.style.backgroundColor = "";
+          menuitem.style.backgroundImage = "";
         }
       }
     }

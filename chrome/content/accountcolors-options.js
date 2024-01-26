@@ -1281,6 +1281,7 @@ var accountColorsOptions = {
     // accountColorsOptions.prefs.setBoolPref("compose-defaultbkgd", document.getElementById("accountcolors-compose-defaultbkgd").checked);
     accountColorsOptions.prefs.setBoolPref("compose-hoverfrom", document.getElementById("accountcolors-compose-hoverfrom").checked);
     accountColorsOptions.prefs.setBoolPref("compose-colorbkgd-idmenu-label", document.getElementById("accountcolors-compose-colorbkgd-idmenu-label").checked);
+    accountColorsOptions.prefs.setIntPref("compose-idmenu-label-width", document.getElementById("accountcolors-compose-idmenu-label-width").value);
   },
 
   /********************************************************************/
