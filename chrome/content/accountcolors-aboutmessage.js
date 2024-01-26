@@ -205,12 +205,18 @@ var accountColorsAboutMessage = {
       element = document.getElementById("expandedHeaderView"); // Removed since TB 102+
       if (element != null) element.style.backgroundColor = bkgdcolor;
 
+      element = document.getElementById("messageHeader");
+      if (element != null) element.style.backgroundColor = bkgdcolor;
+
       /* For CompactHeader add-on */
 
       element = document.getElementById("CompactHeader_collapsedHeaderView");
       if (element != null) element.style.backgroundColor = bkgdcolor;
     } else {
       element = document.getElementById("expandedHeaderView");
+      if (element != null) element.style.backgroundColor = "";
+
+      element = document.getElementById("messageHeader");
       if (element != null) element.style.backgroundColor = "";
 
       /* For CompactHeader add-on */
