@@ -903,6 +903,35 @@ var accountColorsOptions = {
     //   checkbox.checked = false;
     // }
 
+    checkbox = document.getElementById("accountcolors-message-colorbkgd-header-label");
+    try {
+      checkstate = accountColorsOptions.prefs.getBoolPref("message-colorbkgd-header-label");
+      checkbox.checked = checkstate;
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
+    menulist = document.getElementById("accountcolors-message-header-label-width");
+    menulist.disabled = !checkbox.checked;
+    menulist.appendItem("Width: 1", 1);
+    menulist.appendItem("Width: 2", 2);
+    menulist.appendItem("Width: 3", 3);
+    menulist.appendItem("Width: 4", 4);
+    menulist.appendItem("Width: 5", 5);
+    menulist.appendItem("Width: 6", 6);
+    menulist.appendItem("Width: 7", 7);
+    menulist.appendItem("Width: 8", 8);
+    menulist.appendItem("Width: 9", 9);
+    menulist.appendItem("Width: 10", 10);
+    menulist.appendItem("Width: 11", 11);
+    menulist.appendItem("Width: 12", 12);
+    try {
+      value = accountColorsOptions.prefs.getIntPref("message-header-label-width");
+      menulist.selectedIndex = value - 1;
+    } catch (e) {
+      menulist.selectedIndex = 1;
+    }
+
     /* Compose Window Options */
 
     checkbox = document.getElementById("accountcolors-compose-setfontstyle");
@@ -1252,6 +1281,8 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("message-whitehdrlabels", document.getElementById("accountcolors-message-whitehdrlabels").checked);
     // accountColorsOptions.prefs.setBoolPref("message-defaultbkgd", document.getElementById("accountcolors-message-defaultbkgd").checked);
     accountColorsOptions.prefs.setBoolPref("message-hdraccount", document.getElementById("accountcolors-message-hdraccount").checked);
+    accountColorsOptions.prefs.setBoolPref("message-colorbkgd-header-label", document.getElementById("accountcolors-message-colorbkgd-header-label").checked);
+    accountColorsOptions.prefs.setIntPref("message-header-label-width", document.getElementById("accountcolors-message-header-label-width").value);
 
     /* Compose Window Options */
 

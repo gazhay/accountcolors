@@ -75,6 +75,7 @@
 <!ENTITY accountcolors.message.whitehdrlabels   "White Header Labels">
 <!ENTITY accountcolors.message.hdraccount       "Color based on Received Account (instead of Folder Account)">
 <!ENTITY accountcolors.message.defaultbkgd "Retain default light/dark background if White selected">
+<!ENTITY accountcolors.message.colorbkgd.header.label "Color Header Background as Label">
 
 <!ENTITY accountcolors.compose.setfontstyle     "Subject Font Style">
 <!ENTITY accountcolors.compose.setfontsize      "Subject Font Size">

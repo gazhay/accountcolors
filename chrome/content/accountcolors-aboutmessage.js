@@ -202,22 +202,37 @@ var accountColorsAboutMessage = {
       bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
       if (accountColorsAboutMessage.prefs.getBoolPref("message-defaultbkgd") && bkgdcolor == "#FFFFFF") bkgdcolor = "";
 
-      element = document.getElementById("expandedHeaderView"); // Removed since TB 102+
-      if (element != null) element.style.backgroundColor = bkgdcolor;
+      if (accountColorsAboutMessage.prefs.getBoolPref("message-colorbkgd-header-label")) {
+        element = document.getElementById("messageHeader");
+        if (element != null) {
+          width = accountColorsAboutMessage.prefs.getIntPref("message-header-label-width") + "px";
+          element.style.backgroundImage = "linear-gradient(to right, " + bkgdcolor + ", " + bkgdcolor + " " + width + ", transparent " + width + ", transparent 100%)";
+          element.style.backgroundColor = "";
+        }
+      } else {
+        element = document.getElementById("expandedHeaderView"); // Removed since TB 102+
+        if (element != null) element.style.backgroundColor = bkgdcolor;
 
-      element = document.getElementById("messageHeader");
-      if (element != null) element.style.backgroundColor = bkgdcolor;
+        element = document.getElementById("messageHeader");
+        if (element != null) {
+          element.style.backgroundColor = bkgdcolor;
+          element.style.backgroundImage = "";
+        }
 
-      /* For CompactHeader add-on */
+        /* For CompactHeader add-on */
 
-      element = document.getElementById("CompactHeader_collapsedHeaderView");
-      if (element != null) element.style.backgroundColor = bkgdcolor;
+        element = document.getElementById("CompactHeader_collapsedHeaderView");
+        if (element != null) element.style.backgroundColor = bkgdcolor;
+      }
     } else {
-      element = document.getElementById("expandedHeaderView");
+      element = document.getElementById("expandedHeaderView"); // Removed since TB 102+
       if (element != null) element.style.backgroundColor = "";
 
       element = document.getElementById("messageHeader");
-      if (element != null) element.style.backgroundColor = "";
+      if (element != null) {
+        element.style.backgroundColor = "";
+        element.style.backgroundImage = "";
+      }
 
       /* For CompactHeader add-on */
 

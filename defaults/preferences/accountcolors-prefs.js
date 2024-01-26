@@ -95,6 +95,8 @@ pref("extensions.accountcolors.message-blackhdrlabels", false);
 pref("extensions.accountcolors.message-whitehdrlabels", false);
 pref("extensions.accountcolors.message-hdraccount", false);
 pref("extensions.accountcolors.message-defaultbkgd", false);
+pref("extensions.accountcolors.message-colorbkgd-header-label", false);
+pref("extensions.accountcolors.message-header-label-width", 4);
 
 /* Compose Window */
 
