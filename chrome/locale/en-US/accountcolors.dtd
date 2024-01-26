@@ -60,6 +60,7 @@
 <!ENTITY accountcolors.thread.hoverselect       "Reinstate default hover and select styles">
 <!ENTITY accountcolors.thread.colorbkgd.row.label    "Color Row Background as Label in Table View on">
 <!ENTITY accountcolors.thread.colorbkgd.card.label   "Color Row Background as Label in Card View with">
+<!ENTITY accountcolors.thread.color.unified.only "Only Color in Unified Folder">
 
 <!ENTITY accountcolors.message.setfontstyle     "Subject Font Style">
 <!ENTITY accountcolors.message.setfontsize      "Subject Font Size">

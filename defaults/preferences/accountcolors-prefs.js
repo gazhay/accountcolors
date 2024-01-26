@@ -74,6 +74,7 @@ pref("extensions.accountcolors.thread-row-label-width", 2);
 pref("extensions.accountcolors.thread-colorbkgd-card-label", false);
 pref("extensions.accountcolors.thread-card-label-position", 0);
 pref("extensions.accountcolors.thread-card-label-width", 4);
+pref("extensions.accountcolors.thread-color-unified-only", false);
 
 /* Message Pane/Tab/Window */
 

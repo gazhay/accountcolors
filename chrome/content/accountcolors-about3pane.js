@@ -1234,6 +1234,7 @@ var accountColorsAbout3Pane_115 = {
     threadRowIndexSetter: function(row) {
       var msgHdr, accountkey, account, accountidkey, folder, server, element;
       var fontcolor, bkgdcolor, fontstyle, fontsize, style, weight;
+      var coloringDisabled = false;
       var nonHiddenColumnFound = false;
 
       /* Call original function */
@@ -1263,11 +1264,17 @@ var accountColorsAbout3Pane_115 = {
         else accountidkey = account.defaultIdentity.key;
       }
 
+      /* Enable coloring only in Unified folder if specified */
+
+      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-color-unified-only")) {
+        coloringDisabled = !!window.gFolder && window.gFolder.server.hostName != "smart mailboxes";
+      }
+
       /* Set row properties */
 
       /* Color row background */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd")) {
+      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd") && !coloringDisabled) {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
         this.style.setProperty("--ac-bkgd-color", bkgdcolor);
       } else {
@@ -1292,7 +1299,7 @@ var accountColorsAbout3Pane_115 = {
         if (column.id == "subjectCol") {
           /* Color subject font */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
             element.style.setProperty("--ac-font-color", fontcolor);
           } else {
@@ -1358,7 +1365,7 @@ var accountColorsAbout3Pane_115 = {
         if (column.id == "senderCol") {
           /* Color from font */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
             element.style.setProperty("--ac-font-color", fontcolor);
           } else {
@@ -1424,7 +1431,7 @@ var accountColorsAbout3Pane_115 = {
         if (column.id == "correspondentCol") {
           /* Color recipient/date/size/account/etc fonts */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
             element.style.setProperty("--ac-font-color", fontcolor);
           } else {
@@ -1437,7 +1444,7 @@ var accountColorsAbout3Pane_115 = {
         if (column.id == "accountCol") {
           /* Color recipient/date/size/account/etc fonts */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
             element.style.setProperty("--ac-font-color", fontcolor);
           } else {
@@ -1457,7 +1464,7 @@ var accountColorsAbout3Pane_115 = {
 
         /* Color recipient/date/size/account/etc fonts */
 
-        if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother")) {
+        if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && !coloringDisabled) {
           fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
           element.style.setProperty("--ac-font-color", fontcolor);
         } else {
@@ -1471,6 +1478,7 @@ var accountColorsAbout3Pane_115 = {
     threadCardIndexSetter: function(row) {
       var msgHdr, accountkey, account, accountidkey, folder, server, element;
       var fontcolor, bkgdcolor, fontstyle, fontsize, style, weight;
+      var coloringDisabled = false;
 
       /* Call original function */
 
@@ -1499,11 +1507,17 @@ var accountColorsAbout3Pane_115 = {
         else accountidkey = account.defaultIdentity.key;
       }
 
+      /* Enable coloring only in Unified folder if specified */
+
+      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-color-unified-only")) {
+        coloringDisabled = !!window.gFolder && window.gFolder.server.hostName != "smart mailboxes";
+      }
+
       /* Set card properties */
 
       /* Color card background */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd")) {
+      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd") && !coloringDisabled) {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
         this.style.setProperty("--ac-bkgd-color", bkgdcolor);
       } else {
@@ -1516,7 +1530,7 @@ var accountColorsAbout3Pane_115 = {
 
           /* Color subject font */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
             element.style.setProperty("--ac-font-color", fontcolor);
           } else {
@@ -1584,10 +1598,10 @@ var accountColorsAbout3Pane_115 = {
 
           /* Color from / date font */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom") && column == "senderCol") {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom") && column == "senderCol" && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
             element.style.setProperty("--ac-font-color", fontcolor);
-          } else if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && column == "dateCol") {
+          } else if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && column == "dateCol" && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
             element.style.setProperty("--ac-font-color", fontcolor);
           } else {

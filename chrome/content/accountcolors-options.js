@@ -739,6 +739,14 @@ var accountColorsOptions = {
       menulist.selectedIndex = 1;
     }
 
+    checkbox = document.getElementById("accountcolors-thread-color-unified-only");
+    try {
+      checkstate = accountColorsOptions.prefs.getBoolPref("thread-color-unified-only");
+      checkbox.checked = checkstate;
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
     /* Message Pane, Message Tab & Message Window Options */
 
     checkbox = document.getElementById("accountcolors-message-setfontstyle");
@@ -1178,6 +1186,7 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("thread-colorbkgd-card-label", document.getElementById("accountcolors-thread-colorbkgd-card-label").checked);
     accountColorsOptions.prefs.setIntPref("thread-card-label-position", document.getElementById("accountcolors-thread-card-label-indent").value);
     accountColorsOptions.prefs.setIntPref("thread-card-label-width", document.getElementById("accountcolors-thread-card-label-width").value);
+    accountColorsOptions.prefs.setBoolPref("thread-color-unified-only", document.getElementById("accountcolors-thread-color-unified-only").checked);
 
     /* Message Pane, Message Tab & Message Window Options */
 
