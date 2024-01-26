@@ -1008,9 +1008,14 @@ var accountColorsAbout3Pane_115 = {
       if (account.defaultIdentity == null) accountidkey = account.key;
       else accountidkey = account.defaultIdentity.key;
 
+      /* Regard account folders in Unified Folders (Inbox/Drafts/etc.) as accounts */
+
+      var parentElement = this.parentNode.closest('li[is="folder-tree-row"]');
+      var inUnifiedFolder = parentElement && parentElement.uri.startsWith("mailbox://nobody@smart%20mailboxes");
+
       /* Color account/folders font */
 
-      if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfont") && folder.isServer) ||
+      if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfont") && (folder.isServer || inUnifiedFolder)) ||
           (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfldfont") && !folder.isServer)) {
         fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
         this.nameLabel.style.setProperty("--ac-font-color", fontcolor);
@@ -1020,7 +1025,7 @@ var accountColorsAbout3Pane_115 = {
 
       /* Color account/folders background */
 
-      if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorbkgd") && folder.isServer) ||
+      if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorbkgd") && (folder.isServer || inUnifiedFolder)) ||
           (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfldbkgd") && !folder.isServer)) {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
 
@@ -1046,7 +1051,7 @@ var accountColorsAbout3Pane_115 = {
 
       /* Account font style */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-setfontstyle") && folder.isServer) {
+      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-setfontstyle") && (folder.isServer || inUnifiedFolder)) {
         fontstyle = accountColorsAbout3Pane.prefs.getIntPref("folder-fontstyle");
 
         switch (fontstyle) {
@@ -1077,7 +1082,7 @@ var accountColorsAbout3Pane_115 = {
 
       /* Account font size */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-setfontsize") && folder.isServer) {
+      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-setfontsize") && (folder.isServer || inUnifiedFolder)) {
         fontsize = accountColorsAbout3Pane.prefs.getIntPref("folder-fontsize");
         // ac-fs have margin-top attribute set, we use it instead of font-size style
         if (accountColorsAbout3Pane.prefs.getBoolPref("folder-incspacing")) {
