@@ -42,6 +42,8 @@ pref("extensions.accountcolors.folder-showlines", false);
 pref("extensions.accountcolors.folder-darkerbar", false);
 pref("extensions.accountcolors.folder-incspacing", false);
 pref("extensions.accountcolors.folder-hoverselect", true);
+pref("extensions.accountcolors.folder-colorbkgd-account-icon", false);
+pref("extensions.accountcolors.folder-colorbkgd-folder-icon", false);
 
 /* Thread Pane */
 

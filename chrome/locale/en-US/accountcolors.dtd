@@ -37,6 +37,8 @@
 <!ENTITY accountcolors.folder.darkerbar         "Darker Unfocused Select Bar">
 <!ENTITY accountcolors.folder.incspacing        "Increase Row Spacing based on Account Font Size (even if Account Font Size not ticked)">
 <!ENTITY accountcolors.folder.hoverselect       "Reinstate default hover and select styles">
+<!ENTITY accountcolors.folder.colorbkgd.account.icon "Render Account Background Color as Icon Color">
+<!ENTITY accountcolors.folder.colorbkgd.folder.icon "Render Folder Background Color as Icon Color">
 
 <!ENTITY accountcolors.thread.setfontstyle      "Subject Font Style">
 <!ENTITY accountcolors.thread.setfontsize       "Subject Font Size">

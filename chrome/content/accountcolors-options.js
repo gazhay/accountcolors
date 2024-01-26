@@ -443,6 +443,22 @@ var accountColorsOptions = {
       checkbox.checked = false;
     }
 
+    checkbox = document.getElementById("accountcolors-folder-colorbkgd-account-icon");
+    try {
+      checkstate = accountColorsOptions.prefs.getBoolPref("folder-colorbkgd-account-icon");
+      checkbox.checked = checkstate;
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
+    checkbox = document.getElementById("accountcolors-folder-colorbkgd-folder-icon");
+    try {
+      checkstate = accountColorsOptions.prefs.getBoolPref("folder-colorbkgd-folder-icon");
+      checkbox.checked = checkstate;
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
     /* Thread Pane Options */
 
     checkbox = document.getElementById("accountcolors-thread-setfontstyle");
@@ -1154,6 +1170,8 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("folder-darkerbar", document.getElementById("accountcolors-folder-darkerbar").checked);
     accountColorsOptions.prefs.setBoolPref("folder-incspacing", document.getElementById("accountcolors-folder-incspacing").checked);
     accountColorsOptions.prefs.setBoolPref("folder-hoverselect", document.getElementById("accountcolors-folder-hoverselect").checked);
+    accountColorsOptions.prefs.setBoolPref("folder-colorbkgd-account-icon", document.getElementById("accountcolors-folder-colorbkgd-account-icon").checked);
+    accountColorsOptions.prefs.setBoolPref("folder-colorbkgd-folder-icon", document.getElementById("accountcolors-folder-colorbkgd-folder-icon").checked);
 
     /* Thread Pane Options */
 

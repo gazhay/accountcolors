@@ -1023,17 +1023,31 @@ var accountColorsAbout3Pane_115 = {
         this.nameLabel.style.removeProperty("--ac-font-color");
       }
 
+      /* Render background color as icon color */
+
+      var colorBkgdAsIcon = accountColorsAbout3Pane.prefs.getBoolPref("folder-colorbkgd-account-icon") && (folder.isServer || inUnifiedFolder) ||
+                            accountColorsAbout3Pane.prefs.getBoolPref("folder-colorbkgd-folder-icon") && !folder.isServer;
+
       /* Color account/folders background */
 
       if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorbkgd") && (folder.isServer || inUnifiedFolder)) ||
           (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfldbkgd") && !folder.isServer)) {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
 
-        if (!(accountColorsAbout3Pane.prefs.getBoolPref("folder-defaultbkgd") && bkgdcolor == "")) {
-          this.container.style.setProperty("--ac-bkgd-color", bkgdcolor);
+        if (!colorBkgdAsIcon) {
+          if (!(accountColorsAbout3Pane.prefs.getBoolPref("folder-defaultbkgd") && bkgdcolor == "")) {
+            this.container.style.setProperty("--ac-bkgd-color", bkgdcolor);
+          }
+          this.setIconColor(); // Restore default icon
+        } else {
+          if (!this.icon.style.getPropertyValue("--icon-color")) {
+            this.setIconColor(bkgdcolor);
+          }
+          this.container.style.removeProperty("--ac-bkgd-color");
         }
       } else {
         this.container.style.removeProperty("--ac-bkgd-color");
+        this.setIconColor(); // Restore default icon
       }
 
       /* Color unread/total/size fonts */
