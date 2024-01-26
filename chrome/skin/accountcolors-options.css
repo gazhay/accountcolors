@@ -373,3 +373,7 @@ div[role="button"] {
 .colorpickertile[selected="true"] {
   border: 2px dotted black;
 }
+
+menulist {
+  margin: 0;
+}

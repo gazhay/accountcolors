@@ -187,6 +187,18 @@
         <hbox>
           <checkbox id="accountcolors-thread-hoverselect" label="&accountcolors.thread.hoverselect;" />
         </hbox>
+
+        <hbox>
+          <checkbox id="accountcolors-thread-colorbkgd-row-label" label="&accountcolors.thread.colorbkgd.row.label;" oncommand="accountColorsOptions.setMenuStateByCheckbox(this.id, 'accountcolors-thread-row-label-position', 'accountcolors-thread-row-label-width');" />
+          <menulist id="accountcolors-thread-row-label-position" />
+          <menulist id="accountcolors-thread-row-label-width" />
+        </hbox>
+
+        <hbox>
+          <checkbox id="accountcolors-thread-colorbkgd-card-label" label="&accountcolors.thread.colorbkgd.card.label;" oncommand="accountColorsOptions.setMenuStateByCheckbox(this.id, 'accountcolors-thread-card-label-indent', 'accountcolors-thread-card-label-width');" />
+          <menulist id="accountcolors-thread-card-label-indent" />
+          <menulist id="accountcolors-thread-card-label-width" />
+        </hbox>
       </tabpanel>
 
       <tabpanel id="accountcolors-message-panel" orient="vertical">

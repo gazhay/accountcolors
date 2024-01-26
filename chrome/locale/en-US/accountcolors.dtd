@@ -58,6 +58,8 @@
 <!ENTITY accountcolors.thread.darkerbar         "Darker Unfocused Select Bar">
 <!ENTITY accountcolors.thread.incspacing        "Increase Row Spacing based on Subject/From Font Sizes (even if Subject/From Font Sizes not ticked)">
 <!ENTITY accountcolors.thread.hoverselect       "Reinstate default hover and select styles">
+<!ENTITY accountcolors.thread.colorbkgd.row.label    "Color Row Background as Label in Table View on">
+<!ENTITY accountcolors.thread.colorbkgd.card.label   "Color Row Background as Label in Card View with">
 
 <!ENTITY accountcolors.message.setfontstyle     "Subject Font Style">
 <!ENTITY accountcolors.message.setfontsize      "Subject Font Size">

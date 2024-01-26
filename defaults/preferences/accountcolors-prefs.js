@@ -68,6 +68,12 @@ pref("extensions.accountcolors.thread-showstripes", false);
 pref("extensions.accountcolors.thread-darkerbar", false);
 pref("extensions.accountcolors.thread-incspacing", false);
 pref("extensions.accountcolors.thread-hoverselect", true);
+pref("extensions.accountcolors.thread-colorbkgd-row-label", false);
+pref("extensions.accountcolors.thread-row-label-position", 0);
+pref("extensions.accountcolors.thread-row-label-width", 2);
+pref("extensions.accountcolors.thread-colorbkgd-card-label", false);
+pref("extensions.accountcolors.thread-card-label-position", 0);
+pref("extensions.accountcolors.thread-card-label-width", 4);
 
 /* Message Pane/Tab/Window */
 
