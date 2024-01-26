@@ -1013,9 +1013,9 @@ var accountColorsAbout3Pane_115 = {
       if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfont") && folder.isServer) ||
           (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfldfont") && !folder.isServer)) {
         fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-        this.nameLabel.style.color = fontcolor;
+        this.nameLabel.style.setProperty("--ac-font-color", fontcolor);
       } else {
-        this.nameLabel.style.color = "";
+        this.nameLabel.style.removeProperty("--ac-font-color");
       }
 
       /* Color account/folders background */
@@ -1025,23 +1025,23 @@ var accountColorsAbout3Pane_115 = {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
 
         if (!(accountColorsAbout3Pane.prefs.getBoolPref("folder-defaultbkgd") && bkgdcolor == "")) {
-          this.container.style.backgroundColor = bkgdcolor;
+          this.container.style.setProperty("--ac-bkgd-color", bkgdcolor);
         }
       } else {
-        this.container.style.backgroundColor = "";
+        this.container.style.removeProperty("--ac-bkgd-color");
       }
 
       /* Color unread/total/size fonts */
 
       if (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorother")) {
         fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-        this.unreadCountLabel.style.color = fontcolor;
-        this.totalCountLabel.style.color = fontcolor;
-        this.folderSizeLabel.style.color = fontcolor;
+        this.unreadCountLabel.style.setProperty("--ac-font-color", fontcolor);
+        this.totalCountLabel.style.setProperty("--ac-font-color", fontcolor);
+        this.folderSizeLabel.style.setProperty("--ac-font-color", fontcolor);
       } else {
-        this.unreadCountLabel.style.color = "";
-        this.totalCountLabel.style.color = "";
-        this.folderSizeLabel.style.color = "";
+        this.unreadCountLabel.style.removeProperty("--ac-font-color");
+        this.totalCountLabel.style.removeProperty("--ac-font-color");
+        this.folderSizeLabel.style.removeProperty("--ac-font-color");
       }
 
       /* Account font style */
@@ -1068,11 +1068,11 @@ var accountColorsAbout3Pane_115 = {
             break;
         }
 
-        this.nameLabel.style.fontStyle = style;
-        this.nameLabel.style.fontWeight = weight;
+        this.nameLabel.style.setProperty("--ac-font-style", style);
+        this.nameLabel.style.setProperty("--ac-font-weight", weight);
       } else {
-        this.nameLabel.style.fontStyle = "";
-        this.nameLabel.style.fontWeight = "";
+        this.nameLabel.style.removeProperty("--ac-font-style");
+        this.nameLabel.style.removeProperty("--ac-font-weight");
       }
 
       /* Account font size */

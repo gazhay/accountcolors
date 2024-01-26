@@ -25,7 +25,7 @@
 
 /**********************************************************************************************************************/
 
-/* Folder Pane - Font Colors / Background Colors */
+/* Folder Pane - Font Colors / Background Colors / Font Style / Font Weight */
 
 /* Reinstate default font and background colors for selected and hover rows */
 
@@ -37,6 +37,20 @@
 #folderTree:focus-within li.selected > .container > *, #folderTree li.drop-target > .container > * {
     background-color: inherit !important;
     color: inherit !important;
+}
+
+#folderTree li[is="folder-tree-row"] .name {
+    color: var(--ac-font-color);
+    font-style: var(--ac-font-style);
+    font-weight: var(--ac-font-weight);
+}
+
+#folderTree li[is="folder-tree-row"] .container {
+    background-color: var(--ac-bkgd-color);
+}
+
+#folderTree li[is="folder-tree-row"] :is(.unread-count, .total-count, .folder-size) {
+    color: var(--ac-font-color, var(--folderpane-unread-count-text));
 }
 
 /**********************************************************************************************************************/
