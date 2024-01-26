@@ -30,6 +30,7 @@ pref("extensions.accountcolors.folder-colorbkgd", true);
 pref("extensions.accountcolors.folder-colorfldfont", true);
 pref("extensions.accountcolors.folder-colorfldbkgd", true);
 pref("extensions.accountcolors.folder-colorother", false);
+pref("extensions.accountcolors.folder-colorotherbkgd", false);
 pref("extensions.accountcolors.folder-blackrowfont", false);
 pref("extensions.accountcolors.folder-lightpanebkgd", false);
 pref("extensions.accountcolors.folder-whiterowfont", false);

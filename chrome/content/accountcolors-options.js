@@ -335,6 +335,14 @@ var accountColorsOptions = {
       checkbox.checked = false;
     }
 
+    checkbox = document.getElementById("accountcolors-folder-colorotherbkgd");
+    try {
+      checkstate = accountColorsOptions.prefs.getBoolPref("folder-colorotherbkgd");
+      checkbox.checked = checkstate;
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
     checkbox = document.getElementById("accountcolors-folder-blackrowfont");
     try {
       checkstate = accountColorsOptions.prefs.getBoolPref("folder-blackrowfont");
@@ -1216,6 +1224,7 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("folder-colorfldfont", document.getElementById("accountcolors-folder-colorfldfont").checked);
     accountColorsOptions.prefs.setBoolPref("folder-colorfldbkgd", document.getElementById("accountcolors-folder-colorfldbkgd").checked);
     accountColorsOptions.prefs.setBoolPref("folder-colorother", document.getElementById("accountcolors-folder-colorother").checked);
+    accountColorsOptions.prefs.setBoolPref("folder-colorotherbkgd", document.getElementById("accountcolors-folder-colorotherbkgd").checked);
     accountColorsOptions.prefs.setBoolPref("folder-blackrowfont", document.getElementById("accountcolors-folder-blackrowfont").checked);
     accountColorsOptions.prefs.setBoolPref("folder-lightpanebkgd", document.getElementById("accountcolors-folder-lightpanebkgd").checked);
     accountColorsOptions.prefs.setBoolPref("folder-whiterowfont", document.getElementById("accountcolors-folder-whiterowfont").checked);

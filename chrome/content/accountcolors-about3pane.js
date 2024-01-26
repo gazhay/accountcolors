@@ -1050,7 +1050,7 @@ var accountColorsAbout3Pane_115 = {
         this.setIconColor(); // Restore default icon
       }
 
-      /* Color unread/total/size fonts */
+      /* Color unread/total/size font */
 
       if (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorother")) {
         fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
@@ -1061,6 +1061,19 @@ var accountColorsAbout3Pane_115 = {
         this.unreadCountLabel.style.removeProperty("--ac-font-color");
         this.totalCountLabel.style.removeProperty("--ac-font-color");
         this.folderSizeLabel.style.removeProperty("--ac-font-color");
+      }
+
+      /* Color unread/total/size background */
+
+      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorotherbkgd")) {
+        bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
+        this.unreadCountLabel.style.setProperty("--ac-badge-bkgd-color", bkgdcolor);
+        this.totalCountLabel.style.setProperty("--ac-badge-bkgd-color", bkgdcolor);
+        this.folderSizeLabel.style.setProperty("--ac-badge-bkgd-color", bkgdcolor);
+      } else {
+        this.unreadCountLabel.style.removeProperty("--ac-badge-bkgd-color");
+        this.totalCountLabel.style.removeProperty("--ac-badge-bkgd-color");
+        this.folderSizeLabel.style.removeProperty("--ac-badge-bkgd-color");
       }
 
       /* Account font style */

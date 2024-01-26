@@ -53,6 +53,14 @@
     color: var(--ac-font-color, var(--folderpane-unread-count-text));
 }
 
+#folderTree li[is="folder-tree-row"] .unread > .container > :is(.unread-count, .total-count, .folder-size) {
+    background-color: var(--ac-badge-bkgd-color, var(--folderpane-unread-count-background));
+}
+
+#folderTree li[is="folder-tree-row"] .new-messages > .container > :is(.unread-count, .total-count, .folder-size) {
+    background-color: var(--ac-badge-bkgd-color, var(--folderpane-unread-new-count-background));
+}
+
 /**********************************************************************************************************************/
 
 /* Folder Pane - Account Name Font Sizes */

@@ -25,6 +25,7 @@
 <!ENTITY accountcolors.folder.colorfldfont      "Color Folder Font">
 <!ENTITY accountcolors.folder.colorfldbkgd      "Color Folder Background">
 <!ENTITY accountcolors.folder.colorother        "Color Unread/Total/Size Fonts">
+<!ENTITY accountcolors.folder.colorotherbkgd    "Color Unread/Total/Size Background">
 <!ENTITY accountcolors.folder.blackrowfont      "Black Row Fonts">
 <!ENTITY accountcolors.folder.lightpanebkgd     "Light Pane Background">
 <!ENTITY accountcolors.folder.whiterowfont      "White Row Fonts">
