@@ -44,6 +44,47 @@ var accountColorsAboutMessage = {
     },
   },
 
+  /* Listen for the existence of */
+
+  headerObserver: {
+    register: function () {
+      var elements = [
+        "expandedsubjectBox",
+        "expandedHeaderView",
+        "expandedfromBox",
+        "expandedfromLabel",
+        "expandedsubjectLabel",
+        "expandedtoLabel",
+        "expandedtoBox",
+        "dateValueBox",
+        "header-view-toolbar",
+      ];
+      /* Add the observer */
+      this.registered = true;
+      this.observer = new MutationObserver(this.observe);
+      for (var element of elements) {
+        element = window.document.getElementById(element);
+        if (element != null) {
+          this.observer.observe(element, { attributes: true, attributeFilter: ["style"] });
+        }
+      }
+    },
+
+    unregister: function () {
+      if (!this.registered) return;
+      this.observer.disconnect();
+    },
+
+    observe: function (mutationsList, observer) {
+      for(let mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName == "style") {
+          accountColorsAboutMessage.messageWindow();
+          return;
+        }
+      }
+    }
+  },
+
   /* Get messsage header */
 
   getMsgHdr(window) {
@@ -65,6 +106,7 @@ var accountColorsAboutMessage = {
 
   onUnload: function () {
     accountColorsAboutMessage.prefsObserver.unregister();
+    accountColorsAboutMessage.headerObserver.unregister();
     window.document.getElementById("messagepane").removeEventListener("load", accountColorsAboutMessage.messageWindow, true);
     accountColorsAboutMessage.messageWindow(null, true); // Clear colors during unload.
   },
@@ -77,6 +119,10 @@ var accountColorsAboutMessage = {
     /* Register preferences observer */
 
     accountColorsAboutMessage.prefsObserver.register(window);
+
+    /* Register header observer */
+
+    accountColorsAboutMessage.headerObserver.register();
 
     /* Add listeners for Message Window */
 
