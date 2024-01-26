@@ -121,7 +121,7 @@
 
 /**********************************************************************************************************************/
 
-/* Thread Pane - Font Colors / Background Colors */
+/* Thread Pane - Font Colors / Background Colors / Font Style / Font Weight */
 
 /* Reinstate default font and background colors for selected and hover rows */
 
@@ -137,6 +137,16 @@
 [is="tree-view-table-body"] tr.selected:focus-within * {
     background-color: inherit !important;
     color: inherit !important;
+}
+
+#threadTree tr[is="thread-row"] > td, #threadTree tr[is="thread-card"] :is(.subject, .sender, .date) {
+    color: var(--ac-font-color);
+    font-style: var(--ac-font-style);
+    font-weight: var(--ac-font-weight);
+}
+
+#threadTree tr:is([is="thread-row"], [is="thread-card"]) {
+    background-color: var(--ac-bkgd-color);
 }
 
 /**********************************************************************************************************************/

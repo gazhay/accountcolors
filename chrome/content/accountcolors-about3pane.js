@@ -1268,7 +1268,9 @@ var accountColorsAbout3Pane_115 = {
 
       if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd")) {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
-        this.style.backgroundColor = bkgdcolor;
+        this.style.setProperty("--ac-bkgd-color", bkgdcolor);
+      } else {
+        this.style.removeProperty("--ac-bkgd-color");
       }
 
       /* Set column properties */
@@ -1286,9 +1288,9 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont")) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
           } else {
-            element.style.color = "";
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* Subject font style */
@@ -1315,11 +1317,11 @@ var accountColorsAbout3Pane_115 = {
                 break;
             }
 
-            element.style.fontStyle = style;
-            element.style.fontWeight = weight;
+            element.style.setProperty("--ac-font-style", style);
+            element.style.setProperty("--ac-font-weight", weight);
           } else {
-            element.style.fontStyle = "";
-            element.style.fontWeight = "";
+            element.style.removeProperty("--ac-font-style");
+            element.style.removeProperty("--ac-font-weight");
           }
 
           /* Subject font size */
@@ -1352,9 +1354,9 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom")) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
           } else {
-            element.style.color = "";
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* From font style */
@@ -1381,11 +1383,11 @@ var accountColorsAbout3Pane_115 = {
                 break;
             }
 
-            element.style.fontStyle = style;
-            element.style.fontWeight = weight;
+            element.style.setProperty("--ac-font-style", style);
+            element.style.setProperty("--ac-font-weight", weight);
           } else {
-            element.style.fontStyle = "";
-            element.style.fontWeight = "";
+            element.style.removeProperty("--ac-font-style");
+            element.style.removeProperty("--ac-font-weight");
           }
 
           /* From font size */
@@ -1418,7 +1420,9 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother")) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
+          } else {
+            element.style.removeProperty("--ac-font-color");
           }
 
           continue;
@@ -1429,7 +1433,9 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother")) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
+          } else {
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* Color using account in message header */
@@ -1447,7 +1453,9 @@ var accountColorsAbout3Pane_115 = {
 
         if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother")) {
           fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-          element.style.color = fontcolor;
+          element.style.setProperty("--ac-font-color", fontcolor);
+        } else {
+          element.style.removeProperty("--ac-font-color");
         }
       }
     },
@@ -1491,7 +1499,9 @@ var accountColorsAbout3Pane_115 = {
 
       if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd")) {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
-        this.style.backgroundColor = bkgdcolor;
+        this.style.setProperty("--ac-bkgd-color", bkgdcolor);
+      } else {
+        this.style.removeProperty("--ac-bkgd-color");
       }
 
       for (const column of window.threadPane.cardColumns) {
@@ -1502,9 +1512,9 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont")) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
           } else {
-            element.style.color = "";
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* Subject font style */
@@ -1531,11 +1541,11 @@ var accountColorsAbout3Pane_115 = {
                 break;
             }
 
-            element.style.fontStyle = style;
-            element.style.fontWeight = weight;
+            element.style.setProperty("--ac-font-style", style);
+            element.style.setProperty("--ac-font-weight", weight);
           } else {
-            element.style.fontStyle = "";
-            element.style.fontWeight = "";
+            element.style.removeProperty("--ac-font-style");
+            element.style.removeProperty("--ac-font-weight");
           }
 
           /* Subject font size */
@@ -1570,12 +1580,12 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom") && column == "senderCol") {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
           } else if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && column == "dateCol") {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
           } else {
-            element.style.color = "";
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* From font style */
@@ -1602,11 +1612,11 @@ var accountColorsAbout3Pane_115 = {
                 break;
             }
 
-            element.style.fontStyle = style;
-            element.style.fontWeight = weight;
+            element.style.setProperty("--ac-font-style", style);
+            element.style.setProperty("--ac-font-weight", weight);
           } else {
-            element.style.fontStyle = "";
-            element.style.fontWeight = "";
+            element.style.removeProperty("--ac-font-style");
+            element.style.removeProperty("--ac-font-weight");
           }
 
           /* From font size */
