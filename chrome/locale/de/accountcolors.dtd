@@ -20,6 +20,7 @@
 <!ENTITY accountcolors.folder.colorfldfont "Ordnertext kolorieren">
 <!ENTITY accountcolors.folder.colorfldbkgd "Ordner-Hintergrund kolorieren">
 <!ENTITY accountcolors.folder.colorother "Color Unread/Total/Size Fonts">
+<!ENTITY accountcolors.folder.colorotherbkgd "Color Unread/Total Background">
 <!ENTITY accountcolors.folder.blackrowfont "Black Row Fonts">
 <!ENTITY accountcolors.folder.lightpanebkgd "Light Pane Background">
 <!ENTITY accountcolors.folder.whiterowfont "White Row Fonts">
@@ -32,6 +33,9 @@
 <!ENTITY accountcolors.folder.darkerbar "Dunklere Auswahlleiste">
 <!ENTITY accountcolors.folder.incspacing "Zeilenabstand an die Schriftgröße der Konten-Bezeichnung anpassen">
 <!ENTITY accountcolors.folder.hoverselect "Reinstate default hover and select styles">
+<!ENTITY accountcolors.folder.colorbkgd.account.icon "Render Account Background Color as Icon Color">
+<!ENTITY accountcolors.folder.colorbkgd.folder.icon "Render Folder Background Color as Icon Color">
+
 <!ENTITY accountcolors.thread.setfontstyle "Betreffzeilen-Schriftstil:">
 <!ENTITY accountcolors.thread.setfontsize "Betreffzeilen-Schriftgröße:">
 <!ENTITY accountcolors.thread.setfromstyle "Von-Zeilen-Schriftstil:">
@@ -52,6 +56,10 @@
 <!ENTITY accountcolors.thread.darkerbar "Dunklere Farben für nicht-fokussierte Auswahlleiste">
 <!ENTITY accountcolors.thread.incspacing "Zeilenabstand an die Schriftgröße der Betreffzeile anpassen">
 <!ENTITY accountcolors.thread.hoverselect "Reinstate default hover and select styles">
+<!ENTITY accountcolors.thread.colorbkgd.row.label    "Color Row Background as Label in Table View on">
+<!ENTITY accountcolors.thread.colorbkgd.card.label   "Color Row Background as Label in Card View with">
+<!ENTITY accountcolors.thread.color.unified.only "Only Color in Unified Folder">
+
 <!ENTITY accountcolors.message.setfontstyle "Betreffzeilen-Schriftstil:">
 <!ENTITY accountcolors.message.setfontsize "Betreffzeilen-Schriftgröße:">
 <!ENTITY accountcolors.message.setfromstyle "From Font Style">
@@ -63,6 +71,8 @@
 <!ENTITY accountcolors.message.whitehdrlabels   "White Header Labels">
 <!ENTITY accountcolors.message.hdraccount "Farben je nach Empfängerkonto anders">
 <!ENTITY accountcolors.message.defaultbkgd "Retain default light/dark background if White selected">
+<!ENTITY accountcolors.message.colorbkgd.header.label "Color Header Background as Label">
+
 <!ENTITY accountcolors.compose.setfontstyle "Betreffzeilen-Schriftstil:">
 <!ENTITY accountcolors.compose.setfontsize "Betreffzeilen-Schriftgröße:">
 <!ENTITY accountcolors.compose.setidfontstyle "Von-Zeilen-Schriftstil:">
@@ -84,6 +94,8 @@
 <!ENTITY accountcolors.compose.darkfieldbkgd "Dark Field Backgrounds (on hover or focus)">
 <!ENTITY accountcolors.compose.defaultbkgd "Retain default light/dark background if White selected">
 <!ENTITY accountcolors.compose.hoverfrom "Reinstate default hover style (on From menu)">
+<!ENTITY accountcolors.compose.colorbkgd.idmenu.label "Color Identity Background in From Menu as Label">
+
 <!ENTITY accountcolors.picker.fonttitle "Farbauswahl-Text">
 <!ENTITY accountcolors.picker.bkgdtitle "Farbauswahl-Hintergrund">
 <!ENTITY accountcolors.picker.sample "Vorschau">

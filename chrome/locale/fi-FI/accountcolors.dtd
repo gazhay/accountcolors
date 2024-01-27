@@ -20,6 +20,7 @@
 <!ENTITY accountcolors.folder.colorfldfont "Väritä kansion fontti">
 <!ENTITY accountcolors.folder.colorfldbkgd "Väritä kansion tausta">
 <!ENTITY accountcolors.folder.colorother "Color Unread/Total/Size Fonts">
+<!ENTITY accountcolors.folder.colorotherbkgd    "Color Unread/Total Background">
 <!ENTITY accountcolors.folder.blackrowfont "Black Row Fonts">
 <!ENTITY accountcolors.folder.lightpanebkgd "Light Pane Background">
 <!ENTITY accountcolors.folder.whiterowfont "White Row Fonts">
@@ -32,6 +33,9 @@
 <!ENTITY accountcolors.folder.darkerbar "Tummempi valintapalkki">
 <!ENTITY accountcolors.folder.incspacing "Lisää riviväliä riippuen tilin fontin koosta (vaikka tilin fonttikokoa ei ole valittu)">
 <!ENTITY accountcolors.folder.hoverselect "Reinstate default hover and select styles">
+<!ENTITY accountcolors.folder.colorbkgd.account.icon "Render Account Background Color as Icon Color">
+<!ENTITY accountcolors.folder.colorbkgd.folder.icon "Render Folder Background Color as Icon Color">
+
 <!ENTITY accountcolors.thread.setfontstyle "Aiheen fonttityyli">
 <!ENTITY accountcolors.thread.setfontsize "Aiheen fonttikokok">
 <!ENTITY accountcolors.thread.setfromstyle "Vastausosoitteen fonttityyli">
@@ -52,6 +56,10 @@
 <!ENTITY accountcolors.thread.darkerbar "Tummempi valintapalkki">
 <!ENTITY accountcolors.thread.incspacing "Lisää riviväliä riippuen aiheen fonttikoosta (vaikka aiheen fonttikokoa ei ole valittu)">
 <!ENTITY accountcolors.thread.hoverselect "Reinstate default hover and select styles">
+<!ENTITY accountcolors.thread.colorbkgd.row.label    "Color Row Background as Label in Table View on">
+<!ENTITY accountcolors.thread.colorbkgd.card.label   "Color Row Background as Label in Card View with">
+<!ENTITY accountcolors.thread.color.unified.only "Only Color in Unified Folder">
+
 <!ENTITY accountcolors.message.setfontstyle "Aiheen fonttityyli">
 <!ENTITY accountcolors.message.setfontsize "Aiheen fonttikoko">
 <!ENTITY accountcolors.message.setfromstyle "From Font Style">
@@ -63,6 +71,8 @@
 <!ENTITY accountcolors.message.whitehdrlabels "White Header Labels">
 <!ENTITY accountcolors.message.hdraccount "Väritys riippuu viestiin liittyvän tilin värityksestä (kansion värityksen sijasta)">
 <!ENTITY accountcolors.message.defaultbkgd "Retain default light/dark background if White selected">
+<!ENTITY accountcolors.message.colorbkgd.header.label "Color Header Background as Label">
+
 <!ENTITY accountcolors.compose.setfontstyle "Aiheen fonttityyli">
 <!ENTITY accountcolors.compose.setfontsize "Aiheen fonttikoko">
 <!ENTITY accountcolors.compose.setidfontstyle "Identiteetin fonttityyli">
@@ -84,6 +94,8 @@
 <!ENTITY accountcolors.compose.darkfieldbkgd "Dark Field Backgrounds (on hover or focus)">
 <!ENTITY accountcolors.compose.defaultbkgd "Retain default light/dark background if White selected">
 <!ENTITY accountcolors.compose.hoverfrom "Reinstate default hover style (on From menu)">
+<!ENTITY accountcolors.compose.colorbkgd.idmenu.label "Color Identity Background in From Menu as Label">
+
 <!ENTITY accountcolors.picker.fonttitle "Fonttivärin valitsin">
 <!ENTITY accountcolors.picker.bkgdtitle "Taustavärin valitsin">
 <!ENTITY accountcolors.picker.sample "Esimerkki">
