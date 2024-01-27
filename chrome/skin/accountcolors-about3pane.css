@@ -39,24 +39,34 @@
     color: inherit !important;
 }
 
+#folderTree li.selected > .container {
+    background-color: var(--treeitem-background-selected) !important;
+}
+
 #folderTree li[is="folder-tree-row"] .name {
-    color: var(--ac-font-color);
+    color: var(--ac-font-color, currentColor);
+}
+
+#folderTree li[is="folder-tree-row"] .new-messages > .container > .name {
+    color: var(--ac-font-color, var(--new-folder-color));
 }
 
 #folderTree li[is="folder-tree-row"] .container {
     background-color: var(--ac-bkgd-color);
 }
 
-#folderTree li[is="folder-tree-row"] :is(.unread-count, .total-count, .folder-size) {
+#folderTree li[is="folder-tree-row"] .unread:not(.new-messages) > .container > .unread-count {
     color: var(--ac-font-color, var(--folderpane-unread-count-text));
-}
-
-#folderTree li[is="folder-tree-row"] .unread > .container > :is(.unread-count, .total-count, .folder-size) {
     background-color: var(--ac-badge-bkgd-color, var(--folderpane-unread-count-background));
 }
 
-#folderTree li[is="folder-tree-row"] .new-messages > .container > :is(.unread-count, .total-count, .folder-size) {
-    background-color: var(--ac-badge-bkgd-color, var(--folderpane-unread-new-count-background));
+#folderTree li[is="folder-tree-row"] .total-count {
+    color: var(--ac-font-color, var(--folderpane-total-count-text));
+    background-color: var(--ac-badge-bkgd-color, var(--folderpane-total-count-background));
+}
+
+#folderTree li[is="folder-tree-row"] .folder-size {
+    color: var(--ac-font-color, var(--layout-color-3));
 }
 
 /* Folder Pane - Font Style / Font Weight */
@@ -162,12 +172,15 @@
 [is="tree-view-table-body"]:focus tr.selected *,
 [is="tree-view-table-body"]:focus-within tr.selected *,
 [is="tree-view-table-body"] tr.selected:focus-within * {
-    background-color: inherit !important;
     color: inherit !important;
 }
 
-#threadTree tr[is="thread-row"] > td, #threadTree tr[is="thread-card"] :is(.subject, .sender, .date) {
-    color: var(--ac-font-color);
+#threadTree tr[is="thread-row"] > td, #threadTree tr[is="thread-card"] .subject {
+    color: var(--tag-color, var(--ac-font-color, currentColor));
+}
+
+#threadTree tr[is="thread-card"] :is(.sender, .date) {
+    color: var(--ac-font-color, currentColor);
 }
 
 #threadTree:not([ac-bkgdaslabel-row]) tr[is="thread-row"] {
@@ -314,9 +327,7 @@
 /* Ensure bold font on subject / from columns even their styles are set to normal/italic */
 
 #threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-row"] > td,
-#threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-card"] .subject,
-#threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-card"] .sender,
-#threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-card"] .date {
+#threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-card"] :is(.subject, .sender, .date) {
     font-weight: bold !important;
 }
 
@@ -325,9 +336,7 @@
 /* If either Bold Subject or Bold From set, all columns are unbold by default  */
 
 #threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-row"] > td,
-#threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-card"] .subject,
-#threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-card"] .sender,
-#threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-card"] .date {
+#threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-card"] :is(.subject, .sender, .date) {
     font-weight: normal;
 }
 
