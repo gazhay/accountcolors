@@ -25,7 +25,7 @@
 
 /**********************************************************************************************************************/
 
-/* Folder Pane - Font Colors / Background Colors / Font Style / Font Weight */
+/* Folder Pane - Font Colors / Background Colors */
 
 /* Reinstate default font and background colors for selected and hover rows */
 
@@ -41,8 +41,6 @@
 
 #folderTree li[is="folder-tree-row"] .name {
     color: var(--ac-font-color);
-    font-style: var(--ac-font-style);
-    font-weight: var(--ac-font-weight);
 }
 
 #folderTree li[is="folder-tree-row"] .container {
@@ -60,6 +58,13 @@
 #folderTree li[is="folder-tree-row"] .new-messages > .container > :is(.unread-count, .total-count, .folder-size) {
     background-color: var(--ac-badge-bkgd-color, var(--folderpane-unread-new-count-background));
 }
+
+/* Folder Pane - Font Style / Font Weight */
+
+#folderTree li[is="folder-tree-row"][ac-fsw="normal"] { font-style: normal; font-weight:normal; }
+#folderTree li[is="folder-tree-row"][ac-fsw="italic"] { font-style: italic; font-weight:normal; }
+#folderTree li[is="folder-tree-row"][ac-fsw="bold"] { font-style: normal; font-weight:bold; }
+#folderTree li[is="folder-tree-row"][ac-fsw="bolditalic"] { font-style: italic; font-weight:bold; }
 
 /**********************************************************************************************************************/
 
@@ -143,7 +148,7 @@
 
 /**********************************************************************************************************************/
 
-/* Thread Pane - Font Colors / Background Colors / Font Style / Font Weight */
+/* Thread Pane - Font Colors / Background Colors */
 
 /* Reinstate default font and background colors for selected and hover rows */
 
@@ -163,8 +168,6 @@
 
 #threadTree tr[is="thread-row"] > td, #threadTree tr[is="thread-card"] :is(.subject, .sender, .date) {
     color: var(--ac-font-color);
-    font-style: var(--ac-font-style);
-    font-weight: var(--ac-font-weight);
 }
 
 #threadTree:not([ac-bkgdaslabel-row]) tr[is="thread-row"] {
@@ -195,6 +198,18 @@
 #threadTree[ac-bkgdaslabel-card="indent"] tr[is="thread-card"] .thread-card-container {
     background-image: linear-gradient(to right, var(--ac-bkgd-color), var(--ac-bkgd-color) var(--ac-card-label-width), transparent var(--ac-card-label-width), transparent 100%);
 }
+
+/* Thread Pane - Font Style / Font Weight */
+
+#threadTree tr[is="thread-row"] > td[ac-fsw="normal"] { font-style: normal; font-weight:normal; }
+#threadTree tr[is="thread-row"] > td[ac-fsw="italic"] { font-style: italic; font-weight:normal; }
+#threadTree tr[is="thread-row"] > td[ac-fsw="bold"] { font-style: normal; font-weight:bold; }
+#threadTree tr[is="thread-row"] > td[ac-fsw="bolditalic"] { font-style: italic; font-weight:bold; }
+
+#threadTree tr[is="thread-card"] :is(.subject, .sender, .date)[ac-fsw="normal"] { font-style: normal; font-weight:normal; }
+#threadTree tr[is="thread-card"] :is(.subject, .sender, .date)[ac-fsw="italic"] { font-style: italic; font-weight:normal; }
+#threadTree tr[is="thread-card"] :is(.subject, .sender, .date)[ac-fsw="bold"] { font-style: normal; font-weight:bold; }
+#threadTree tr[is="thread-card"] :is(.subject, .sender, .date)[ac-fsw="bolditalic"] { font-style: italic; font-weight:bold; }
 
 /**********************************************************************************************************************/
 

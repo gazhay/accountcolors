@@ -1080,31 +1080,9 @@ var accountColorsAbout3Pane_115 = {
 
       if (accountColorsAbout3Pane.prefs.getBoolPref("folder-setfontstyle") && (folder.isServer || inUnifiedFolder)) {
         fontstyle = accountColorsAbout3Pane.prefs.getIntPref("folder-fontstyle");
-
-        switch (fontstyle) {
-          case 0 /* Normal */:
-            style = "normal";
-            weight = "normal";
-            break;
-          case 1 /* Italic */:
-            style = "italic";
-            weight = "normal";
-            break;
-          case 2 /* Bold */:
-            style = "normal";
-            weight = "bold";
-            break;
-          case 3 /* Bold Italic */:
-            style = "italic";
-            weight = "bold";
-            break;
-        }
-
-        this.nameLabel.style.setProperty("--ac-font-style", style);
-        this.nameLabel.style.setProperty("--ac-font-weight", weight);
+        this.nameLabel.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
       } else {
-        this.nameLabel.style.removeProperty("--ac-font-style");
-        this.nameLabel.style.removeProperty("--ac-font-weight");
+        this.nameLabel.removeAttribute("ac-fsw");
       }
 
       /* Account font size */
@@ -1342,31 +1320,9 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-setfontstyle")) {
             fontstyle = accountColorsAbout3Pane.prefs.getIntPref("thread-fontstyle");
-
-            switch (fontstyle) {
-              case 0 /* Normal */:
-                style = "normal";
-                weight = "normal";
-                break;
-              case 1 /* Italic */:
-                style = "italic";
-                weight = "normal";
-                break;
-              case 2 /* Bold */:
-                style = "normal";
-                weight = "bold";
-                break;
-              case 3 /* Bold Italic */:
-                style = "italic";
-                weight = "bold";
-                break;
-            }
-
-            element.style.setProperty("--ac-font-style", style);
-            element.style.setProperty("--ac-font-weight", weight);
+            element.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
           } else {
-            element.style.removeProperty("--ac-font-style");
-            element.style.removeProperty("--ac-font-weight");
+            element.removeAttribute("ac-fsw");
           }
 
           /* Subject font size */
@@ -1408,31 +1364,9 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-setfromstyle")) {
             fontstyle = accountColorsAbout3Pane.prefs.getIntPref("thread-fromstyle");
-
-            switch (fontstyle) {
-              case 0 /* Normal */:
-                style = "normal";
-                weight = "normal";
-                break;
-              case 1 /* Italic */:
-                style = "italic";
-                weight = "normal";
-                break;
-              case 2 /* Bold */:
-                style = "normal";
-                weight = "bold";
-                break;
-              case 3 /* Bold Italic */:
-                style = "italic";
-                weight = "bold";
-                break;
-            }
-
-            element.style.setProperty("--ac-font-style", style);
-            element.style.setProperty("--ac-font-weight", weight);
+            element.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
           } else {
-            element.style.removeProperty("--ac-font-style");
-            element.style.removeProperty("--ac-font-weight");
+            element.removeAttribute("ac-fsw");
           }
 
           /* From font size */
@@ -1573,31 +1507,9 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-setfontstyle")) {
             fontstyle = accountColorsAbout3Pane.prefs.getIntPref("thread-fontstyle");
-
-            switch (fontstyle) {
-              case 0 /* Normal */:
-                style = "normal";
-                weight = "normal";
-                break;
-              case 1 /* Italic */:
-                style = "italic";
-                weight = "normal";
-                break;
-              case 2 /* Bold */:
-                style = "normal";
-                weight = "bold";
-                break;
-              case 3 /* Bold Italic */:
-                style = "italic";
-                weight = "bold";
-                break;
-            }
-
-            element.style.setProperty("--ac-font-style", style);
-            element.style.setProperty("--ac-font-weight", weight);
+            element.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
           } else {
-            element.style.removeProperty("--ac-font-style");
-            element.style.removeProperty("--ac-font-weight");
+            element.removeAttribute("ac-fsw");
           }
 
           /* Subject font size */
@@ -1644,31 +1556,9 @@ var accountColorsAbout3Pane_115 = {
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-setfromstyle")) {
             fontstyle = accountColorsAbout3Pane.prefs.getIntPref("thread-fromstyle");
-
-            switch (fontstyle) {
-              case 0 /* Normal */:
-                style = "normal";
-                weight = "normal";
-                break;
-              case 1 /* Italic */:
-                style = "italic";
-                weight = "normal";
-                break;
-              case 2 /* Bold */:
-                style = "normal";
-                weight = "bold";
-                break;
-              case 3 /* Bold Italic */:
-                style = "italic";
-                weight = "bold";
-                break;
-            }
-
-            element.style.setProperty("--ac-font-style", style);
-            element.style.setProperty("--ac-font-weight", weight);
+            element.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
           } else {
-            element.style.removeProperty("--ac-font-style");
-            element.style.removeProperty("--ac-font-weight");
+            element.removeAttribute("ac-fsw");
           }
 
           /* From font size */
