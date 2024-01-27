@@ -53,7 +53,7 @@
 <!ENTITY accountcolors.thread.lightpanebkgd     "Light Pane Background">
 <!ENTITY accountcolors.thread.whiterowfont      "White Row Fonts">
 <!ENTITY accountcolors.thread.darkpanebkgd      "Dark Pane Background">
-<!ENTITY accountcolors.thread.hdraccount        "Color based on Received Account (instead of Folder Account)">
+<!ENTITY accountcolors.thread.hdraccount        "Color based on Account of Received Email&apos;s Address (instead of Folder&apos;s Account)">
 <!ENTITY accountcolors.thread.boldsubject       "Bold Subject on Unread Messages">
 <!ENTITY accountcolors.thread.boldfrom          "Bold From on Unread Messages">
 <!ENTITY accountcolors.thread.hidestripes       "Hide Row Stripes">
@@ -74,7 +74,7 @@
 <!ENTITY accountcolors.message.colorfrom        "Color From Font">
 <!ENTITY accountcolors.message.blackhdrlabels   "Black Header Labels">
 <!ENTITY accountcolors.message.whitehdrlabels   "White Header Labels">
-<!ENTITY accountcolors.message.hdraccount       "Color based on Received Account (instead of Folder Account)">
+<!ENTITY accountcolors.message.hdraccount       "Color based on Account of Received Email&apos;s Address (instead of Folder&apos;s Account)">
 <!ENTITY accountcolors.message.defaultbkgd "Retain default light/dark background if White selected">
 <!ENTITY accountcolors.message.colorbkgd.header.label "Color Header Background as Label">
 

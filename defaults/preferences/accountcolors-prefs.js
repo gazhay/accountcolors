@@ -128,3 +128,7 @@ pref("extensions.accountcolors.compose-defaultbkgd", false);
 pref("extensions.accountcolors.compose-hoverfrom", true);
 pref("extensions.accountcolors.compose-colorbkgd-idmenu-label", false);
 pref("extensions.accountcolors.compose-idmenu-label-width", 4);
+
+/* Fetch received header for better identity resolution */
+
+pref("mailnews.customDBHeaders", "received");

@@ -146,28 +146,29 @@ var accountColorsAboutMessage = {
       return;
     }
 
-    /* Color based on received account */
-
-    if (accountColorsAboutMessage.prefs.getBoolPref("message-hdraccount")) {
-      /* color using account in message header */
-      accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-      account = accountColorsAboutMessage.accountManager.getAccount(accountkey);
-
-      if (account == null) accountidkey = null; /* sent message */
-      else if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
-    } /* color using account in which folder is located */ else {
-      folder = msgHdr.folder;
-      server = folder.server;
-      account = accountColorsAboutMessage.accountManager.FindAccountForServer(server);
-
-      if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
-    }
-
-    // Use an empty id to cause color clearing.
     if (clear) {
-      accountidkey = "";
+      accountidkey = ""; // Use an empty id to cause color clearing.
+    } else if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAboutMessage.prefs.getBoolPref("message-hdraccount"));
+    } else {
+      /* Color based on received account */
+
+      if (accountColorsAboutMessage.prefs.getBoolPref("message-hdraccount")) {
+        /* color using account in message header */
+        accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
+        account = accountColorsAboutMessage.accountManager.getAccount(accountkey);
+
+        if (account == null) accountidkey = null; /* sent message */
+        else if (account.defaultIdentity == null) accountidkey = account.key;
+        else accountidkey = account.defaultIdentity.key;
+      } /* color using account in which folder is located */ else {
+        folder = msgHdr.folder;
+        server = folder.server;
+        account = accountColorsAboutMessage.accountManager.FindAccountForServer(server);
+
+        if (account.defaultIdentity == null) accountidkey = account.key;
+        else accountidkey = account.defaultIdentity.key;
+      }
     }
 
     /* Color subject font */

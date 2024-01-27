@@ -550,23 +550,27 @@ var accountColorsAbout3Pane_102 = {
 
           msgHdr = gDBView.getMsgHdrAt(row);
 
-          /* Color based on received account */
+          if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+            accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
+          } else {
+            /* Color based on received account */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
-            /* color using account in message header */
-            accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-            account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
+            if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
+              /* color using account in message header */
+              accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
+              account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
 
-            if (account == null) accountidkey = null; /* sent message */
-            else if (account.defaultIdentity == null) accountidkey = account.key;
-            else accountidkey = account.defaultIdentity.key;
-          } /* color using account in which folder is located */ else {
-            folder = msgHdr.folder;
-            server = folder.server;
-            account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+              if (account == null) accountidkey = null; /* sent message */
+              else if (account.defaultIdentity == null) accountidkey = account.key;
+              else accountidkey = account.defaultIdentity.key;
+            } /* color using account in which folder is located */ else {
+              folder = msgHdr.folder;
+              server = folder.server;
+              account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
 
-            if (account.defaultIdentity == null) accountidkey = account.key;
-            else accountidkey = account.defaultIdentity.key;
+              if (account.defaultIdentity == null) accountidkey = account.key;
+              else accountidkey = account.defaultIdentity.key;
+            }
           }
 
           /* add extra properties for not-hover, not-selected, not-focused, background color, show row stripes, darker selection bar */
@@ -614,23 +618,27 @@ var accountColorsAbout3Pane_102 = {
 
           msgHdr = gDBView.getMsgHdrAt(row);
 
-          /* Color based on received account */
+          if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+            accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
+          } else {
+            /* Color based on received account */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
-            /* color using account in message header */
-            accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-            account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
+            if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
+              /* color using account in message header */
+              accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
+              account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
 
-            if (account == null) accountidkey = null; /* sent message */
-            else if (account.defaultIdentity == null) accountidkey = account.key;
-            else accountidkey = account.defaultIdentity.key;
-          } /* color using account in which folder is located */ else {
-            folder = msgHdr.folder;
-            server = folder.server;
-            account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+              if (account == null) accountidkey = null; /* sent message */
+              else if (account.defaultIdentity == null) accountidkey = account.key;
+              else accountidkey = account.defaultIdentity.key;
+            } /* color using account in which folder is located */ else {
+              folder = msgHdr.folder;
+              server = folder.server;
+              account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
 
-            if (account.defaultIdentity == null) accountidkey = account.key;
-            else accountidkey = account.defaultIdentity.key;
+              if (account.defaultIdentity == null) accountidkey = account.key;
+              else accountidkey = account.defaultIdentity.key;
+            }
           }
 
           /* add extra properties for not-hover and not-selected */
@@ -1242,8 +1250,8 @@ var accountColorsAbout3Pane_115 = {
     /* Detour ThreadRow.prototype.index setter */
 
     threadRowIndexSetter: function(row) {
-      var msgHdr, accountkey, account, accountidkey, folder, server, element;
-      var fontcolor, bkgdcolor, fontstyle, fontsize, style, weight;
+      var msgHdr, account, accountidkey, element;
+      var fontcolor, bkgdcolor, fontstyle, fontsize;
       var coloringDisabled = false;
       var nonHiddenColumnFound = false;
 
@@ -1254,25 +1262,7 @@ var accountColorsAbout3Pane_115 = {
       }
 
       msgHdr = gDBView.getMsgHdrAt(row);
-
-      /* Color based on received account */
-
-      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
-        /* color using account in message header */
-        accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-        account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
-
-        if (account == null) accountidkey = null; /* sent message */
-        else if (account.defaultIdentity == null) accountidkey = account.key;
-        else accountidkey = account.defaultIdentity.key;
-      } /* color using account in which folder is located */ else {
-        folder = msgHdr.folder;
-        server = folder.server;
-        account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
-
-        if (account.defaultIdentity == null) accountidkey = account.key;
-        else accountidkey = account.defaultIdentity.key;
-      }
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
 
       /* Enable coloring only in Unified folder if specified */
 
@@ -1442,8 +1432,8 @@ var accountColorsAbout3Pane_115 = {
     /* Detour ThreadCard.prototype.index setter */
 
     threadCardIndexSetter: function(row) {
-      var msgHdr, accountkey, account, accountidkey, folder, server, element;
-      var fontcolor, bkgdcolor, fontstyle, fontsize, style, weight;
+      var msgHdr, accountidkey, element;
+      var fontcolor, bkgdcolor, fontstyle, fontsize;
       var coloringDisabled = false;
 
       /* Call original function */
@@ -1453,25 +1443,7 @@ var accountColorsAbout3Pane_115 = {
       }
 
       msgHdr = gDBView.getMsgHdrAt(row);
-
-      /* Color based on received account */
-
-      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
-        /* color using account in message header */
-        accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-        account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
-
-        if (account == null) accountidkey = null; /* sent message */
-        else if (account.defaultIdentity == null) accountidkey = account.key;
-        else accountidkey = account.defaultIdentity.key;
-      } /* color using account in which folder is located */ else {
-        folder = msgHdr.folder;
-        server = folder.server;
-        account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
-
-        if (account.defaultIdentity == null) accountidkey = account.key;
-        else accountidkey = account.defaultIdentity.key;
-      }
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
 
       /* Enable coloring only in Unified folder if specified */
 
