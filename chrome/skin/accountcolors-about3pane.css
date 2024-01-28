@@ -47,7 +47,7 @@
     color: var(--ac-font-color, currentColor);
 }
 
-#folderTree li[is="folder-tree-row"] .new-messages > .container > .name {
+#folderTree li[is="folder-tree-row"].new-messages > .container > .name {
     color: var(--ac-font-color, var(--new-folder-color));
 }
 
@@ -55,7 +55,7 @@
     background-color: var(--ac-bkgd-color);
 }
 
-#folderTree li[is="folder-tree-row"] .unread:not(.new-messages) > .container > .unread-count {
+#folderTree li[is="folder-tree-row"].unread:not(.new-messages) > .container > .unread-count {
     color: var(--ac-font-color, var(--folderpane-unread-count-text));
     background-color: var(--ac-badge-bkgd-color, var(--folderpane-unread-count-background));
 }
