@@ -149,7 +149,7 @@ var accountColorsAboutMessage = {
     if (clear) {
       accountidkey = ""; // Use an empty id to cause color clearing.
     } else if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
-      accountidkey = accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAboutMessage.prefs.getBoolPref("message-hdraccount"));
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAboutMessage.prefs.getBoolPref("message-hdraccount"));
     } else {
       /* Color based on received account */
 

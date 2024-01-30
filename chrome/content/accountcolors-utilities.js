@@ -73,7 +73,7 @@ var accountColorsUtilities = {
 
   /* Resolve account / identity key for message, for thunderbird 102+ */
 
-  resolveAccountIdentityKey: function (msgHdr, searchAllAccounts) {
+  resolveAccountIdentityKeyForMessage: function (msgHdr, searchAllAccounts) {
     var msgFolder, msgServer, msgAccount;
     var account, identity, address;
     var identities, matches, header, ccList;
@@ -152,6 +152,47 @@ var accountColorsUtilities = {
     }
 
     return msgAccount.key;
+  },
+
+  /* Resolve account / identity key for folder, for thunderbird 102+ */
+
+  resolveAccountIdentityKeyForFolder: function (folder) {
+    var server = folder.server;
+    var account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+    var identities = account.identities || [];
+    var identity, currentFolder;
+
+    /* If folder name or any of its parent folder's name matches identity's email, use this identity */
+
+    for (identity of identities) {
+      currentFolder = folder;
+      while (!!currentFolder.parent) { // Do not check root folder, as it's always default identity's email
+        if (currentFolder.abbreviatedName.toLowerCase() == identity.email.toLowerCase()) {
+          return identity.key;
+        }
+        currentFolder = currentFolder.parent;
+      }
+    }
+
+    /* If folder name or any of its parent folder's name matches identity's name, use this identity */
+
+    for (identity of identities) {
+      currentFolder = folder;
+      while (!!currentFolder.parent) {
+        if (currentFolder.abbreviatedName.toLowerCase() == identity.fullName.toLowerCase()) {
+          return identity.key;
+        }
+        currentFolder = currentFolder.parent;
+      }
+    }
+
+    /* Fallback to use default identity or account key */
+
+    if (!!account.defaultIdentity) {
+      return account.defaultIdentity.key;
+    }
+
+    return account.key;
   },
 
   /* Find account key for message recipient */

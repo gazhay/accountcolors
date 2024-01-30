@@ -312,11 +312,15 @@ var accountColorsAbout3Pane_102 = {
         return props; // Unified Inbox row's _folder may be null
       }
 
-      server = gFolderTreeView._rowMap[row]._folder.server;
-      account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+        accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForFolder(gFolderTreeView._rowMap[row]._folder);
+      } else {
+        server = gFolderTreeView._rowMap[row]._folder.server;
+        account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
 
-      if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
+        if (account.defaultIdentity == null) accountidkey = account.key;
+        else accountidkey = account.defaultIdentity.key;
+      }
 
       /* add extra properties for not-hover, not-dragOn, not-selected, not-focused, background color, folder background color, and darker selection bar */
       /* required to select tree element styles defined in accountcolors-messengerwindow[-generated].css */
@@ -367,11 +371,15 @@ var accountColorsAbout3Pane_102 = {
         props = ""
       }
 
-      server = gFolderTreeView._rowMap[row]._folder.server;
-      account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+        accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForFolder(gFolderTreeView._rowMap[row]._folder);
+      } else {
+        server = gFolderTreeView._rowMap[row]._folder.server;
+        account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
 
-      if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
+        if (account.defaultIdentity == null) accountidkey = account.key;
+        else accountidkey = account.defaultIdentity.key;
+      }
 
       /* add extra properties for not-hover, not-dragOn, not-selected */
       /* required to select tree element styles defined in accountcolors-messengerwindow[-generated].css */
@@ -551,7 +559,7 @@ var accountColorsAbout3Pane_102 = {
           msgHdr = gDBView.getMsgHdrAt(row);
 
           if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
-            accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
+            accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
           } else {
             /* Color based on received account */
 
@@ -619,7 +627,7 @@ var accountColorsAbout3Pane_102 = {
           msgHdr = gDBView.getMsgHdrAt(row);
 
           if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
-            accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
+            accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
           } else {
             /* Color based on received account */
 
@@ -996,8 +1004,8 @@ var accountColorsAbout3Pane_115 = {
     /* Detour FolderTreeRow.prototype.setFolderPropertiesFromFolder */
 
     setFolderPropertiesFromFolder: function(folder) {
-      var server, account, accountidkey;
-      var fontcolor, bkgdcolor, fontstyle, fontsize, style, weight;
+      var accountidkey;
+      var fontcolor, bkgdcolor, fontstyle, fontsize;
 
       /* Call original function */
 
@@ -1010,11 +1018,7 @@ var accountColorsAbout3Pane_115 = {
         this.container = this.querySelector(".container");
       }
 
-      server = folder.server;
-      account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
-
-      if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForFolder(folder);
 
       /* Regard account folders in Unified Folders (Inbox/Drafts/etc.) as accounts */
 
@@ -1262,7 +1266,7 @@ var accountColorsAbout3Pane_115 = {
       }
 
       msgHdr = gDBView.getMsgHdrAt(row);
-      accountidkey = accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
 
       /* Enable coloring only in Unified folder if specified */
 
@@ -1443,7 +1447,7 @@ var accountColorsAbout3Pane_115 = {
       }
 
       msgHdr = gDBView.getMsgHdrAt(row);
-      accountidkey = accountColorsUtilities.resolveAccountIdentityKey(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
 
       /* Enable coloring only in Unified folder if specified */
 
