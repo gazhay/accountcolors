@@ -81,6 +81,7 @@
 
         <hbox>
           <checkbox id="accountcolors-folder-colorother" label="&accountcolors.folder.colorother;" />
+          <checkbox id="accountcolors-folder-colorotherbkgd" label="&accountcolors.folder.colorotherbkgd;" />
         </hbox>
 
         <hbox>
@@ -122,6 +123,14 @@
         <hbox>
           <checkbox id="accountcolors-folder-hoverselect" label="&accountcolors.folder.hoverselect;" />
         </hbox>
+
+        <hbox>
+          <checkbox id="accountcolors-folder-colorbkgd-account-icon" label="&accountcolors.folder.colorbkgd.account.icon;" />
+        </hbox>
+
+        <hbox>
+          <checkbox id="accountcolors-folder-colorbkgd-folder-icon" label="&accountcolors.folder.colorbkgd.folder.icon;" />
+        </hbox>
       </tabpanel>
 
       <tabpanel id="accountcolors-thread-panel" orient="vertical">
@@ -148,9 +157,6 @@
 
         <hbox>
           <checkbox id="accountcolors-thread-colorfrom" label="&accountcolors.thread.colorfrom;" />
-        </hbox>
-
-        <hbox>
           <checkbox id="accountcolors-thread-colorother" label="&accountcolors.thread.colorother;" />
         </hbox>
 
@@ -186,6 +192,22 @@
 
         <hbox>
           <checkbox id="accountcolors-thread-hoverselect" label="&accountcolors.thread.hoverselect;" />
+        </hbox>
+
+        <hbox>
+          <checkbox id="accountcolors-thread-colorbkgd-row-label" label="&accountcolors.thread.colorbkgd.row.label;" oncommand="accountColorsOptions.setMenuStateByCheckbox(this.id, 'accountcolors-thread-row-label-position', 'accountcolors-thread-row-label-width');" />
+          <menulist id="accountcolors-thread-row-label-position" />
+          <menulist id="accountcolors-thread-row-label-width" />
+        </hbox>
+
+        <hbox>
+          <checkbox id="accountcolors-thread-colorbkgd-card-label" label="&accountcolors.thread.colorbkgd.card.label;" oncommand="accountColorsOptions.setMenuStateByCheckbox(this.id, 'accountcolors-thread-card-label-indent', 'accountcolors-thread-card-label-width');" />
+          <menulist id="accountcolors-thread-card-label-indent" />
+          <menulist id="accountcolors-thread-card-label-width" />
+        </hbox>
+
+        <hbox>
+          <checkbox id="accountcolors-thread-color-unified-only" label="&accountcolors.thread.color.unified.only;" />
         </hbox>
       </tabpanel>
 
@@ -234,6 +256,11 @@
         </hbox>
 
         <separator class="groove section" />
+
+        <hbox>
+          <checkbox id="accountcolors-message-colorbkgd-header-label" label="&accountcolors.message.colorbkgd.header.label;" oncommand="accountColorsOptions.setMenuStateByCheckbox(this.id, 'accountcolors-message-header-label-width');" />
+          <menulist id="accountcolors-message-header-label-width" />
+        </hbox>
       </tabpanel>
 
       <tabpanel id="accountcolors-compose-panel" orient="vertical">
@@ -302,6 +329,11 @@
 
         <hbox>
           <checkbox id="accountcolors-compose-hoverfrom" label="&accountcolors.compose.hoverfrom;" />
+        </hbox>
+
+        <hbox>
+          <checkbox id="accountcolors-compose-colorbkgd-idmenu-label" label="&accountcolors.compose.colorbkgd.idmenu.label;" oncommand="accountColorsOptions.setMenuStateByCheckbox(this.id, 'accountcolors-compose-idmenu-label-width');" />
+          <menulist id="accountcolors-compose-idmenu-label-width" />
         </hbox>
       </tabpanel>
     </tabpanels>

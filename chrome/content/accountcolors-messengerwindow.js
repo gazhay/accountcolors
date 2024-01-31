@@ -44,6 +44,8 @@ var accountColorsMessenger = {
 
   mailPrefs: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("mail."),
 
+  mailnewsPrefs: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("mailnews."),
+
   otherPrefs: Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch),
 
   accountManager: Components.classes["@mozilla.org/messenger/account-manager;1"].getService(Components.interfaces.nsIMsgAccountManager),
@@ -74,10 +76,44 @@ var accountColorsMessenger = {
     },
   },
 
+  /* Listen for changes to mailnews settings - to ensure `received` property in MsgHdr */
+
+  mailnewsPrefsObserver: {
+    register: function () {
+      /* Add the observer */
+      this.registered = true;
+      this.ensureReceivedHeader();
+      accountColorsMessenger.mailnewsPrefs.addObserver("", this, false);
+    },
+
+    unregister: function () {
+      if (!this.registered) return;
+
+      accountColorsMessenger.mailnewsPrefs.removeObserver("", this);
+    },
+
+    observe: function (subject, topic, data) {
+      if (topic != "nsPref:changed") return;
+
+      /* Ensure `received` property in MsgHdr */
+
+      this.ensureReceivedHeader();
+    },
+
+    ensureReceivedHeader: function () {
+      var customDBHeaders = accountColorsMessenger.mailnewsPrefs.getCharPref("customDBHeaders");
+      if (customDBHeaders.indexOf("received") == -1) {
+        accountColorsMessenger.mailnewsPrefs.setCharPref("customDBHeaders", customDBHeaders + " received");
+      }
+    },
+  },
+
   /* On Unload */
 
   onUnload: function () {
     accountColorsMessenger.mailPrefsObserver.unregister();
+
+    accountColorsMessenger.mailnewsPrefsObserver.unregister();
 
     if (accountColorsUtilities.thunderbirdVersion.major <= 102) {
       accountColorsAbout3Pane.onUnload();
@@ -94,6 +130,8 @@ var accountColorsMessenger = {
     /* Register mail preferences observers */
 
     accountColorsMessenger.mailPrefsObserver.register();
+
+    accountColorsMessenger.mailnewsPrefsObserver.register();
 
     if (accountColorsUtilities.thunderbirdVersion.major <= 102) {
       accountColorsAbout3Pane.onLoad();

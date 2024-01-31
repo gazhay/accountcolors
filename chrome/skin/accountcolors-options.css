@@ -184,6 +184,7 @@ separator.section {
 #accountcolors-folder-blackrowfont,
 #accountcolors-folder-whiterowfont,
 #accountcolors-folder-colorfldfont,
+#accountcolors-folder-colorother,
 #accountcolors-folder-boldnewmail,
 #accountcolors-folder-showlines,
 #accountcolors-thread-colorfont,
@@ -372,4 +373,8 @@ div[role="button"] {
 .colorpickertile:hover,
 .colorpickertile[selected="true"] {
   border: 2px dotted black;
+}
+
+menulist {
+  margin: 0;
 }

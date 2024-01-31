@@ -28,8 +28,9 @@ pref("extensions.accountcolors.folder-fontsize", 12);
 pref("extensions.accountcolors.folder-colorfont", true);
 pref("extensions.accountcolors.folder-colorbkgd", true);
 pref("extensions.accountcolors.folder-colorfldfont", true);
-pref("extensions.accountcolors.folder-colorfldbkgd", true);
+pref("extensions.accountcolors.folder-colorfldbkgd", false);
 pref("extensions.accountcolors.folder-colorother", false);
+pref("extensions.accountcolors.folder-colorotherbkgd", false);
 pref("extensions.accountcolors.folder-blackrowfont", false);
 pref("extensions.accountcolors.folder-lightpanebkgd", false);
 pref("extensions.accountcolors.folder-whiterowfont", false);
@@ -42,6 +43,8 @@ pref("extensions.accountcolors.folder-showlines", false);
 pref("extensions.accountcolors.folder-darkerbar", false);
 pref("extensions.accountcolors.folder-incspacing", false);
 pref("extensions.accountcolors.folder-hoverselect", true);
+pref("extensions.accountcolors.folder-colorbkgd-account-icon", true);
+pref("extensions.accountcolors.folder-colorbkgd-folder-icon", false);
 
 /* Thread Pane */
 
@@ -68,6 +71,13 @@ pref("extensions.accountcolors.thread-showstripes", false);
 pref("extensions.accountcolors.thread-darkerbar", false);
 pref("extensions.accountcolors.thread-incspacing", false);
 pref("extensions.accountcolors.thread-hoverselect", true);
+pref("extensions.accountcolors.thread-colorbkgd-row-label", false);
+pref("extensions.accountcolors.thread-row-label-position", 0);
+pref("extensions.accountcolors.thread-row-label-width", 2);
+pref("extensions.accountcolors.thread-colorbkgd-card-label", false);
+pref("extensions.accountcolors.thread-card-label-position", 0);
+pref("extensions.accountcolors.thread-card-label-width", 4);
+pref("extensions.accountcolors.thread-color-unified-only", false);
 
 /* Message Pane/Tab/Window */
 
@@ -86,6 +96,8 @@ pref("extensions.accountcolors.message-blackhdrlabels", false);
 pref("extensions.accountcolors.message-whitehdrlabels", false);
 pref("extensions.accountcolors.message-hdraccount", false);
 pref("extensions.accountcolors.message-defaultbkgd", false);
+pref("extensions.accountcolors.message-colorbkgd-header-label", false);
+pref("extensions.accountcolors.message-header-label-width", 4);
 
 /* Compose Window */
 
@@ -114,3 +126,9 @@ pref("extensions.accountcolors.compose-whitefieldfont", false);
 pref("extensions.accountcolors.compose-darkfieldbkgd", false);
 pref("extensions.accountcolors.compose-defaultbkgd", false);
 pref("extensions.accountcolors.compose-hoverfrom", true);
+pref("extensions.accountcolors.compose-colorbkgd-idmenu-label", false);
+pref("extensions.accountcolors.compose-idmenu-label-width", 4);
+
+/* Fetch received header for better identity resolution */
+
+pref("mailnews.customDBHeaders", "received");

@@ -33,7 +33,8 @@ var accountColorsUtilities = {
 
   accountManager: Components.classes["@mozilla.org/messenger/account-manager;1"].getService(Components.interfaces.nsIMsgAccountManager),
 
-  headerParser: Components.classes["@mozilla.org/messenger/headerparser;1"].getService(Components.interfaces.nsIMsgHeaderParser),
+  headerParser: Components.classes["@mozilla.org/messenger/headerparser;1"].getService(Components.interfaces.nsIMsgHeaderParser).wrappedJSObject ||
+                Components.classes["@mozilla.org/messenger/headerparser;1"].getService(Components.interfaces.nsIMsgHeaderParser),
 
   debugCount: 0,
 
@@ -68,6 +69,130 @@ var accountColorsUtilities = {
     }
 
     return accountkey;
+  },
+
+  /* Resolve account / identity key for message, for thunderbird 102+ */
+
+  resolveAccountIdentityKeyForMessage: function (msgHdr, searchAllAccounts) {
+    var msgFolder, msgServer, msgAccount;
+    var account, identity, address;
+    var identities, matches, header, ccList;
+    var identityMap = new Map();
+
+    if (msgHdr.accountKey != "") {
+      return msgHdr.accountKey;
+    }
+
+    msgFolder = msgHdr.folder;
+    msgServer = msgFolder.server;
+    msgAccount = accountColorsUtilities.accountManager.FindAccountForServer(msgServer);
+
+    /* If searchAllAccounts = false, the result account / identity will only come from message's folder account */
+
+    for (account of searchAllAccounts ? accountColorsUtilities.accountManager.accounts : [msgAccount]) {
+      for (identity of account.identities || []) {
+        identities = identityMap.get(identity.email);
+        if (!identities) {
+          identities = []
+          identityMap.set(identity.email, identities);
+        }
+        if (account.incomingServer.type == msgServer.type) {
+          identities.unshift(identity); // Prefer identity that has same server type as message
+        } else {
+          identities.push(identity);
+        }
+      }
+    }
+
+    /* Search Recipient list first */
+
+    for (address of accountColorsUtilities.headerParser.parseDecodedHeader(msgHdr.mime2DecodedRecipients)) {
+      identities = identityMap.get(address.email);
+      if (identities && identities.length > 0) {
+        return identities[0].key; // Use first identity (as it is preferred)
+      }
+    }
+
+    /* Search `Received` header's `for <email>` fields next, as Recipient's address may be special group address (e.g. GitHub notifications) */
+
+    header = msgHdr.getStringProperty("received");
+    if (header) {
+      matches = header.match(/for\s+<([^>]+)>/);
+      identities = matches && identityMap.get(matches[1]);
+      if (identities && identities.length > 0) {
+        return identities[0].key;
+      }
+    }
+
+    /* Search for CC and BCC list next */
+
+    ccList = msgHdr.ccList && msgHdr.bccList ? `${msgHdr.ccList}, ${msgHdr.bccList}` : msgHdr.ccList || msgHdr.bccList;
+    if (ccList) {
+      for (address of accountColorsUtilities.headerParser.parseDecodedHeader(ccList)) {
+        identities = identityMap.get(address.email);
+        if (identities && identities.length > 0) {
+          return identities[0].key;
+        }
+      }
+    }
+
+    /* Search for Author (Message could be a sent message) */
+
+    for (address of accountColorsUtilities.headerParser.parseDecodedHeader(msgHdr.mime2DecodedAuthor)) {
+      identities = identityMap.get(address.email);
+      if (identities && identities.length > 0) {
+        return identities[0].key;
+      }
+    }
+
+    /* Default fallback */
+
+    if (msgAccount.defaultIdentity) {
+      return msgAccount.defaultIdentity.key;
+    }
+
+    return msgAccount.key;
+  },
+
+  /* Resolve account / identity key for folder, for thunderbird 102+ */
+
+  resolveAccountIdentityKeyForFolder: function (folder) {
+    var server = folder.server;
+    var account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+    var identities = account.identities || [];
+    var identity, currentFolder;
+
+    /* If folder name or any of its parent folder's name matches identity's email, use this identity */
+
+    for (identity of identities) {
+      currentFolder = folder;
+      while (!!currentFolder.parent) { // Do not check root folder, as it's always default identity's email
+        if (currentFolder.abbreviatedName.toLowerCase() == identity.email.toLowerCase()) {
+          return identity.key;
+        }
+        currentFolder = currentFolder.parent;
+      }
+    }
+
+    /* If folder name or any of its parent folder's name matches identity's name, use this identity */
+
+    for (identity of identities) {
+      currentFolder = folder;
+      while (!!currentFolder.parent) {
+        if (currentFolder.abbreviatedName.toLowerCase() == identity.fullName.toLowerCase()) {
+          return identity.key;
+        }
+        currentFolder = currentFolder.parent;
+      }
+    }
+
+    /* Fallback to use default identity or account key */
+
+    if (!!account.defaultIdentity) {
+      return account.defaultIdentity.key;
+    }
+
+    return account.key;
   },
 
   /* Find account key for message recipient */

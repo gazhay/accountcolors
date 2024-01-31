@@ -146,28 +146,29 @@ var accountColorsAboutMessage = {
       return;
     }
 
-    /* Color based on received account */
-
-    if (accountColorsAboutMessage.prefs.getBoolPref("message-hdraccount")) {
-      /* color using account in message header */
-      accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-      account = accountColorsAboutMessage.accountManager.getAccount(accountkey);
-
-      if (account == null) accountidkey = null; /* sent message */
-      else if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
-    } /* color using account in which folder is located */ else {
-      folder = msgHdr.folder;
-      server = folder.server;
-      account = accountColorsAboutMessage.accountManager.FindAccountForServer(server);
-
-      if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
-    }
-
-    // Use an empty id to cause color clearing.
     if (clear) {
-      accountidkey = "";
+      accountidkey = ""; // Use an empty id to cause color clearing.
+    } else if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAboutMessage.prefs.getBoolPref("message-hdraccount"));
+    } else {
+      /* Color based on received account */
+
+      if (accountColorsAboutMessage.prefs.getBoolPref("message-hdraccount")) {
+        /* color using account in message header */
+        accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
+        account = accountColorsAboutMessage.accountManager.getAccount(accountkey);
+
+        if (account == null) accountidkey = null; /* sent message */
+        else if (account.defaultIdentity == null) accountidkey = account.key;
+        else accountidkey = account.defaultIdentity.key;
+      } /* color using account in which folder is located */ else {
+        folder = msgHdr.folder;
+        server = folder.server;
+        account = accountColorsAboutMessage.accountManager.FindAccountForServer(server);
+
+        if (account.defaultIdentity == null) accountidkey = account.key;
+        else accountidkey = account.defaultIdentity.key;
+      }
     }
 
     /* Color subject font */
@@ -202,16 +203,37 @@ var accountColorsAboutMessage = {
       bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
       if (accountColorsAboutMessage.prefs.getBoolPref("message-defaultbkgd") && bkgdcolor == "#FFFFFF") bkgdcolor = "";
 
-      element = document.getElementById("expandedHeaderView"); // Removed since TB 102+
-      if (element != null) element.style.backgroundColor = bkgdcolor;
+      if (accountColorsAboutMessage.prefs.getBoolPref("message-colorbkgd-header-label")) {
+        element = document.getElementById("messageHeader");
+        if (element != null) {
+          width = accountColorsAboutMessage.prefs.getIntPref("message-header-label-width") + "px";
+          element.style.backgroundImage = "linear-gradient(to right, " + bkgdcolor + ", " + bkgdcolor + " " + width + ", transparent " + width + ", transparent 100%)";
+          element.style.backgroundColor = "";
+        }
+      } else {
+        element = document.getElementById("expandedHeaderView"); // Removed since TB 102+
+        if (element != null) element.style.backgroundColor = bkgdcolor;
 
-      /* For CompactHeader add-on */
+        element = document.getElementById("messageHeader");
+        if (element != null) {
+          element.style.backgroundColor = bkgdcolor;
+          element.style.backgroundImage = "";
+        }
 
-      element = document.getElementById("CompactHeader_collapsedHeaderView");
-      if (element != null) element.style.backgroundColor = bkgdcolor;
+        /* For CompactHeader add-on */
+
+        element = document.getElementById("CompactHeader_collapsedHeaderView");
+        if (element != null) element.style.backgroundColor = bkgdcolor;
+      }
     } else {
-      element = document.getElementById("expandedHeaderView");
+      element = document.getElementById("expandedHeaderView"); // Removed since TB 102+
       if (element != null) element.style.backgroundColor = "";
+
+      element = document.getElementById("messageHeader");
+      if (element != null) {
+        element.style.backgroundColor = "";
+        element.style.backgroundImage = "";
+      }
 
       /* For CompactHeader add-on */
 

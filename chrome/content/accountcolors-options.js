@@ -73,7 +73,7 @@ var accountColorsOptions = {
 
   initPrefs: function () {
     var container, template, accountidbox, account, identity, index, acc, id;
-    var background, menulist, color, fontstyle, fontsize;
+    var background, menulist, color, fontstyle, fontsize, value;
     var checkbox, checkstate;
     var accounts = new Array();
     var identities = new Array();
@@ -335,6 +335,18 @@ var accountColorsOptions = {
       checkbox.checked = false;
     }
 
+    checkbox = document.getElementById("accountcolors-folder-colorotherbkgd");
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("folder-colorotherbkgd");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
     checkbox = document.getElementById("accountcolors-folder-blackrowfont");
     try {
       checkstate = accountColorsOptions.prefs.getBoolPref("folder-blackrowfont");
@@ -438,6 +450,30 @@ var accountColorsOptions = {
         checkbox.checked = checkstate;
       } else {
         checkbox.style.display = "none"; // Hide option for thunderbird 103+, as it is always enabled and strictly stick to system default
+      }
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
+    checkbox = document.getElementById("accountcolors-folder-colorbkgd-account-icon");
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("folder-colorbkgd-account-icon");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
+    checkbox = document.getElementById("accountcolors-folder-colorbkgd-folder-icon");
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("folder-colorbkgd-folder-icon");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
       }
     } catch (e) {
       checkbox.checked = false;
@@ -659,6 +695,122 @@ var accountColorsOptions = {
       checkbox.checked = false;
     }
 
+    checkbox = document.getElementById("accountcolors-thread-colorbkgd-row-label");
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("thread-colorbkgd-row-label");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
+    menulist = document.getElementById("accountcolors-thread-row-label-position");
+    menulist.disabled = !checkbox.checked;
+    menulist.appendItem("Subject Column", 0);
+    menulist.appendItem("First Column", 1);
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        value = accountColorsOptions.prefs.getIntPref("thread-row-label-position");
+        menulist.selectedIndex = value;
+      } else {
+        menulist.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      menulist.selectedIndex = 0;
+    }
+
+    menulist = document.getElementById("accountcolors-thread-row-label-width");
+    menulist.disabled = !checkbox.checked;
+    menulist.appendItem("Width: 1", 1);
+    menulist.appendItem("Width: 2", 2);
+    menulist.appendItem("Width: 3", 3);
+    menulist.appendItem("Width: 4", 4);
+    menulist.appendItem("Width: 5", 5);
+    menulist.appendItem("Width: 6", 6);
+    menulist.appendItem("Width: 7", 7);
+    menulist.appendItem("Width: 8", 8);
+    menulist.appendItem("Width: 9", 9);
+    menulist.appendItem("Width: 10", 10);
+    menulist.appendItem("Width: 11", 11);
+    menulist.appendItem("Width: 12", 12);
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        value = accountColorsOptions.prefs.getIntPref("thread-row-label-width");
+        menulist.selectedIndex = value - 1;
+      } else {
+        menulist.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      menulist.selectedIndex = 1;
+    }
+
+    checkbox = document.getElementById("accountcolors-thread-colorbkgd-card-label");
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("thread-colorbkgd-card-label");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
+    menulist = document.getElementById("accountcolors-thread-card-label-indent");
+    menulist.disabled = !checkbox.checked;
+    menulist.appendItem("No Indent", 0);
+    menulist.appendItem("Indent", 1);
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        value = accountColorsOptions.prefs.getIntPref("thread-card-label-position");
+        menulist.selectedIndex = value;
+      } else {
+        menulist.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      menulist.selectedIndex = 0;
+    }
+
+    menulist = document.getElementById("accountcolors-thread-card-label-width");
+    menulist.disabled = !checkbox.checked;
+    menulist.appendItem("Width: 1", 1);
+    menulist.appendItem("Width: 2", 2);
+    menulist.appendItem("Width: 3", 3);
+    menulist.appendItem("Width: 4", 4);
+    menulist.appendItem("Width: 5", 5);
+    menulist.appendItem("Width: 6", 6);
+    menulist.appendItem("Width: 7", 7);
+    menulist.appendItem("Width: 8", 8);
+    menulist.appendItem("Width: 9", 9);
+    menulist.appendItem("Width: 10", 10);
+    menulist.appendItem("Width: 11", 11);
+    menulist.appendItem("Width: 12", 12);
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        value = accountColorsOptions.prefs.getIntPref("thread-card-label-width");
+        menulist.selectedIndex = value - 1;
+      } else {
+        menulist.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      menulist.selectedIndex = 1;
+    }
+
+    checkbox = document.getElementById("accountcolors-thread-color-unified-only");
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("thread-color-unified-only");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
     /* Message Pane, Message Tab & Message Window Options */
 
     checkbox = document.getElementById("accountcolors-message-setfontstyle");
@@ -798,6 +950,43 @@ var accountColorsOptions = {
     // } catch (e) {
     //   checkbox.checked = false;
     // }
+
+    checkbox = document.getElementById("accountcolors-message-colorbkgd-header-label");
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("message-colorbkgd-header-label");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
+    menulist = document.getElementById("accountcolors-message-header-label-width");
+    menulist.disabled = !checkbox.checked;
+    menulist.appendItem("Width: 1", 1);
+    menulist.appendItem("Width: 2", 2);
+    menulist.appendItem("Width: 3", 3);
+    menulist.appendItem("Width: 4", 4);
+    menulist.appendItem("Width: 5", 5);
+    menulist.appendItem("Width: 6", 6);
+    menulist.appendItem("Width: 7", 7);
+    menulist.appendItem("Width: 8", 8);
+    menulist.appendItem("Width: 9", 9);
+    menulist.appendItem("Width: 10", 10);
+    menulist.appendItem("Width: 11", 11);
+    menulist.appendItem("Width: 12", 12);
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        value = accountColorsOptions.prefs.getIntPref("message-header-label-width");
+        menulist.selectedIndex = value - 1;
+      } else {
+        menulist.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      menulist.selectedIndex = 1;
+    }
 
     /* Compose Window Options */
 
@@ -1022,6 +1211,43 @@ var accountColorsOptions = {
     } catch (e) {
       checkbox.checked = false;
     }
+
+    checkbox = document.getElementById("accountcolors-compose-colorbkgd-idmenu-label");
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        checkstate = accountColorsOptions.prefs.getBoolPref("compose-colorbkgd-idmenu-label");
+        checkbox.checked = checkstate;
+      } else {
+        checkbox.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      checkbox.checked = false;
+    }
+
+    menulist = document.getElementById("accountcolors-compose-idmenu-label-width");
+    menulist.disabled = !checkbox.checked;
+    menulist.appendItem("Width: 1", 1);
+    menulist.appendItem("Width: 2", 2);
+    menulist.appendItem("Width: 3", 3);
+    menulist.appendItem("Width: 4", 4);
+    menulist.appendItem("Width: 5", 5);
+    menulist.appendItem("Width: 6", 6);
+    menulist.appendItem("Width: 7", 7);
+    menulist.appendItem("Width: 8", 8);
+    menulist.appendItem("Width: 9", 9);
+    menulist.appendItem("Width: 10", 10);
+    menulist.appendItem("Width: 11", 11);
+    menulist.appendItem("Width: 12", 12);
+    try {
+      if (accountColorsUtilities.thunderbirdVersion.major > 102) {
+        value = accountColorsOptions.prefs.getIntPref("compose-idmenu-label-width");
+        menulist.selectedIndex = value - 1;
+      } else {
+        menulist.style.display = "none"; // Hide option for thunderbird 102 and below, as not implemented for legacy mail frontend
+      }
+    } catch (e) {
+      menulist.selectedIndex = 1;
+    }
   },
 
   /********************************************************************/
@@ -1054,6 +1280,7 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("folder-colorfldfont", document.getElementById("accountcolors-folder-colorfldfont").checked);
     accountColorsOptions.prefs.setBoolPref("folder-colorfldbkgd", document.getElementById("accountcolors-folder-colorfldbkgd").checked);
     accountColorsOptions.prefs.setBoolPref("folder-colorother", document.getElementById("accountcolors-folder-colorother").checked);
+    accountColorsOptions.prefs.setBoolPref("folder-colorotherbkgd", document.getElementById("accountcolors-folder-colorotherbkgd").checked);
     accountColorsOptions.prefs.setBoolPref("folder-blackrowfont", document.getElementById("accountcolors-folder-blackrowfont").checked);
     accountColorsOptions.prefs.setBoolPref("folder-lightpanebkgd", document.getElementById("accountcolors-folder-lightpanebkgd").checked);
     accountColorsOptions.prefs.setBoolPref("folder-whiterowfont", document.getElementById("accountcolors-folder-whiterowfont").checked);
@@ -1066,6 +1293,8 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("folder-darkerbar", document.getElementById("accountcolors-folder-darkerbar").checked);
     accountColorsOptions.prefs.setBoolPref("folder-incspacing", document.getElementById("accountcolors-folder-incspacing").checked);
     accountColorsOptions.prefs.setBoolPref("folder-hoverselect", document.getElementById("accountcolors-folder-hoverselect").checked);
+    accountColorsOptions.prefs.setBoolPref("folder-colorbkgd-account-icon", document.getElementById("accountcolors-folder-colorbkgd-account-icon").checked);
+    accountColorsOptions.prefs.setBoolPref("folder-colorbkgd-folder-icon", document.getElementById("accountcolors-folder-colorbkgd-folder-icon").checked);
 
     /* Thread Pane Options */
 
@@ -1092,6 +1321,13 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("thread-darkerbar", document.getElementById("accountcolors-thread-darkerbar").checked);
     accountColorsOptions.prefs.setBoolPref("thread-incspacing", document.getElementById("accountcolors-thread-incspacing").checked);
     accountColorsOptions.prefs.setBoolPref("thread-hoverselect", document.getElementById("accountcolors-thread-hoverselect").checked);
+    accountColorsOptions.prefs.setBoolPref("thread-colorbkgd-row-label", document.getElementById("accountcolors-thread-colorbkgd-row-label").checked);
+    accountColorsOptions.prefs.setIntPref("thread-row-label-position", document.getElementById("accountcolors-thread-row-label-position").value);
+    accountColorsOptions.prefs.setIntPref("thread-row-label-width", document.getElementById("accountcolors-thread-row-label-width").value);
+    accountColorsOptions.prefs.setBoolPref("thread-colorbkgd-card-label", document.getElementById("accountcolors-thread-colorbkgd-card-label").checked);
+    accountColorsOptions.prefs.setIntPref("thread-card-label-position", document.getElementById("accountcolors-thread-card-label-indent").value);
+    accountColorsOptions.prefs.setIntPref("thread-card-label-width", document.getElementById("accountcolors-thread-card-label-width").value);
+    accountColorsOptions.prefs.setBoolPref("thread-color-unified-only", document.getElementById("accountcolors-thread-color-unified-only").checked);
 
     /* Message Pane, Message Tab & Message Window Options */
 
@@ -1110,6 +1346,8 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("message-whitehdrlabels", document.getElementById("accountcolors-message-whitehdrlabels").checked);
     // accountColorsOptions.prefs.setBoolPref("message-defaultbkgd", document.getElementById("accountcolors-message-defaultbkgd").checked);
     accountColorsOptions.prefs.setBoolPref("message-hdraccount", document.getElementById("accountcolors-message-hdraccount").checked);
+    accountColorsOptions.prefs.setBoolPref("message-colorbkgd-header-label", document.getElementById("accountcolors-message-colorbkgd-header-label").checked);
+    accountColorsOptions.prefs.setIntPref("message-header-label-width", document.getElementById("accountcolors-message-header-label-width").value);
 
     /* Compose Window Options */
 
@@ -1138,6 +1376,8 @@ var accountColorsOptions = {
     accountColorsOptions.prefs.setBoolPref("compose-darkfieldbkgd", document.getElementById("accountcolors-compose-darkfieldbkgd").checked);
     // accountColorsOptions.prefs.setBoolPref("compose-defaultbkgd", document.getElementById("accountcolors-compose-defaultbkgd").checked);
     accountColorsOptions.prefs.setBoolPref("compose-hoverfrom", document.getElementById("accountcolors-compose-hoverfrom").checked);
+    accountColorsOptions.prefs.setBoolPref("compose-colorbkgd-idmenu-label", document.getElementById("accountcolors-compose-colorbkgd-idmenu-label").checked);
+    accountColorsOptions.prefs.setIntPref("compose-idmenu-label-width", document.getElementById("accountcolors-compose-idmenu-label-width").value);
   },
 
   /********************************************************************/
@@ -1146,6 +1386,13 @@ var accountColorsOptions = {
 
   setMenuState: function (element) {
     document.getElementById(element.substr(0, element.lastIndexOf("-") + 1) + element.substr(element.lastIndexOf("-") + 4)).disabled = !document.getElementById(element).checked;
+  },
+
+  setMenuStateByCheckbox: function (checkbox, ...menulists) {
+    var menulist;
+    for (menulist of menulists) {
+      document.getElementById(menulist).disabled = !document.getElementById(checkbox).checked;
+    }
   },
 
   updateFontColor: function (index) {

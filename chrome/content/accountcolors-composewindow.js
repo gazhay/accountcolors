@@ -78,7 +78,7 @@ var accountColorsCompose = {
 
   composeWindow: function (event, clear = false) {
     var i, menulist, accountidkey, menupopup, menuitem;
-    var defaultbkgd, bkgdcolor, fontcolor, element, idkey, fontstyle, fontsize;
+    var defaultbkgd, bkgdcolor, fontcolor, element, idkey, fontstyle, fontsize, width;
 
     menulist = document.getElementById("msgIdentity");
 
@@ -167,7 +167,10 @@ var accountColorsCompose = {
     if (accountColorsCompose.prefs.getBoolPref("compose-colorfrombkgd")) {
       bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
 
-      if (defaultbkgd) {
+      if (accountColorsCompose.prefs.getBoolPref("compose-colorbkgd-idmenu-label")) { // Do not render background color of selected identity box in label mode
+        menulist = document.getElementById("msgIdentity");
+        menulist.style.backgroundColor = "";
+      } else if (defaultbkgd) {
         menulist = document.getElementById("msgIdentity");
         menulist.style.backgroundColor = "";
       } else {
@@ -183,8 +186,18 @@ var accountColorsCompose = {
         if (menuitem.localName == "menuitem") {
           /* not menu separator */
           idkey = menuitem.getAttribute("identitykey");
+          bkgdcolor = accountColorsUtilities.bkgdColorPref(idkey);
 
-          menuitem.style.backgroundColor = accountColorsUtilities.bkgdColorPref(idkey);
+          if (accountColorsCompose.prefs.getBoolPref("compose-colorbkgd-idmenu-label")) {
+            width = accountColorsCompose.prefs.getIntPref("compose-idmenu-label-width") + "px";
+            menuitem.style.backgroundImage = "linear-gradient(to right, " + bkgdcolor + ", " + bkgdcolor + " " + width + ", transparent " + width + ", transparent 100%)";
+            menuitem.style.backgroundColor = "";
+            menuitem.style.setProperty("border-radius", "0", "");
+          } else {
+            menuitem.style.backgroundColor = bkgdcolor;
+            menuitem.style.backgroundImage = "";
+            menuitem.style.removeProperty("border-radius");
+          }
         }
       }
     } else {
@@ -199,6 +212,7 @@ var accountColorsCompose = {
         if (menuitem.localName == "menuitem") {
           /* not menu separator */
           menuitem.style.backgroundColor = "";
+          menuitem.style.backgroundImage = "";
         }
       }
     }

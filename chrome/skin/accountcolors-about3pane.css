@@ -39,6 +39,43 @@
     color: inherit !important;
 }
 
+#folderTree li.selected > .container {
+    background-color: var(--treeitem-background-selected) !important;
+}
+
+#folderTree li[is="folder-tree-row"] .name {
+    color: var(--ac-font-color, currentColor);
+}
+
+#folderTree li[is="folder-tree-row"].new-messages > .container > .name {
+    color: var(--ac-font-color, var(--new-folder-color));
+}
+
+#folderTree li[is="folder-tree-row"] .container {
+    background-color: var(--ac-bkgd-color);
+}
+
+#folderTree li[is="folder-tree-row"].unread:not(.new-messages) > .container > .unread-count {
+    color: var(--ac-font-color, var(--folderpane-unread-count-text));
+    background-color: var(--ac-badge-bkgd-color, var(--folderpane-unread-count-background));
+}
+
+#folderTree li[is="folder-tree-row"] .total-count {
+    color: var(--ac-font-color, var(--folderpane-total-count-text));
+    background-color: var(--ac-badge-bkgd-color, var(--folderpane-total-count-background));
+}
+
+#folderTree li[is="folder-tree-row"] .folder-size {
+    color: var(--ac-font-color, var(--layout-color-3));
+}
+
+/* Folder Pane - Font Style / Font Weight */
+
+#folderTree li[is="folder-tree-row"][ac-fsw="normal"] { font-style: normal; font-weight:normal; }
+#folderTree li[is="folder-tree-row"][ac-fsw="italic"] { font-style: italic; font-weight:normal; }
+#folderTree li[is="folder-tree-row"][ac-fsw="bold"] { font-style: normal; font-weight:bold; }
+#folderTree li[is="folder-tree-row"][ac-fsw="bolditalic"] { font-style: italic; font-weight:bold; }
+
 /**********************************************************************************************************************/
 
 /* Folder Pane - Account Name Font Sizes */
@@ -135,9 +172,57 @@
 [is="tree-view-table-body"]:focus tr.selected *,
 [is="tree-view-table-body"]:focus-within tr.selected *,
 [is="tree-view-table-body"] tr.selected:focus-within * {
-    background-color: inherit !important;
     color: inherit !important;
 }
+
+#threadTree tr[is="thread-row"] > td, #threadTree tr[is="thread-card"] .subject {
+    color: var(--tag-color, var(--ac-font-color, currentColor));
+}
+
+#threadTree tr[is="thread-card"] :is(.sender, .date) {
+    color: var(--ac-font-color, currentColor);
+}
+
+#threadTree:not([ac-bkgdaslabel-row]) tr[is="thread-row"] {
+    background-color: var(--ac-bkgd-color);
+}
+
+#threadTree[ac-bkgdaslabel-row="subjectCol"] tr[is="thread-row"] td.subjectcol-column .thread-container {
+    background-image: linear-gradient(to right, var(--ac-bkgd-color), var(--ac-bkgd-color) var(--ac-row-label-width), transparent var(--ac-row-label-width), transparent 100%);
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+#threadTree[ac-bkgdaslabel-row="firstCol"] tr[is="thread-row"] td.ac-first-non-hidden-column {
+    background-image: linear-gradient(to right, var(--ac-bkgd-color), var(--ac-bkgd-color) var(--ac-row-label-width), transparent var(--ac-row-label-width), transparent 100%);
+    background-clip: content-box;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+#threadTree:not([ac-bkgdaslabel-card]) tr[is="thread-card"] {
+    background-color: var(--ac-bkgd-color);
+}
+
+#threadTree[ac-bkgdaslabel-card="noindent"] tr[is="thread-card"] {
+    background-image: linear-gradient(to right, var(--ac-bkgd-color), var(--ac-bkgd-color) var(--ac-card-label-width), transparent var(--ac-card-label-width), transparent 100%);
+}
+
+#threadTree[ac-bkgdaslabel-card="indent"] tr[is="thread-card"] .thread-card-container {
+    background-image: linear-gradient(to right, var(--ac-bkgd-color), var(--ac-bkgd-color) var(--ac-card-label-width), transparent var(--ac-card-label-width), transparent 100%);
+}
+
+/* Thread Pane - Font Style / Font Weight */
+
+#threadTree tr[is="thread-row"] > td[ac-fsw="normal"] { font-style: normal; font-weight:normal; }
+#threadTree tr[is="thread-row"] > td[ac-fsw="italic"] { font-style: italic; font-weight:normal; }
+#threadTree tr[is="thread-row"] > td[ac-fsw="bold"] { font-style: normal; font-weight:bold; }
+#threadTree tr[is="thread-row"] > td[ac-fsw="bolditalic"] { font-style: italic; font-weight:bold; }
+
+#threadTree tr[is="thread-card"] :is(.subject, .sender, .date)[ac-fsw="normal"] { font-style: normal; font-weight:normal; }
+#threadTree tr[is="thread-card"] :is(.subject, .sender, .date)[ac-fsw="italic"] { font-style: italic; font-weight:normal; }
+#threadTree tr[is="thread-card"] :is(.subject, .sender, .date)[ac-fsw="bold"] { font-style: normal; font-weight:bold; }
+#threadTree tr[is="thread-card"] :is(.subject, .sender, .date)[ac-fsw="bolditalic"] { font-style: italic; font-weight:bold; }
 
 /**********************************************************************************************************************/
 
@@ -242,9 +327,7 @@
 /* Ensure bold font on subject / from columns even their styles are set to normal/italic */
 
 #threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-row"] > td,
-#threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-card"] .subject,
-#threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-card"] .sender,
-#threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-card"] .date {
+#threadTree:not([ac-boldsubjectfrom]) tbody > tr[data-properties~="unread"][is="thread-card"] :is(.subject, .sender, .date) {
     font-weight: bold !important;
 }
 
@@ -253,9 +336,7 @@
 /* If either Bold Subject or Bold From set, all columns are unbold by default  */
 
 #threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-row"] > td,
-#threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-card"] .subject,
-#threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-card"] .sender,
-#threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-card"] .date {
+#threadTree[ac-boldsubjectfrom] tbody > tr[data-properties~="unread"][is="thread-card"] :is(.subject, .sender, .date) {
     font-weight: normal;
 }
 

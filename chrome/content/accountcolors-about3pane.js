@@ -312,11 +312,15 @@ var accountColorsAbout3Pane_102 = {
         return props; // Unified Inbox row's _folder may be null
       }
 
-      server = gFolderTreeView._rowMap[row]._folder.server;
-      account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+        accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForFolder(gFolderTreeView._rowMap[row]._folder);
+      } else {
+        server = gFolderTreeView._rowMap[row]._folder.server;
+        account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
 
-      if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
+        if (account.defaultIdentity == null) accountidkey = account.key;
+        else accountidkey = account.defaultIdentity.key;
+      }
 
       /* add extra properties for not-hover, not-dragOn, not-selected, not-focused, background color, folder background color, and darker selection bar */
       /* required to select tree element styles defined in accountcolors-messengerwindow[-generated].css */
@@ -367,11 +371,15 @@ var accountColorsAbout3Pane_102 = {
         props = ""
       }
 
-      server = gFolderTreeView._rowMap[row]._folder.server;
-      account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+      if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+        accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForFolder(gFolderTreeView._rowMap[row]._folder);
+      } else {
+        server = gFolderTreeView._rowMap[row]._folder.server;
+        account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
 
-      if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
+        if (account.defaultIdentity == null) accountidkey = account.key;
+        else accountidkey = account.defaultIdentity.key;
+      }
 
       /* add extra properties for not-hover, not-dragOn, not-selected */
       /* required to select tree element styles defined in accountcolors-messengerwindow[-generated].css */
@@ -550,23 +558,27 @@ var accountColorsAbout3Pane_102 = {
 
           msgHdr = gDBView.getMsgHdrAt(row);
 
-          /* Color based on received account */
+          if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+            accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
+          } else {
+            /* Color based on received account */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
-            /* color using account in message header */
-            accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-            account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
+            if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
+              /* color using account in message header */
+              accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
+              account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
 
-            if (account == null) accountidkey = null; /* sent message */
-            else if (account.defaultIdentity == null) accountidkey = account.key;
-            else accountidkey = account.defaultIdentity.key;
-          } /* color using account in which folder is located */ else {
-            folder = msgHdr.folder;
-            server = folder.server;
-            account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+              if (account == null) accountidkey = null; /* sent message */
+              else if (account.defaultIdentity == null) accountidkey = account.key;
+              else accountidkey = account.defaultIdentity.key;
+            } /* color using account in which folder is located */ else {
+              folder = msgHdr.folder;
+              server = folder.server;
+              account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
 
-            if (account.defaultIdentity == null) accountidkey = account.key;
-            else accountidkey = account.defaultIdentity.key;
+              if (account.defaultIdentity == null) accountidkey = account.key;
+              else accountidkey = account.defaultIdentity.key;
+            }
           }
 
           /* add extra properties for not-hover, not-selected, not-focused, background color, show row stripes, darker selection bar */
@@ -614,23 +626,27 @@ var accountColorsAbout3Pane_102 = {
 
           msgHdr = gDBView.getMsgHdrAt(row);
 
-          /* Color based on received account */
+          if (accountColorsUtilities.thunderbirdVersion.major >= 102) {
+            accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
+          } else {
+            /* Color based on received account */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
-            /* color using account in message header */
-            accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-            account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
+            if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
+              /* color using account in message header */
+              accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
+              account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
 
-            if (account == null) accountidkey = null; /* sent message */
-            else if (account.defaultIdentity == null) accountidkey = account.key;
-            else accountidkey = account.defaultIdentity.key;
-          } /* color using account in which folder is located */ else {
-            folder = msgHdr.folder;
-            server = folder.server;
-            account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+              if (account == null) accountidkey = null; /* sent message */
+              else if (account.defaultIdentity == null) accountidkey = account.key;
+              else accountidkey = account.defaultIdentity.key;
+            } /* color using account in which folder is located */ else {
+              folder = msgHdr.folder;
+              server = folder.server;
+              account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
 
-            if (account.defaultIdentity == null) accountidkey = account.key;
-            else accountidkey = account.defaultIdentity.key;
+              if (account.defaultIdentity == null) accountidkey = account.key;
+              else accountidkey = account.defaultIdentity.key;
+            }
           }
 
           /* add extra properties for not-hover and not-selected */
@@ -988,8 +1004,8 @@ var accountColorsAbout3Pane_115 = {
     /* Detour FolderTreeRow.prototype.setFolderPropertiesFromFolder */
 
     setFolderPropertiesFromFolder: function(folder) {
-      var server, account, accountidkey;
-      var fontcolor, bkgdcolor, fontstyle, fontsize, style, weight;
+      var accountidkey;
+      var fontcolor, bkgdcolor, fontstyle, fontsize;
 
       /* Call original function */
 
@@ -1002,82 +1018,88 @@ var accountColorsAbout3Pane_115 = {
         this.container = this.querySelector(".container");
       }
 
-      server = folder.server;
-      account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForFolder(folder);
 
-      if (account.defaultIdentity == null) accountidkey = account.key;
-      else accountidkey = account.defaultIdentity.key;
+      /* Regard account folders in Unified Folders (Inbox/Drafts/etc.) as accounts */
+
+      var parentElement = this.parentNode && this.parentNode.closest('li[is="folder-tree-row"]');
+      var inUnifiedFolder = !!parentElement && parentElement.uri.startsWith("mailbox://nobody@smart%20mailboxes");
 
       /* Color account/folders font */
 
-      if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfont") && folder.isServer) ||
+      if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfont") && (folder.isServer || inUnifiedFolder)) ||
           (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfldfont") && !folder.isServer)) {
         fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-        this.nameLabel.style.color = fontcolor;
+        this.nameLabel.style.setProperty("--ac-font-color", fontcolor);
       } else {
-        this.nameLabel.style.color = "";
+        this.nameLabel.style.removeProperty("--ac-font-color");
       }
+
+      /* Render background color as icon color */
+
+      var colorBkgdAsIcon = accountColorsAbout3Pane.prefs.getBoolPref("folder-colorbkgd-account-icon") && (folder.isServer || inUnifiedFolder) ||
+                            accountColorsAbout3Pane.prefs.getBoolPref("folder-colorbkgd-folder-icon") && !folder.isServer;
 
       /* Color account/folders background */
 
-      if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorbkgd") && folder.isServer) ||
+      if ((accountColorsAbout3Pane.prefs.getBoolPref("folder-colorbkgd") && (folder.isServer || inUnifiedFolder)) ||
           (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorfldbkgd") && !folder.isServer)) {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
 
-        if (!(accountColorsAbout3Pane.prefs.getBoolPref("folder-defaultbkgd") && bkgdcolor == "")) {
-          this.container.style.backgroundColor = bkgdcolor;
+        if (!colorBkgdAsIcon) {
+          if (!(accountColorsAbout3Pane.prefs.getBoolPref("folder-defaultbkgd") && bkgdcolor == "")) {
+            this.container.style.setProperty("--ac-bkgd-color", bkgdcolor);
+          }
+          this.setIconColor(); // Restore default icon
+        } else {
+          if (!this.icon.style.getPropertyValue("--icon-color")) {
+            this.setIconColor(bkgdcolor);
+          }
+          this.container.style.removeProperty("--ac-bkgd-color");
         }
       } else {
-        this.container.style.backgroundColor = "";
+        this.container.style.removeProperty("--ac-bkgd-color");
+        this.setIconColor(); // Restore default icon
       }
 
-      /* Color unread/total/size fonts */
+      /* Color unread/total/size font */
 
       if (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorother")) {
         fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-        this.unreadCountLabel.style.color = fontcolor;
-        this.totalCountLabel.style.color = fontcolor;
-        this.folderSizeLabel.style.color = fontcolor;
+        this.unreadCountLabel.style.setProperty("--ac-font-color", fontcolor);
+        this.totalCountLabel.style.setProperty("--ac-font-color", fontcolor);
+        this.folderSizeLabel.style.setProperty("--ac-font-color", fontcolor);
       } else {
-        this.unreadCountLabel.style.color = "";
-        this.totalCountLabel.style.color = "";
-        this.folderSizeLabel.style.color = "";
+        this.unreadCountLabel.style.removeProperty("--ac-font-color");
+        this.totalCountLabel.style.removeProperty("--ac-font-color");
+        this.folderSizeLabel.style.removeProperty("--ac-font-color");
+      }
+
+      /* Color unread/total/size background */
+
+      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-colorotherbkgd")) {
+        bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
+        this.unreadCountLabel.style.setProperty("--ac-badge-bkgd-color", bkgdcolor);
+        this.totalCountLabel.style.setProperty("--ac-badge-bkgd-color", bkgdcolor);
+        this.folderSizeLabel.style.setProperty("--ac-badge-bkgd-color", bkgdcolor);
+      } else {
+        this.unreadCountLabel.style.removeProperty("--ac-badge-bkgd-color");
+        this.totalCountLabel.style.removeProperty("--ac-badge-bkgd-color");
+        this.folderSizeLabel.style.removeProperty("--ac-badge-bkgd-color");
       }
 
       /* Account font style */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-setfontstyle") && folder.isServer) {
+      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-setfontstyle") && (folder.isServer || inUnifiedFolder)) {
         fontstyle = accountColorsAbout3Pane.prefs.getIntPref("folder-fontstyle");
-
-        switch (fontstyle) {
-          case 0 /* Normal */:
-            style = "normal";
-            weight = "normal";
-            break;
-          case 1 /* Italic */:
-            style = "italic";
-            weight = "normal";
-            break;
-          case 2 /* Bold */:
-            style = "normal";
-            weight = "bold";
-            break;
-          case 3 /* Bold Italic */:
-            style = "italic";
-            weight = "bold";
-            break;
-        }
-
-        this.nameLabel.style.fontStyle = style;
-        this.nameLabel.style.fontWeight = weight;
+        this.nameLabel.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
       } else {
-        this.nameLabel.style.fontStyle = "";
-        this.nameLabel.style.fontWeight = "";
+        this.nameLabel.removeAttribute("ac-fsw");
       }
 
       /* Account font size */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-setfontsize") && folder.isServer) {
+      if (accountColorsAbout3Pane.prefs.getBoolPref("folder-setfontsize") && (folder.isServer || inUnifiedFolder)) {
         fontsize = accountColorsAbout3Pane.prefs.getIntPref("folder-fontsize");
         // ac-fs have margin-top attribute set, we use it instead of font-size style
         if (accountColorsAbout3Pane.prefs.getBoolPref("folder-incspacing")) {
@@ -1232,8 +1254,10 @@ var accountColorsAbout3Pane_115 = {
     /* Detour ThreadRow.prototype.index setter */
 
     threadRowIndexSetter: function(row) {
-      var msgHdr, accountkey, account, accountidkey, folder, server, element;
-      var fontcolor, bkgdcolor, fontstyle, fontsize, style, weight;
+      var msgHdr, account, accountidkey, element;
+      var fontcolor, bkgdcolor, fontstyle, fontsize;
+      var coloringDisabled = false;
+      var nonHiddenColumnFound = false;
 
       /* Call original function */
 
@@ -1242,33 +1266,23 @@ var accountColorsAbout3Pane_115 = {
       }
 
       msgHdr = gDBView.getMsgHdrAt(row);
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
 
-      /* Color based on received account */
+      /* Enable coloring only in Unified folder if specified */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
-        /* color using account in message header */
-        accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-        account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
-
-        if (account == null) accountidkey = null; /* sent message */
-        else if (account.defaultIdentity == null) accountidkey = account.key;
-        else accountidkey = account.defaultIdentity.key;
-      } /* color using account in which folder is located */ else {
-        folder = msgHdr.folder;
-        server = folder.server;
-        account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
-
-        if (account.defaultIdentity == null) accountidkey = account.key;
-        else accountidkey = account.defaultIdentity.key;
+      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-color-unified-only")) {
+        coloringDisabled = !!window.gFolder && window.gFolder.server.hostName != "smart mailboxes";
       }
 
       /* Set row properties */
 
       /* Color row background */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd")) {
+      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd") && !coloringDisabled) {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
-        this.style.backgroundColor = bkgdcolor;
+        this.style.setProperty("--ac-bkgd-color", bkgdcolor);
+      } else {
+        this.style.removeProperty("--ac-bkgd-color");
       }
 
       /* Set column properties */
@@ -1281,45 +1295,28 @@ var accountColorsAbout3Pane_115 = {
         /* Set some element fields on ThreadRow object for modifying properties */
         element = this.querySelector("." + column.id.toLowerCase() + "-column");
 
+        if (!nonHiddenColumnFound) {
+          element.classList.add("ac-first-non-hidden-column");
+          nonHiddenColumnFound = true;
+        }
+
         if (column.id == "subjectCol") {
           /* Color subject font */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
           } else {
-            element.style.color = "";
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* Subject font style */
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-setfontstyle")) {
             fontstyle = accountColorsAbout3Pane.prefs.getIntPref("thread-fontstyle");
-
-            switch (fontstyle) {
-              case 0 /* Normal */:
-                style = "normal";
-                weight = "normal";
-                break;
-              case 1 /* Italic */:
-                style = "italic";
-                weight = "normal";
-                break;
-              case 2 /* Bold */:
-                style = "normal";
-                weight = "bold";
-                break;
-              case 3 /* Bold Italic */:
-                style = "italic";
-                weight = "bold";
-                break;
-            }
-
-            element.style.fontStyle = style;
-            element.style.fontWeight = weight;
+            element.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
           } else {
-            element.style.fontStyle = "";
-            element.style.fontWeight = "";
+            element.removeAttribute("ac-fsw");
           }
 
           /* Subject font size */
@@ -1350,42 +1347,20 @@ var accountColorsAbout3Pane_115 = {
         if (column.id == "senderCol") {
           /* Color from font */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
           } else {
-            element.style.color = "";
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* From font style */
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-setfromstyle")) {
             fontstyle = accountColorsAbout3Pane.prefs.getIntPref("thread-fromstyle");
-
-            switch (fontstyle) {
-              case 0 /* Normal */:
-                style = "normal";
-                weight = "normal";
-                break;
-              case 1 /* Italic */:
-                style = "italic";
-                weight = "normal";
-                break;
-              case 2 /* Bold */:
-                style = "normal";
-                weight = "bold";
-                break;
-              case 3 /* Bold Italic */:
-                style = "italic";
-                weight = "bold";
-                break;
-            }
-
-            element.style.fontStyle = style;
-            element.style.fontWeight = weight;
+            element.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
           } else {
-            element.style.fontStyle = "";
-            element.style.fontWeight = "";
+            element.removeAttribute("ac-fsw");
           }
 
           /* From font size */
@@ -1416,9 +1391,11 @@ var accountColorsAbout3Pane_115 = {
         if (column.id == "correspondentCol") {
           /* Color recipient/date/size/account/etc fonts */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
+          } else {
+            element.style.removeProperty("--ac-font-color");
           }
 
           continue;
@@ -1427,9 +1404,11 @@ var accountColorsAbout3Pane_115 = {
         if (column.id == "accountCol") {
           /* Color recipient/date/size/account/etc fonts */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
+          } else {
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* Color using account in message header */
@@ -1445,9 +1424,11 @@ var accountColorsAbout3Pane_115 = {
 
         /* Color recipient/date/size/account/etc fonts */
 
-        if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother")) {
+        if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && !coloringDisabled) {
           fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-          element.style.color = fontcolor;
+          element.style.setProperty("--ac-font-color", fontcolor);
+        } else {
+          element.style.removeProperty("--ac-font-color");
         }
       }
     },
@@ -1455,8 +1436,9 @@ var accountColorsAbout3Pane_115 = {
     /* Detour ThreadCard.prototype.index setter */
 
     threadCardIndexSetter: function(row) {
-      var msgHdr, accountkey, account, accountidkey, folder, server, element;
-      var fontcolor, bkgdcolor, fontstyle, fontsize, style, weight;
+      var msgHdr, accountidkey, element;
+      var fontcolor, bkgdcolor, fontstyle, fontsize;
+      var coloringDisabled = false;
 
       /* Call original function */
 
@@ -1465,33 +1447,23 @@ var accountColorsAbout3Pane_115 = {
       }
 
       msgHdr = gDBView.getMsgHdrAt(row);
+      accountidkey = accountColorsUtilities.resolveAccountIdentityKeyForMessage(msgHdr, accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount"));
 
-      /* Color based on received account */
+      /* Enable coloring only in Unified folder if specified */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-hdraccount")) {
-        /* color using account in message header */
-        accountkey = accountColorsUtilities.getAccountKey(msgHdr); /* null string if sent message */
-        account = accountColorsAbout3Pane.accountManager.getAccount(accountkey);
-
-        if (account == null) accountidkey = null; /* sent message */
-        else if (account.defaultIdentity == null) accountidkey = account.key;
-        else accountidkey = account.defaultIdentity.key;
-      } /* color using account in which folder is located */ else {
-        folder = msgHdr.folder;
-        server = folder.server;
-        account = accountColorsAbout3Pane.accountManager.FindAccountForServer(server);
-
-        if (account.defaultIdentity == null) accountidkey = account.key;
-        else accountidkey = account.defaultIdentity.key;
+      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-color-unified-only")) {
+        coloringDisabled = !!window.gFolder && window.gFolder.server.hostName != "smart mailboxes";
       }
 
       /* Set card properties */
 
       /* Color card background */
 
-      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd")) {
+      if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd") && !coloringDisabled) {
         bkgdcolor = accountColorsUtilities.bkgdColorPref(accountidkey);
-        this.style.backgroundColor = bkgdcolor;
+        this.style.setProperty("--ac-bkgd-color", bkgdcolor);
+      } else {
+        this.style.removeProperty("--ac-bkgd-color");
       }
 
       for (const column of window.threadPane.cardColumns) {
@@ -1500,42 +1472,20 @@ var accountColorsAbout3Pane_115 = {
 
           /* Color subject font */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont")) {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfont") && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
           } else {
-            element.style.color = "";
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* Subject font style */
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-setfontstyle")) {
             fontstyle = accountColorsAbout3Pane.prefs.getIntPref("thread-fontstyle");
-
-            switch (fontstyle) {
-              case 0 /* Normal */:
-                style = "normal";
-                weight = "normal";
-                break;
-              case 1 /* Italic */:
-                style = "italic";
-                weight = "normal";
-                break;
-              case 2 /* Bold */:
-                style = "normal";
-                weight = "bold";
-                break;
-              case 3 /* Bold Italic */:
-                style = "italic";
-                weight = "bold";
-                break;
-            }
-
-            element.style.fontStyle = style;
-            element.style.fontWeight = weight;
+            element.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
           } else {
-            element.style.fontStyle = "";
-            element.style.fontWeight = "";
+            element.removeAttribute("ac-fsw");
           }
 
           /* Subject font size */
@@ -1568,45 +1518,23 @@ var accountColorsAbout3Pane_115 = {
 
           /* Color from / date font */
 
-          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom") && column == "senderCol") {
+          if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorfrom") && column == "senderCol" && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
-          } else if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && column == "dateCol") {
+            element.style.setProperty("--ac-font-color", fontcolor);
+          } else if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorother") && column == "dateCol" && !coloringDisabled) {
             fontcolor = accountColorsUtilities.fontColorPref(accountidkey);
-            element.style.color = fontcolor;
+            element.style.setProperty("--ac-font-color", fontcolor);
           } else {
-            element.style.color = "";
+            element.style.removeProperty("--ac-font-color");
           }
 
           /* From font style */
 
           if (accountColorsAbout3Pane.prefs.getBoolPref("thread-setfromstyle")) {
             fontstyle = accountColorsAbout3Pane.prefs.getIntPref("thread-fromstyle");
-
-            switch (fontstyle) {
-              case 0 /* Normal */:
-                style = "normal";
-                weight = "normal";
-                break;
-              case 1 /* Italic */:
-                style = "italic";
-                weight = "normal";
-                break;
-              case 2 /* Bold */:
-                style = "normal";
-                weight = "bold";
-                break;
-              case 3 /* Bold Italic */:
-                style = "italic";
-                weight = "bold";
-                break;
-            }
-
-            element.style.fontStyle = style;
-            element.style.fontWeight = weight;
+            element.setAttribute("ac-fsw", ["normal", "italic", "bold", "bolditalic"][fontstyle]);
           } else {
-            element.style.fontStyle = "";
-            element.style.fontWeight = "";
+            element.removeAttribute("ac-fsw");
           }
 
           /* From font size */
@@ -1703,6 +1631,42 @@ var accountColorsAbout3Pane_115 = {
     } else {
       element = accountColorsAbout3Pane.threadTree;
       element.removeAttribute("ac-hoverselect");
+    }
+
+    /* Color row background as label */
+
+    if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd-row-label")) {
+      element = accountColorsAbout3Pane.threadTree;
+      switch (accountColorsAbout3Pane.prefs.getIntPref("thread-row-label-position")) {
+        case 0: /* Subject Column */
+          element.setAttribute("ac-bkgdaslabel-row", "subjectCol");
+          break;
+        case 1: /* First Column */
+          element.setAttribute("ac-bkgdaslabel-row", "firstCol");
+          break;
+      }
+      element.style.setProperty("--ac-row-label-width", accountColorsAbout3Pane.prefs.getIntPref("thread-row-label-width") + "px");
+    } else {
+      element = accountColorsAbout3Pane.threadTree;
+      element.removeAttribute("ac-bkgdaslabel-row");
+      element.style.removeProperty("--ac-row-label-width");
+    }
+
+    if (accountColorsAbout3Pane.prefs.getBoolPref("thread-colorbkgd-card-label")) {
+      element = accountColorsAbout3Pane.threadTree;
+      switch (accountColorsAbout3Pane.prefs.getIntPref("thread-card-label-position")) {
+        case 0: /* No Indent */
+          element.setAttribute("ac-bkgdaslabel-card", "noindent");
+          break;
+        case 1: /* Indent */
+          element.setAttribute("ac-bkgdaslabel-card", "indent");
+          break;
+      }
+      element.style.setProperty("--ac-card-label-width", accountColorsAbout3Pane.prefs.getIntPref("thread-card-label-width") + "px");
+    } else {
+      element = accountColorsAbout3Pane.threadTree;
+      element.removeAttribute("ac-bkgdaslabel-card");
+      element.style.removeProperty("--ac-card-label-width");
     }
   },
 
