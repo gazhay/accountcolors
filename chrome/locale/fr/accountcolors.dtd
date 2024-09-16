@@ -19,8 +19,8 @@
 <!ENTITY accountcolors.folder.colorbkgd "Couleur de fond des comptes">
 <!ENTITY accountcolors.folder.colorfldfont "Couleur de la police des dossier">
 <!ENTITY accountcolors.folder.colorfldbkgd "Couleur de fond des dossier">
-<!ENTITY accountcolors.folder.colorother "Color Unread/Total/Size Fonts">
-<!ENTITY accountcolors.folder.colorotherbkgd    "Color Unread/Total Background">
+<!ENTITY accountcolors.folder.colorother "Couleur de la police Non-Lu/Total/Taille">
+<!ENTITY accountcolors.folder.colorotherbkgd    "Couleur de fond Non-Lu/Total/Taille">
 <!ENTITY accountcolors.folder.blackrowfont "Black Row Fonts">
 <!ENTITY accountcolors.folder.lightpanebkgd "Light Pane Background">
 <!ENTITY accountcolors.folder.whiterowfont "White Row Fonts">
@@ -81,9 +81,9 @@
 <!ENTITY accountcolors.compose.colorbkgd "Couleur de fond du sujet">
 <!ENTITY accountcolors.compose.colorfromfont "Couleur de la police de l'expéditeur">
 <!ENTITY accountcolors.compose.colorfrombkgd "Couleur de fond de l'expéditeur">
-<!ENTITY accountcolors.compose.colortofont "Color To/Cc/Bcc Fonts">
-<!ENTITY accountcolors.compose.colortobkgd "Couleur des fonds Pour/Cc/Bcc">
-<!ENTITY accountcolors.compose.coloratmfont "Color Attachment Font">
+<!ENTITY accountcolors.compose.colortofont "Couleur de la police To/Cc/Bcc">
+<!ENTITY accountcolors.compose.colortobkgd "Couleur des fonds To/Cc/Bcc">
+<!ENTITY accountcolors.compose.coloratmfont "Coleur de la police des pièces jointes">
 <!ENTITY accountcolors.compose.coloratmbkgd "Couleur de fond des pièces jointes">
 <!ENTITY accountcolors.compose.blackhdrlabels "Black Header Labels">
 <!ENTITY accountcolors.compose.colorhdrbkgd "Couleur de fond de l'en-tête">
